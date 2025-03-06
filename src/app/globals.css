@@ -7,16 +7,20 @@
 @theme inline {
   /* fonts  */
   --font-roboto: "Roboto Slab", serif;
-  --font-open-sans: "Open Sans", sans-serif;
+  --font-openSans: "Open Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
 
   /* bg colors  */
-  --color-blue: #4378E0;
+  --color-blue: #4378e0;
 
   /* text color  */
-  --color-gray: #252D3C;
-  
+  --color-gray: #252d3c;
+  --color-dark: #2f3a4c;
+ --color-primary-gray: #2D3142;
+ --color-secondary-gray:#343434;
+ ;
   /* border color  */
-  --color-border: #F955553D;
+  --color-border: #f955553d;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
