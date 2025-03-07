@@ -1,64 +1,76 @@
-// steps/EmailSignUp.tsx
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { StepProps } from "../auth/types";
+import { useFormContext } from "react-hook-form";
+import { FormData } from "@/lib/schema";
+import { Routes } from "@/lib/routes";
+import { useRouter } from "next/navigation";
 
-export const EmailSignUp: React.FC<StepProps> = ({
-  formData,
-  handleInputChange,
-  errors,
-  handleContinue,
-}) => {
+
+interface EmailSignUpProps {
+  onContinue?: () => void;
+}
+
+export const EmailSignUp: React.FC<EmailSignUpProps> = ({ onContinue }) => {
+  const router = useRouter();
+
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FormData>();
+
+  const handleEmailSignUp = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent form submission
+    if (onContinue) {
+      onContinue();
+    }
+  };
+
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
+    <div>
+      <h2 className="text-center text-xl font-semibold mb-4">Sign Up</h2>
+
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          placeholder="Enter email"
-          className={`w-full ${errors.email ? "border-red-500" : ""}`}
-        />
-        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
-      </div>
-
-      <Button
-        type="button"
-        className="w-full bg-blue-500 hover:bg-blue-600 text-white"
-        onClick={handleContinue}
-      >
-        Sign up with email
-      </Button>
-
-      <div className="flex items-center justify-between my-4">
-        <div className="h-px bg-gray-300 w-5/12"></div>
-        <span className="text-gray-500 text-sm px-2">OR</span>
-        <div className="h-px bg-gray-300 w-5/12"></div>
-      </div>
-
-      <Button
-        type="button"
-        variant="outline"
-        className="w-full flex items-center justify-center gap-2"
-        onClick={() => console.log("Google sign up")}
-      >
-        <div className="w-5 h-5 rounded-full flex items-center justify-center">
-          <span className="text-xl">○</span>
+        <div className="space-y-4">
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" type="email" placeholder="Enter email" {...register("email")} />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
         </div>
-        Sign In with Google
-      </Button>
+        <Button
+          type="button"
+          className="w-full bg-blue hover:bg-blue-600 mt-4"
+          onClick={handleEmailSignUp}
+        >
+          Sign up with email
+        </Button>
 
-      <div className="text-center mt-4">
-        <p className="text-sm text-gray-500">
-          Already have an account?
-          <span className="text-blue-500 ml-1 cursor-pointer">Sign In</span>
-        </p>
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">OR</span>
+          </div>
+        </div>
+
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
+          onClick={() => router.push(Routes.SIGNIN_GOOGLE)}
+        >
+          <span className="mr-2">○</span>
+          Sign In with Google
+        </Button>
+          <p className="text-center text-sm">
+            Already have an account?{" "}
+            <button className=" ml-2 text-blue font-medium cursor-pointer " onClick={() => router.push(Routes.SIGNIN)}>
+              Sign In
+            </button>
+          </p>
       </div>
     </div>
   );

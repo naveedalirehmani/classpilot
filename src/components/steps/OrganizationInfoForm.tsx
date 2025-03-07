@@ -1,4 +1,3 @@
-// steps/OrganizationInfoForm.tsx
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,66 +8,58 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { StepProps } from "../auth/types";
+import { useFormContext } from "react-hook-form";
+import { FormData } from "../auth/types";
 
-export const OrganizationInfoForm: React.FC<StepProps> = ({
-  formData,
-  handleInputChange,
-  handleSelectChange,
-  errors,
-}) => {
+export const OrganizationInfoForm: React.FC = () => {
+  const { register, formState: { errors }, setValue } = useFormContext<FormData>();
+
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-semibold mb-4">General information</h2>
+    <div>
+      <h2 className="text-center text-xl font-semibold mb-4">General information</h2>
 
-      <div className="space-y-2">
-        <Label htmlFor="organization">Organization</Label>
-        <Input
-          id="organization"
-          name="organization"
-          value={formData.organization}
-          onChange={handleInputChange}
-          placeholder="Enter organization"
-          className={`w-full ${errors.organization ? "border-red-500" : ""}`}
-        />
-        {errors.organization && <p className="text-red-500 text-xs mt-1">{errors.organization}</p>}
-      </div>
+      <div className="space-y-4">
+        <div className="w-full">
+          <Label htmlFor="organization">Organization</Label>
+          <Input
+            id="organization"
+            className="w-full"
+            {...register("organization")}
+          />
+          {errors.organization && <p className="text-red-500 text-sm">{errors.organization.message}</p>}
+        </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="profession">Your profession</Label>
-        <Select
-          value={formData.profession}
-          onValueChange={(value) => handleSelectChange("profession", value)}
-        >
-          <SelectTrigger id="profession" className={`w-full ${errors.profession ? "border-red-500" : ""}`}>
-            <SelectValue placeholder="Please select" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="teacher">Educator (k-12)</SelectItem>
-            <SelectItem value="professor">Educator (Higher-ed)</SelectItem>
-            <SelectItem value="administrator">Trainer</SelectItem>
-            <SelectItem value="other">Other</SelectItem>
-          </SelectContent>
-        </Select>
-        {errors.profession && <p className="text-red-500 text-xs mt-1">{errors.profession}</p>}
-      </div>
+        <div className="w-full">
+          <Label htmlFor="profession">Your profession</Label>
+          <Select onValueChange={(value) => setValue("profession", value)}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select your profession" />
+            </SelectTrigger>
+            <SelectContent className="w-full">
+              <SelectItem value="Educator (k-12)">Educator (k-12)</SelectItem>
+              <SelectItem value="Educator (Higher-ed)">Educator (Higher-ed)</SelectItem>
+              <SelectItem value="Trainer">Trainer</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
+            </SelectContent>
+          </Select>
+          {errors.profession && <p className="text-red-500 text-sm">{errors.profession.message}</p>}
+        </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="referral">How did you hear about Us?</Label>
-        <Select
-          value={formData.referral}
-          onValueChange={(value) => handleSelectChange("referral", value)}
-        >
-          <SelectTrigger id="referral" className="w-full">
-            <SelectValue placeholder="Please select" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="social">Online search</SelectItem>
-            <SelectItem value="friend">Social media</SelectItem>
-            <SelectItem value="search">Blog or article</SelectItem>
-            <SelectItem value="other">Other</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="w-full">
+          <Label htmlFor="referral">How did you hear about Us?</Label>
+          <Select onValueChange={(value) => setValue("referral", value)}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select an option" />
+            </SelectTrigger>
+            <SelectContent className="w-full">
+              <SelectItem value="Online search">Online search</SelectItem>
+              <SelectItem value="Social media">Social media</SelectItem>
+              <SelectItem value="Blog or article">Blog or article</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
+            </SelectContent>
+          </Select>
+          {errors.referral && <p className="text-red-500 text-sm">{errors.referral.message}</p>}
+        </div>
       </div>
     </div>
   );
