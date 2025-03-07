@@ -118,9 +118,10 @@ export default function SignInForm() {
 
         <Button
           variant="outline"
-          className="w-full flex gap-2 justify-center items-center text-primary-gray font-openSans font-semibold text-sm"
+          className="w-full flex gap-2 justify-center items-center text-primary-gray font-openSans font-semibold text-sm cursor-pointer"
         >
-          <Image src="/icons/google.svg" alt="Google" width={20} height={20} />
+          <Image src="/icons/google.svg" alt="Google" width={20} height={20} 
+          onClick={onclick=()=> router.push("/signingoogle")}/>
           Sign in with google
         </Button>
 
@@ -128,11 +129,12 @@ export default function SignInForm() {
           Continue as Guest
         </Button>
       </CardContent>
+    
 
       <CardFooter className="flex justify-center">
         <p className="text-xs text-secondary-gray font-openSans font-normal ">
           {"Don't have an account?"}
-          <button className="text-blue hover:underline pl-2 cursor-pointer" onClick={() => router.push("/signup")}>
+          <button className="text-blue hover:underline pl-2 cursor-pointer">
             Sign Up
           </button>
         </p>
