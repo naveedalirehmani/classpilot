@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
+@theme inline { 
   /* fonts  */
   --font-roboto: "Roboto Slab", serif;
   --font-openSans: "Open Sans", sans-serif;
