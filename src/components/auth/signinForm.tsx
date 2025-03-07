@@ -131,7 +131,7 @@ export default function SignInForm() {
 
       <CardFooter className="flex justify-center">
         <p className="text-xs text-secondary-gray font-openSans font-normal ">
-         {" Don't have an account? "}
+          {"Don't have an account?"}
           <button className="text-blue hover:underline pl-2 cursor-pointer" onClick={() => router.push("/signup")}>
             Sign Up
           </button>
