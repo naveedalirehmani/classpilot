@@ -1,8 +1,7 @@
+import { redirect } from "next/navigation";
+import { Routes } from "@/lib/routes";
 
 export default function Home() {
-  return (
-    <div>
-      Home
-    </div>
-  );
+  redirect(Routes.SIGNIN);
+  return null;
 }

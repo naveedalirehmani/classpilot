@@ -1,78 +1,69 @@
-// steps/PersonalInfoForm.tsx
-import React from "react";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { StepProps } from "../auth/types";
+import { useFormContext } from "react-hook-form";
+import { FormData } from "../auth/types";
 
-export const PersonalInfoForm: React.FC<StepProps> = ({
-  formData,
-  handleInputChange,
-  errors,
-  showPassword,
-  setShowPassword,
-}) => {
+export const PersonalInfoForm: React.FC<{ showPassword: boolean, setShowPassword: (show: boolean) => void }> = ({ showPassword, setShowPassword }) => {
+  const { register, watch, formState: { errors } } = useFormContext<FormData>();
+  const password = watch("password", ""); // Get password input value
+
+  // Password validation checks
+  const hasMinLength = password.length >= 8;
+  const hasNumber = /\d/.test(password);
+  const hasUpperCase = /[A-Z]/.test(password);
+  const hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+  
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-semibold mb-4">Personal information</h2>
+    <div>
+      <h2 className="text-xl font-semibold mb-4">Personal Information</h2>
 
-      <div className="space-y-2">
-        <Label htmlFor="fullName">Full name</Label>
-        <Input
-          id="fullName"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleInputChange}
-          placeholder="Enter full name"
-          className={`w-full ${errors.fullName ? "border-red-500" : ""}`}
-        />
-        {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          placeholder="youremail@example.com"
-          className="w-full"
-          disabled
-        />
-      </div>
-
-      <div className="space-y-2 relative">
-        <Label htmlFor="password">Password</Label>
-        <div className="relative">
-          <Input
-            id="password"
-            name="password"
-            type={showPassword ? "text" : "password"}
-            value={formData.password}
-            onChange={handleInputChange}
-            className={`w-full pr-10 ${errors.password ? "border-red-500" : ""}`}
-            placeholder="********"
-          />
-          <button
-            type="button"
-            className="absolute inset-y-0 right-0 flex items-center pr-3"
-            onClick={() => setShowPassword?.(!showPassword)}
-          >
-            {showPassword ? (
-              <EyeOffIcon className="h-5 w-5 text-gray-400" />
-            ) : (
-              <EyeIcon className="h-5 w-5 text-gray-400" />
-            )}
-          </button>
+      <div className="space-y-4">
+        {/* Full Name */}
+        <div className="space-y-2">
+          <Label htmlFor="fullName">Full Name</Label>
+          <Input id="fullName" {...register("fullName")} />
+          {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>}
         </div>
-        {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
-      </div>
 
-      <div className="text-xs p-2 rounded">
-        Password must be at least 8 characters and contain 1 number, 1 uppercase
-        letter and 1 special character.
+        {/* Email */}
+        <div className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" type="email" {...register("email")} />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+        </div>
+
+        {/* Password */}
+        <div className="space-y-2">
+          <Label htmlFor="password">Password</Label>
+          <div className="relative">
+            <Input id="password" type={showPassword ? "text" : "password"} {...register("password")} />
+            <button type="button" className="absolute right-2 top-2" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Password Validation Rules */}
+        <p className="text-sm text-gray-600">
+          Password must be{" "}
+          <span className={hasMinLength ? "text-blue-600 font-medium" : "text-gray-600"}>
+            at least 8 characters
+          </span>
+          {", "}
+          <span className={hasNumber ? "text-blue-600 font-medium" : "text-gray-600"}>
+            1 number
+          </span>
+          {", "}
+          <span className={hasUpperCase ? "text-blue-600 font-medium" : "text-gray-600"}>
+            1 uppercase letter
+          </span>
+          {" and "}
+          <span className={hasSpecialChar ? "text-blue-600 font-medium" : "text-gray-600"}>
+            1 special character
+          </span>.
+        </p>
       </div>
     </div>
   );

@@ -13,10 +13,12 @@ import { Label } from "@/components/ui/label";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Routes } from "@/lib/routes";
 
 export default function SignInForm() {
-    const router = useRouter();
+  const router = useRouter();
   const [showPassword, setShowPassword] = React.useState(false);
+
   return (
     <Card className="w-full max-w-[400px]">
       <CardHeader className="space-y-1 text-center">
@@ -51,7 +53,7 @@ export default function SignInForm() {
           <Input
             id="email"
             type="email"
-            placeholder="moeez.ali@gmail.com"
+            placeholder="Enter email"
             className="w-full"
           />
         </div>
@@ -119,22 +121,27 @@ export default function SignInForm() {
         <Button
           variant="outline"
           className="w-full flex gap-2 justify-center items-center text-primary-gray font-openSans font-semibold text-sm cursor-pointer"
+          onClick={() => router.push(Routes.SIGNIN_GOOGLE)}
         >
-          <Image src="/icons/google.svg" alt="Google" width={20} height={20} 
-          onClick={onclick=()=> router.push("/signingoogle")}/>
-          Sign in with google
+          <Image src="/icons/google.svg" alt="Google" width={20} height={20} />
+          Sign in with Google
         </Button>
 
-        <Button variant="outline" className="w-full text-primary-gray font-openSans font-semibold text-sm">
+        <Button
+          variant="outline"
+          className="w-full text-primary-gray font-openSans font-semibold text-sm"
+        >
           Continue as Guest
         </Button>
       </CardContent>
-    
 
       <CardFooter className="flex justify-center">
         <p className="text-xs text-secondary-gray font-openSans font-normal ">
           {"Don't have an account?"}
-          <button className="text-blue hover:underline pl-2 cursor-pointer">
+          <button
+            className="text-blue hover:underline pl-2 cursor-pointer"
+            onClick={() => router.push(Routes.SIGNUP)}
+          >
             Sign Up
           </button>
         </p>
