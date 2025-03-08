@@ -1,6 +1,16 @@
 import { z } from "zod";
 
-export const formSchema = z.object({
+// Sign In Schema
+export const signInSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  rememberMe: z.boolean().optional(),
+});
+
+export type SignInFormValues = z.infer<typeof signInSchema>;
+
+// Sign Up Schema
+export const signUpSchema = z.object({
   email: z.string().email("Please enter a valid email"),
   fullName: z.string().min(1, "Full name is required"),
   password: z
@@ -14,4 +24,4 @@ export const formSchema = z.object({
   referral: z.string().min(1, "Please tell us how you heard about us"),
 });
 
-export type FormData = z.infer<typeof formSchema>;
+export type SignUpFormValues = z.infer<typeof signUpSchema>;
