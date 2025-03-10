@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormContext } from "react-hook-form";
-import { FormData } from "@/lib/schema";
+import { SignUpFormValues} from "@/lib/schema";
 import { Routes } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 
@@ -18,7 +18,7 @@ export const EmailSignUp: React.FC<EmailSignUpProps> = ({ onContinue }) => {
   const {
     register,
     formState: { errors },
-  } = useFormContext<FormData>();
+  } = useFormContext<SignUpFormValues>();
 
   const handleEmailSignUp = (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent form submission

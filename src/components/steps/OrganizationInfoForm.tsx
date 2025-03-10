@@ -9,10 +9,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useFormContext } from "react-hook-form";
-import { FormData } from "../auth/types";
+import { SignUpFormValues } from "@/lib/schema";
 
 export const OrganizationInfoForm: React.FC = () => {
-  const { register, formState: { errors }, setValue } = useFormContext<FormData>();
+  const { register, formState: { errors }, setValue } = useFormContext<SignUpFormValues>();
 
   return (
     <div>
