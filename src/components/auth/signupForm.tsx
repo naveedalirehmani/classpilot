@@ -31,7 +31,6 @@ export function SignUpForm() {
   });
 
   const { handleSubmit, trigger, formState } = methods;
-
   useEffect(() => {
     console.log("Current step:", currentStep);
   }, [currentStep]);
