@@ -5,14 +5,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { EmailSignUp } from "@/components/steps/EmailSignUp";
 import { PersonalInfoForm } from "@/components/steps/PersonalInfoForm";
 import { OrganizationInfoForm } from "@/components/steps/OrganizationInfoForm";
 import { signUpSchema, SignUpFormValues } from "@/lib/schema";
 
 export function SignUpForm() {
-  const router = useRouter();
+  // const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
   const totalSteps = 3;
@@ -115,13 +115,13 @@ export function SignUpForm() {
     <Card className="w-full max-w-[400px]">
       <CardHeader className="space-y-1 text-center">
         <div className="flex justify-center mb-2">
-          <div className="flex items-center gap-2">
+          <div className="flex w-full">
             <Image
               src="/logo.svg"
               className="w-full"
               alt="Logo"
-              width={24}
-              height={24}
+              width={100}
+              height={100}
             />
           </div>
         </div>

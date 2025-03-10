@@ -21,7 +21,7 @@ export const EmailSignUp: React.FC<EmailSignUpProps> = ({ onContinue }) => {
   } = useFormContext<SignUpFormValues>();
 
   const handleEmailSignUp = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault();
     if (onContinue) {
       onContinue();
     }

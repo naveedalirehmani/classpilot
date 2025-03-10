@@ -38,7 +38,13 @@ export default function SignInForm() {
     <Card className="w-full max-w-[400px]">
       <CardHeader className="space-y-1 text-center">
         <div className="flex justify-center mb-2">
-          <Image src="/logo.svg" alt="Logo" className="w-full" width={100} height={100} />
+          <Image
+            src="/logo.svg"
+            alt="Logo"
+            className="w-full"
+            width={100}
+            height={100}
+          />
         </div>
         <p className="text-base text-dark font-openSans font-normal leading-relaxed tracking-normal text-center">
           AI-Powered Lesson Planning Assistant
@@ -50,8 +56,15 @@ export default function SignInForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter email" {...register("email")} />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+            <Input
+              id="email"
+              type="email"
+              placeholder="Enter email"
+              {...register("email")}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -69,10 +82,16 @@ export default function SignInForm() {
                 className="absolute inset-y-0 right-0 flex items-center pr-3"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? <EyeOffIcon className="h-5 w-5 text-gray-400" /> : <EyeIcon className="h-5 w-5 text-gray-400" />}
+                {showPassword ? (
+                  <EyeOffIcon className="h-5 w-5 text-gray-400" />
+                ) : (
+                  <EyeIcon className="h-5 w-5 text-gray-400" />
+                )}
               </button>
             </div>
-            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password.message}</p>
+            )}
           </div>
 
           <div className="flex items-center justify-between">
@@ -80,19 +99,28 @@ export default function SignInForm() {
               <Checkbox id="remember" {...register("rememberMe")} />
               <Label htmlFor="remember">Remember Me</Label>
             </div>
-            <a href="#" className="text-blue text-xs hover:underline">
+            <Button
+              variant="link"
+              className="text-blue text-xs hover:underline"
+              onClick={() => router.push(Routes.FORGOT_PASSWORD)}
+            >
               Forgot Password?
-            </a>
+            </Button>
           </div>
 
-          <Button type="submit" className="w-full bg-blue hover:bg-blue-600 text-white">
+          <Button
+            type="submit"
+            className="w-full bg-blue hover:bg-blue-600 text-white"
+          >
             Sign In
           </Button>
         </form>
 
         <div className="relative flex py-2 items-center">
           <div className="flex-grow border-t border-gray-300"></div>
-          <span className="flex-shrink mx-4 text-gray-600 text-xs font-medium">OR</span>
+          <span className="flex-shrink mx-4 text-gray-600 text-xs font-medium">
+            OR
+          </span>
           <div className="flex-grow border-t border-gray-300"></div>
         </div>
 
@@ -113,7 +141,10 @@ export default function SignInForm() {
       <CardFooter className="flex justify-center">
         <p className="text-xs text-secondary-gray">
           Don't have an account?
-          <button className="text-blue hover:underline pl-2" onClick={() => router.push(Routes.SIGNUP)}>
+          <button
+            className="text-blue hover:underline pl-2"
+            onClick={() => router.push(Routes.SIGNUP)}
+          >
             Sign Up
           </button>
         </p>
