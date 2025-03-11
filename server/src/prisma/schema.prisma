@@ -1,0 +1,110 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// USERS --------------------------------------------
+model Users {
+  id                       String             @id @default(uuid())
+  email                    String             @unique
+  name                     String
+  password                 String
+  otps                     Otp[]
+  created_at               DateTime           @default(now())
+  updated_at               DateTime           @updatedAt
+  firstTimeLogin            Boolean            @default(true)
+  isSuspended              Boolean            @default(false)
+  isVerified               Boolean            @default(false)
+  role                     Roles              @default(USER)
+  isTemporaryPasswordReset Boolean            @default(true)
+  isDeleted                Boolean            @default(false)
+  restrictions             UserRestrictions[]
+  reportedUsers            UserReports[]      @relation("ReportedUser")
+  reportsMade              UserReports[]      @relation("Reporter")
+  provider                 OAuthProvider    @default(EMAIL_PASSWORD)
+
+  @@map("users")
+}
+
+// ROLES --------------------------------------------
+enum Roles {
+  SUPER_ADMIN
+  ADMIN
+  DEVELOPER
+  USER
+  GUEST
+  ANALYST
+  MODERATOR
+}
+
+enum OAuthProvider {
+  GOOGLE
+  OUTLOOK
+  FACEBOOK
+  GITHUB
+  TWITTER
+  LINKEDIN
+  EMAIL_PASSWORD
+}
+
+// RESTRICTIONS --------------------------------------------
+model UserRestrictions {
+  id              String       @id @default(uuid())
+  userId          String
+  user            Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  restrictionType Restrictions
+  createdAt       DateTime     @default(now())
+
+  @@unique([userId, restrictionType])
+  @@map("user_restrictions")
+}
+
+enum Restrictions {
+  CREATE_POST
+  EDIT_POST
+  DELETE_POST
+  VIEW_POST
+  CREATE_COMMENT
+  VIEW_COMMENT
+  ANALYTICS
+  REPORT
+  ACCOUNT
+  CONTENT
+}
+
+// REPORTS --------------------------------------------
+model UserReports {
+  id             String       @id @default(uuid())
+  option         String       @db.VarChar(255)
+  reason         String       @db.Text
+  reportedUserId String
+  reporterId     String
+  reportedUser   Users        @relation("ReportedUser", fields: [reportedUserId], references: [id], onDelete: Cascade)
+  reporter       Users        @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  status         ReportStatus @default(PENDING)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@map("user_reports")
+}
+
+enum ReportStatus {
+  PENDING
+  UNDER_REVIEW
+  RESOLVED
+  REJECTED
+}
+
+model Otp {
+  id         String   @id @default(uuid())
+  otp        Int
+  created_at DateTime @default(now())
+  isExpired  Boolean  @default(false)
+  userId     String
+  user       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
