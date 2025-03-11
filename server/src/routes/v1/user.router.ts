@@ -12,6 +12,12 @@ userRouter.get(
 );
 
 userRouter.put(
+  "/update-user-details",
+  isAuthorized(),
+  userController.updateUserDetails
+);
+
+userRouter.put(
   "/toggle-first-time-login",
   isAuthorized([
     Roles.SUPER_ADMIN,

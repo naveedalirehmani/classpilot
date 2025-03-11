@@ -135,3 +135,26 @@ export const resetPassword = async (userId: string, newPassword: string) => {
     throw new DatabaseError(error.message);
   }
 };
+
+// Update user details
+
+interface UserDetails {
+  name?: string;
+  // email?: string;
+  organization?: string;
+  profession?: string;
+  howDidYouHearAboutUs?: string;
+}
+
+export const updateUserDetails = async (userId: string, userDetails: UserDetails) => {
+  try {
+    const updatedUser = await prisma.users.update({
+      where: { id: userId },
+      data: userDetails,
+    });
+
+    return updatedUser;
+  } catch (error: any) {
+    throw new DatabaseError(error.message);
+  }
+};

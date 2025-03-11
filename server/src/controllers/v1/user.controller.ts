@@ -4,6 +4,7 @@ import { ResponseMessages, ResponseStatus } from "../../types/response.enums";
 import { NotFoundError, ValidationError } from "../../utils/errors";
 import OtpService from "../../services/email.service";
 import * as forgetPasswordSchema from "../../schema/v1/user.valdiation";
+import { updateUserDetailsSchema } from "../../schema/v1/user.valdiation";
 
 export const getCurrentUserDetails = async (
   request: Request,
@@ -82,9 +83,7 @@ export const forgotPasswordHandler = async (
   next: NextFunction
 ) => {
   try {
-    const { email } = forgetPasswordSchema.forgotPassword.parse(
-      request.body
-    );
+    const { email } = forgetPasswordSchema.forgotPassword.parse(request.body);
 
     const user = await userModel.findUserByEmail(email);
 
@@ -96,9 +95,9 @@ export const forgotPasswordHandler = async (
 
     response.status(ResponseStatus.OK).json({
       message: ResponseMessages.Success,
-      data : {
-        email : user.email
-      }
+      data: {
+        email: user.email,
+      },
     });
   } catch (error: any) {
     return next(error);
@@ -111,10 +110,8 @@ export const verifyOtpHandler = async (
   next: NextFunction
 ) => {
   try {
-    const { email, otp } = forgetPasswordSchema.verifyOtp.parse(
-      request.body
-    );
-    console.log(email, otp)
+    const { email, otp } = forgetPasswordSchema.verifyOtp.parse(request.body);
+    console.log(email, otp);
 
     const user = await userModel.findUserByEmail(email);
 
@@ -145,9 +142,10 @@ export const resetPasswordHandler = async (
   next: NextFunction
 ) => {
   try {
-    console.log(request.body)
-    const { email, newPassword } =
-      forgetPasswordSchema.resetPassword.parse(request.body);
+    console.log(request.body);
+    const { email, newPassword } = forgetPasswordSchema.resetPassword.parse(
+      request.body
+    );
 
     const user = await userModel.findUserByEmail(email);
 
@@ -159,6 +157,27 @@ export const resetPasswordHandler = async (
 
     response.status(ResponseStatus.OK).json({
       message: ResponseMessages.Success,
+    });
+  } catch (error: any) {
+    return next(error);
+  }
+};
+
+
+export const updateUserDetails = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  try {
+    const { userId } = request.user;
+    const userDetails = updateUserDetailsSchema.parse(request.body);
+
+    const updatedUser = await userModel.updateUserDetails(userId, userDetails);
+    
+    return response.status(ResponseStatus.OK).json({
+      message: ResponseMessages.Success,
+      user: updatedUser,
     });
   } catch (error: any) {
     return next(error);

@@ -14,10 +14,13 @@ model Users {
   email                    String             @unique
   name                     String
   password                 String
+  organization             String?
+  profession               String?
+  howDidYouHearAboutUs     String?
   otps                     Otp[]
   created_at               DateTime           @default(now())
   updated_at               DateTime           @updatedAt
-  firstTimeLogin            Boolean            @default(true)
+  firstTimeLogin           Boolean            @default(true)
   isSuspended              Boolean            @default(false)
   isVerified               Boolean            @default(false)
   role                     Roles              @default(USER)
@@ -26,7 +29,7 @@ model Users {
   restrictions             UserRestrictions[]
   reportedUsers            UserReports[]      @relation("ReportedUser")
   reportsMade              UserReports[]      @relation("Reporter")
-  provider                 OAuthProvider    @default(EMAIL_PASSWORD)
+  provider                 OAuthProvider      @default(EMAIL_PASSWORD)
 
   @@map("users")
 }
