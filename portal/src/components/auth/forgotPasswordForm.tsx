@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
+} from "../../components/ui/card";
 import Image from "next/image";
-import VerificationForm from "@/components/auth/verificationForm";
+import VerificationForm from "../../components/auth/verificationForm";
 
 const PasswordResetFom = () => {
   const [currentStep, setCurrentStep] = useState("reset");

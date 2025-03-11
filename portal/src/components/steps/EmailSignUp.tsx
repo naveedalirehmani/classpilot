@@ -3,13 +3,8 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useFormContext } from "react-hook-form";
-<<<<<<< HEAD:src/components/steps/EmailSignUp.tsx
-import { SignUpFormValues } from "@/lib/schema";
-import { Routes } from "@/lib/routes";
-=======
 import { SignUpFormValues} from "../../lib/schema";
 import { Routes } from "../../lib/routes";
->>>>>>> 737b2222f826833a2349bfdf05c337621d440671:portal/src/components/steps/EmailSignUp.tsx
 import { useRouter } from "next/navigation";
 
 interface EmailSignUpProps {

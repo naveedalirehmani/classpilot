@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
 import {
   Card,
   CardContent,
   CardHeader,
   CardDescription,
-} from "@/components/ui/card";
+} from "../../components/ui/card";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Routes } from "@/lib/routes";
+import { Routes } from "../../lib/routes";
 
 interface VerificationFormProps {
   email: string;

@@ -6,18 +6,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent, CardHeader, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
 import Image from "next/image";
-<<<<<<< HEAD:src/components/auth/signupForm.tsx
-import { EmailSignUp } from "@/components/steps/EmailSignUp";
-import { PersonalInfoForm } from "@/components/steps/PersonalInfoForm";
-import { OrganizationInfoForm } from "@/components/steps/OrganizationInfoForm";
-import { signUpSchema, SignUpFormValues } from "@/lib/schema";
-=======
-import { useRouter } from "next/navigation";
 import { EmailSignUp } from "../steps/EmailSignUp";
 import { PersonalInfoForm } from "../steps/PersonalInfoForm";
 import { OrganizationInfoForm } from "../steps/OrganizationInfoForm";
 import { signUpSchema, SignUpFormValues } from "../../lib/schema";
->>>>>>> 737b2222f826833a2349bfdf05c337621d440671:portal/src/components/auth/signupForm.tsx
 
 export function SignUpForm() {
   const router = useRouter();

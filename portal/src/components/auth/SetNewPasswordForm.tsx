@@ -1,15 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { forgotPasswordSchema } from "@/lib/schema";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { forgotPasswordSchema } from "../..//lib/schema";
+import { Card, CardContent, CardHeader } from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import { z } from "zod";
 import Image from "next/image";
-import { Routes } from "@/lib/routes";
+import { Routes } from "../../lib/routes";
 
 // Define form values type based on schema
 export type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>;
