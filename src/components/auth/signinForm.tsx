@@ -1,5 +1,6 @@
 "use client";
 
+import { signIn } from "next-auth/react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -100,8 +101,9 @@ export default function SignInForm() {
               <Label htmlFor="remember">Remember Me</Label>
             </div>
             <Button
+              type="button"
               variant="link"
-              className="text-blue text-xs hover:underline"
+              className="text-blue text-xs hover:underline cursor-pointer"
               onClick={() => router.push(Routes.FORGOT_PASSWORD)}
             >
               Forgot Password?
@@ -127,12 +129,13 @@ export default function SignInForm() {
         <Button
           variant="outline"
           className="w-full flex gap-2 justify-center items-center"
-          onClick={() => router.push(Routes.SIGNIN_GOOGLE)}
+          onClick={() =>
+            signIn("google", { callbackUrl: Routes.SIGNIN_GOOGLE })
+          } // Redirect after sign-in
         >
           <Image src="/icons/google.svg" alt="Google" width={20} height={20} />
           Sign in with Google
         </Button>
-
         <Button variant="outline" className="w-full">
           Continue as Guest
         </Button>

@@ -3,10 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormContext } from "react-hook-form";
-import { SignUpFormValues} from "@/lib/schema";
+import { SignUpFormValues } from "@/lib/schema";
 import { Routes } from "@/lib/routes";
 import { useRouter } from "next/navigation";
-
 
 interface EmailSignUpProps {
   onContinue?: () => void;
@@ -34,7 +33,12 @@ export const EmailSignUp: React.FC<EmailSignUpProps> = ({ onContinue }) => {
       <div className="space-y-2">
         <div className="space-y-4">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="Enter email" {...register("email")} />
+          <Input
+            id="email"
+            type="email"
+            placeholder="Enter email"
+            {...register("email")}
+          />
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
@@ -65,12 +69,16 @@ export const EmailSignUp: React.FC<EmailSignUpProps> = ({ onContinue }) => {
           <span className="mr-2">○</span>
           Sign In with Google
         </Button>
-          <p className="text-center text-sm">
-            Already have an account?{" "}
-            <button className=" ml-2 text-blue font-medium cursor-pointer " onClick={() => router.push(Routes.SIGNIN)}>
-              Sign In
-            </button>
-          </p>
+        <p className="text-center text-sm">
+          Already have an account?{" "}
+          <button
+            type="button"
+            className=" ml-2 text-blue font-medium cursor-pointer "
+            onClick={() => router.push(Routes.SIGNIN)}
+          >
+            Sign In
+          </button>
+        </p>
       </div>
     </div>
   );
