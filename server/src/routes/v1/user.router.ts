@@ -11,10 +11,10 @@ userRouter.get(
   userController.getCurrentUserDetails
 );
 
-userRouter.put(
+userRouter.patch(
   "/update-user-details",
-  isAuthorized(),
-  userController.updateUserDetails
+  isAuthorized([Roles.USER, Roles.ADMIN, Roles.SUPER_ADMIN]),
+  userController.updateUserDetailsHandler
 );
 
 userRouter.put(

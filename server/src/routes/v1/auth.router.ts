@@ -26,7 +26,6 @@ authRouter.get("/logout", authController.logoutHandler);
 // auth check
 authRouter.get("/isauthenticated", authController.isAuthenticated);
 
-
 authRouter.use("/oauth", oAuthRouter);
 
 export default authRouter;

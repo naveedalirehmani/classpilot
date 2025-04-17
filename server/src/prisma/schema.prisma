@@ -17,6 +17,13 @@ model Users {
   organization             String?
   profession               String?
   howDidYouHearAboutUs     String?
+  // Teacher specific fields
+  schoolName               String?
+  yearsOfExperience       Int?
+  subjectsTaught          String?            // Comma separated subjects
+  gradeLevel              String?
+  educationalQualification String?
+  teacherLicenseNumber    String?            @unique
   otps                     Otp[]
   created_at               DateTime           @default(now())
   updated_at               DateTime           @updatedAt
@@ -30,6 +37,12 @@ model Users {
   reportedUsers            UserReports[]      @relation("ReportedUser")
   reportsMade              UserReports[]      @relation("Reporter")
   provider                 OAuthProvider      @default(EMAIL_PASSWORD)
+  // Subscription and lesson plan relations
+  subscription            Subscription?
+  lessonPlans            LessonPlan[]
+  favoriteLessonPlans    FavoriteLessonPlan[]
+  dailyGenerationCount   Int                 @default(0)
+  lastGenerationDate     DateTime?
 
   @@map("users")
 }
@@ -43,6 +56,7 @@ enum Roles {
   GUEST
   ANALYST
   MODERATOR
+  TEACHER
 }
 
 enum OAuthProvider {
@@ -78,6 +92,7 @@ enum Restrictions {
   REPORT
   ACCOUNT
   CONTENT
+  CREATE_LESSON_PLAN
 }
 
 // REPORTS --------------------------------------------
@@ -110,4 +125,65 @@ model Otp {
   isExpired  Boolean  @default(false)
   userId     String
   user       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// SUBSCRIPTION --------------------------------------------
+model Subscription {
+  id              String           @id @default(uuid())
+  userId          String           @unique
+  user            Users            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type            SubscriptionTier
+  startDate       DateTime         @default(now())
+  endDate         DateTime
+  isActive        Boolean          @default(true)
+  dailyLimit      Int              @default(10)
+  stripeCustomerId String?         
+  stripePriceId   String?
+  stripeSubscriptionId String?
+
+  @@map("subscriptions")
+}
+
+enum SubscriptionTier {
+  FREE
+  BASIC
+  PREMIUM
+  GOLD
+}
+
+// LESSON PLANS --------------------------------------------
+model LessonPlan {
+  id              String    @id @default(uuid())
+  userId          String    
+  user            Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String
+  subject         String
+  gradeLevel      String
+  duration        String    // e.g. "45 minutes"
+  objectives      String    @db.Text
+  materials       String    @db.Text
+  procedures      String    @db.Text
+  assessment      String    @db.Text
+  homework        String?   @db.Text
+  notes           String?   @db.Text
+  aiPrompt        String    @db.Text  // Store the prompt used to generate
+  aiResponse      String    @db.Text  // Store the AI's response
+  isDeleted       Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  favorites       FavoriteLessonPlan[]
+
+  @@map("lesson_plans")
+}
+
+model FavoriteLessonPlan {
+  id            String     @id @default(uuid())
+  userId        String
+  lessonPlanId  String
+  user          Users      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonPlan    LessonPlan @relation(fields: [lessonPlanId], references: [id], onDelete: Cascade)
+  createdAt     DateTime   @default(now())
+
+  @@unique([userId, lessonPlanId])
+  @@map("favorite_lesson_plans")
 }

@@ -13,6 +13,18 @@ export const signUpSchema = z.object({
     .min(1, { message: "Name must be at least 1 character long." }),
 });
 
+export const updateUserDetailsSchema = z.object({
+  organization: z.string().optional(),
+  profession: z.string().optional(),
+  howDidYouHearAboutUs: z.string().optional(),
+  schoolName: z.string().optional(),
+  yearsOfExperience: z.number().optional(),
+  subjectsTaught: z.string().optional(),
+  gradeLevel: z.string().optional(),
+  educationalQualification: z.string().optional(),
+  teacherLicenseNumber: z.string().optional(),
+});
+
 export const loginSchema = z.object({
   email: z
     .string({ required_error: "Email is required." })
@@ -30,7 +42,9 @@ export const createAccountsSchema = z.object({
     .string({ required_error: "Password is required." })
     .min(8, { message: "Password must be at least 8 characters long." }),
   type: z
-    .enum([Roles.ADMIN, Roles.DEVELOPER], { required_error: "Type is required." })
+    .enum([Roles.ADMIN, Roles.DEVELOPER], {
+      required_error: "Type is required.",
+    })
     .describe('The type of account: "admin" or "developer"'),
   age: z.number().optional(),
   expoPushToken: z.string().optional(),
@@ -39,7 +53,7 @@ export const createAccountsSchema = z.object({
 export const deleteAccountsSchema = z.object({
   userId: z
     .string({ required_error: "User ID is required." })
-    .uuid({ message: "Invalid user ID format." }),  // Assuming UUID format for user ID
+    .uuid({ message: "Invalid user ID format." }), // Assuming UUID format for user ID
   expoPushToken: z.string().optional(),
 });
 
