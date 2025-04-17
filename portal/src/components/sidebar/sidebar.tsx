@@ -68,6 +68,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ href, icon, children, hasChil
 };
 
 const Sidebar: React.FC = () => {
+  //@ts-expect-error - don't
   const [openMenus, setOpenMenus] = useState<Record<Routes, boolean>>({});
 
   const toggleMenu = (route: Routes) => {

@@ -1,77 +1,152 @@
+"use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { useFormContext } from "react-hook-form";
-import { SignUpFormValues} from "../../lib/schema";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Routes } from "../../lib/routes";
-import { useRouter } from "next/navigation";
-
+import { useSignUp } from "../../hooks/auth/auth.hooks";
+import { formSchema, SignUpFormValues } from "../../schema/auth/auth.schema";
 
 interface EmailSignUpProps {
   onContinue?: () => void;
 }
 
-export const EmailSignUp: React.FC<EmailSignUpProps> = ({ onContinue }) => {
+export const EmailSignUp = ({ onContinue }: EmailSignUpProps) => {
   const router = useRouter();
+  const { mutateAsync: signUp, isPending } = useSignUp();
 
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<SignUpFormValues>();
+  const form = useForm<SignUpFormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "web@test.com",
+      password: "passpass",
+      confirmPassword: "passpass",
+    },
+  });
 
-  const handleEmailSignUp = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent form submission
-    if (onContinue) {
-      onContinue();
-    }
+  const onSubmit = (values: SignUpFormValues) => {
+    signUp(
+      {
+        email: values.email,
+        password: values.password,
+        name:'test'
+      },
+      {
+        onSuccess: () => {
+          if (onContinue) {
+            onContinue();
+          }
+        },
+      }
+    );
   };
 
   return (
     <div>
       <h2 className="text-center text-xl font-semibold mb-4">Sign Up</h2>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter email" type="email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <div className="space-y-2">
-        <div className="space-y-4">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="Enter email" {...register("email")} />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
-        </div>
-        <Button
-          type="button"
-          className="w-full bg-blue hover:bg-blue-600 mt-4"
-          onClick={handleEmailSignUp}
-        >
-          Sign up with email
-        </Button>
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter password"
+                    type="password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <div className="relative my-4">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm Password</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Confirm your password"
+                    type="password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button
+            type="submit"
+            className="w-full bg-blue hover:bg-blue-600 mt-4"
+            disabled={isPending}
+          >
+            {isPending ? "Signing up..." : "Sign up with email"}
+          </Button>
+
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                OR
+              </span>
+            </div>
           </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">OR</span>
-          </div>
-        </div>
 
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full"
-          onClick={() => router.push(Routes.SIGNIN_GOOGLE)}
-        >
-          <span className="mr-2">○</span>
-          Sign In with Google
-        </Button>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full"
+            onClick={() => router.push(Routes.SIGNIN_GOOGLE)}
+          >
+            <span className="mr-2">○</span> Sign In with Google
+          </Button>
+
           <p className="text-center text-sm">
             Already have an account?{" "}
-            <button className=" ml-2 text-blue font-medium cursor-pointer " onClick={() => router.push(Routes.SIGNIN)}>
+            <button
+              type="button"
+              className="ml-2 text-blue font-medium cursor-pointer"
+              onClick={() => router.push(Routes.SIGNIN)}
+            >
               Sign In
             </button>
           </p>
-      </div>
+        </form>
+      </Form>
     </div>
   );
 };
