@@ -5,14 +5,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent, CardHeader, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { EmailSignUp } from "../steps/EmailSignUp";
 import { PersonalInfoForm } from "../steps/PersonalInfoForm";
 import { OrganizationInfoForm } from "../steps/OrganizationInfoForm";
 import { signUpSchema, SignUpFormValues } from "../../lib/schema";
 
 export function SignUpForm() {
-  const router = useRouter();
+  // const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
   const totalSteps = 3;

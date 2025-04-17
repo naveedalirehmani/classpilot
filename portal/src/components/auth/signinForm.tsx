@@ -41,7 +41,7 @@ export default function SignInForm() {
           <Image src="/logo.svg" alt="Logo" className="w-full" width={100} height={100} />
         </div>
         <p className="text-base text-dark font-openSans font-normal leading-relaxed tracking-normal text-center">
-          AI-Powered Lesson Planning Assistant
+          AI-Powered Lesson Planning Assistant.
         </p>
       </CardHeader>
 
@@ -112,7 +112,7 @@ export default function SignInForm() {
 
       <CardFooter className="flex justify-center">
         <p className="text-xs text-secondary-gray">
-          Don't have an account?
+          Don&apos;t have an account?
           <button className="text-blue hover:underline pl-2" onClick={() => router.push(Routes.SIGNUP)}>
             Sign Up
           </button>
