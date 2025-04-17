@@ -5,11 +5,11 @@ import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
-import { ArrowLeft, FileText, Lightbulb, Globe, Sparkles } from "lucide-react"
+import { ArrowLeft, FileText } from "lucide-react"
 import Image from "next/image"
 
 export default function LessonPlan() {
-  const [activeTab, setActiveTab] = useState("topic")
+  const [, setActiveTab] = useState("topic")
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
