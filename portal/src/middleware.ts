@@ -52,8 +52,12 @@ export async function middleware(request: NextRequest) {
 
     // Proceed if validation passes
     return NextResponse.next();
-  } catch (error: any) {
-    console.error("Middleware error:", error?.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Middleware error:", error.message);
+    } else {
+      console.error("Middleware error:", error);
+    }
     return NextResponse.redirect(new URL(SIGN_IN_PATH, request.url));
   }
 }
