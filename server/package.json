@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc && node copy.js",
-    "start": "npm run build && node build/index.js",
+    "start": "npm run build && node dist/index.js",
     "test": "jest --verbose",
     "type-check": "tsc --noEmit"
   },
@@ -15,6 +15,7 @@
   "dependencies": {
     "@aws-sdk/client-ses": "^3.758.0",
     "@prisma/client": "^5.15.1",
+    "@tanstack/react-query": "^5.67.2",
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
