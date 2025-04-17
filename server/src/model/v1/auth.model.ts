@@ -47,6 +47,9 @@ export const createUser = async (data: CreateUser) => {
         isSuspended: false,
         role: Roles.USER
       },
+      include: {
+        restrictions: true,
+      },
     });
 
     return newUser;

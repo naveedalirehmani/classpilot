@@ -4,7 +4,8 @@ import { ResponseMessages, ResponseStatus } from "../../types/response.enums";
 import { NotFoundError, ValidationError } from "../../utils/errors";
 import OtpService from "../../services/email.service";
 import * as forgetPasswordSchema from "../../schema/v1/user.valdiation";
-import { updateUserDetailsSchema } from "../../schema/v1/user.valdiation";
+import { updateUserDetailsSchema } from "../../schema/v1/auth.validation";
+import { updateUserDetails } from "../../model/v1/user.model";
 
 export const getCurrentUserDetails = async (
   request: Request,
@@ -163,23 +164,43 @@ export const resetPasswordHandler = async (
   }
 };
 
-
-export const updateUserDetails = async (
+export const updateUserDetailsHandler = async (
   request: Request,
-  response: Response,
-  next: NextFunction
+  response: Response
 ) => {
   try {
     const { userId } = request.user;
-    const userDetails = updateUserDetailsSchema.parse(request.body);
+    const {
+      organization,
+      profession,
+      howDidYouHearAboutUs,
+      schoolName,
+      yearsOfExperience,
+      subjectsTaught,
+      gradeLevel,
+      educationalQualification,
+      teacherLicenseNumber,
+    } = updateUserDetailsSchema.parse(request.body);
 
-    const updatedUser = await userModel.updateUserDetails(userId, userDetails);
-    
+    const updatedUser = await userModel.updateUserDetails(userId, {
+      organization,
+      profession,
+      howDidYouHearAboutUs,
+      schoolName,
+      yearsOfExperience,
+      subjectsTaught,
+      gradeLevel,
+      educationalQualification,
+      teacherLicenseNumber,
+    });
+
     return response.status(ResponseStatus.OK).json({
       message: ResponseMessages.Success,
-      user: updatedUser,
+      data: updatedUser,
     });
   } catch (error: any) {
-    return next(error);
+    return response.status(ResponseStatus.InternalServerError).json({
+      message: error.message,
+    });
   }
 };

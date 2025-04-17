@@ -7,6 +7,7 @@ import {
   loginSchema,
   resetPasswordSchema,
   signUpSchema,
+  updateUserDetailsSchema,
 } from "../../schema/v1/auth.validation";
 import { z } from "zod";
 import { setUserCookies } from "../../utils/auth.utils";
@@ -23,11 +24,13 @@ const LOGOUT_COOKIE_OPTIONS = {
   ...(IS_PRODUCTION && { domain: process.env.COOKIE_CLIENT }),
 };
 
-export const signupHandler = async (request: Request, response: Response) => {
+export const signupHandler = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
   try {
-    const { email, password, name } = signUpSchema.parse(
-      request.body
-    );
+    const { email, password, name } = signUpSchema.parse(request.body);
 
     const existingUser = await authModel.findUserByEmail(email);
 
@@ -51,18 +54,19 @@ export const signupHandler = async (request: Request, response: Response) => {
       isMobileClient
     );
 
-    if (process.env.NODE_ENV !== "test") {
-      await OtpService.sendOtpHandler(newUser.id, email);
-    }
-
     if (isMobileClient) {
       return response.status(ResponseStatus.Created).json({
         message: ResponseMessages.Success,
         accessToken,
         refreshToken,
         role: newUser.role,
-        userId : newUser.id,
-        firstTimeLogin: newUser.firstTimeLogin
+        userId: newUser.id,
+        firstTimeLogin: newUser.firstTimeLogin,
+        restrictions: newUser.restrictions.map(
+          (restriction) => restriction.restrictionType
+        ),
+        isVerified: newUser.isVerified,
+        name: newUser.name,
       });
     }
 
@@ -70,20 +74,15 @@ export const signupHandler = async (request: Request, response: Response) => {
       message: ResponseMessages.Success,
     });
   } catch (error: any) {
-    console.error(error);
-
-    if (error instanceof z.ZodError) {
-      return response
-        .status(ResponseStatus.BadGateway)
-        .json({ message: error.errors[0].message });
-    }
-    return response
-      .status(error.statusCode || ResponseStatus.InternalServerError)
-      .json({ message: error.message });
+    return next(error);
   }
 };
 
-export const signinHandler = async (request: Request, response: Response, next:NextFunction) => {
+export const signinHandler = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
   try {
     const { email, password } = loginSchema.parse(request.body);
 
@@ -126,15 +125,9 @@ export const signinHandler = async (request: Request, response: Response, next:N
       isMobileClient
     );
 
-    // if (process.env.NODE_END != "test") {
-    //   if (!user.isVerified) {
-    //     await OtpService.sendOtpHandler(user.id, user.email);
-    //   }
-    // }
-
     if (isMobileClient) {
       return response.status(ResponseStatus.OK).json({
-        userId : user.id,
+        userId: user.id,
         message: ResponseMessages.Success,
         accessToken,
         refreshToken,
@@ -160,7 +153,8 @@ export const signinHandler = async (request: Request, response: Response, next:N
 
 export const passwordRecoveryHandler = async (
   request: Request,
-  response: Response
+  response: Response,
+  next: NextFunction
 ) => {
   try {
     const { email, password } = loginSchema.parse(request.body);
@@ -188,15 +182,16 @@ export const passwordRecoveryHandler = async (
     return response
       .status(ResponseStatus.OK)
       .json({ message: ResponseMessages.Success });
-  } catch (err: any) {
-    console.error("Error during password recovery:", err);
-    return response
-      .status(err.statusCode || ResponseStatus.InternalServerError)
-      .json({ message: err.message });
+  } catch (error: any) {
+    next(error);
   }
 };
 
-export async function logoutHandler(_: Request, response: Response) {
+export async function logoutHandler(
+  _: Request,
+  response: Response,
+  next: NextFunction
+) {
   try {
     console.log("logoutHandler");
     response.clearCookie("access_token", LOGOUT_COOKIE_OPTIONS);
@@ -208,52 +203,54 @@ export async function logoutHandler(_: Request, response: Response) {
       .status(ResponseStatus.OK)
       .json({ message: ResponseMessages.Success });
   } catch (error: any) {
-    console.error("Logout error:", error);
-    response
-      .status(ResponseStatus.InternalServerError)
-      .json({ message: ResponseMessages.InternalServerError });
+    return next(error);
   }
 }
 
 export const refreshAccessToken = async (
   request: Request,
-  response: Response
+  response: Response,
+  next: NextFunction
 ) => {
-  const refreshToken = request.headers["x-refresh-token"] as string;
+  try {
+    const refreshToken = request.headers["x-refresh-token"] as string;
 
-  if (!refreshToken) {
-    return response
-      .status(ResponseStatus.Unauthorized)
-      .json({ message: ResponseMessages.Unauthorized });
+    if (!refreshToken) {
+      return response
+        .status(ResponseStatus.Unauthorized)
+        .json({ message: ResponseMessages.Unauthorized });
+    }
+
+    const { payload } = verifyJWT(refreshToken);
+
+    if (!payload) {
+      return response
+        .status(ResponseStatus.Unauthorized)
+        .json({ message: "Invalid refresh token" });
+    }
+
+    const newAccessToken = signJWT(
+      {
+        email: payload.email,
+        userId: payload.userId,
+        oAuthAccessToken: payload.oAuthAccessToken,
+        role: payload.role,
+      },
+      "12h" // expires in 12 hour
+    );
+    console.log("return access toekn");
+    return response.status(ResponseStatus.OK).json({
+      accessToken: newAccessToken,
+    });
+  } catch (error: any) {
+    return next(error);
   }
-
-  const { payload } = verifyJWT(refreshToken);
-
-  if (!payload) {
-    return response
-      .status(ResponseStatus.Unauthorized)
-      .json({ message: "Invalid refresh token" });
-  }
-
-
-  const newAccessToken = signJWT(
-    {
-      email: payload.email,
-      userId: payload.userId,
-      oAuthAccessToken: payload.oAuthAccessToken,
-      role: payload.role,
-    },
-    "12h" // expires in 12 hour
-  );
-console.log('return access toekn')
-  return response.status(ResponseStatus.OK).json({
-    accessToken: newAccessToken,
-  });
 };
 
 export const resetPasswordHandler = async (
   request: Request,
-  response: Response
+  response: Response,
+  next: NextFunction
 ) => {
   try {
     const { otp, email, password } = resetPasswordSchema.parse(request.body);
@@ -281,14 +278,16 @@ export const resetPasswordHandler = async (
     return response
       .status(ResponseStatus.OK)
       .json({ message: ResponseMessages.Success });
-  } catch (err: any) {
-    return response
-      .status(err.statusCode || ResponseStatus.InternalServerError)
-      .json({ message: err.message });
+  } catch (error: any) {
+    return next(error);
   }
 };
 
-export const isAuthenticated = async (request: Request, response: Response) => {
+export const isAuthenticated = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
   try {
     if (!request.user) {
       return response.status(ResponseStatus.NotAcceptable).json({
@@ -304,24 +303,22 @@ export const isAuthenticated = async (request: Request, response: Response) => {
     };
 
     response.status(ResponseStatus.OK).json(userStatus);
-  } catch (error) {
-    console.error("Error fetching user status:", error);
-    response
-      .status(ResponseStatus.InternalServerError)
-      .json({ error: "Internal server error" });
+  } catch (error: any) {
+    next(error);
   }
 };
 
 export const deleteMyAccount = async (
   request: Request,
-  response: Response
+  response: Response,
+  next: NextFunction
 ) => {
   try {
-    const {userId,email} = request.user;
+    const { userId, email } = request.user;
 
     const userData = await authModel.findUserByEmail(email);
 
-    if(!userData){
+    if (!userData) {
       return response
         .status(ResponseStatus.NotFound)
         .json({ message: ResponseMessages.UserNotFound });
@@ -333,8 +330,6 @@ export const deleteMyAccount = async (
       .status(ResponseStatus.OK)
       .json({ message: ResponseMessages.Success, data: deleteUser });
   } catch (error: any) {
-    return response.status(ResponseStatus.InternalServerError).json({
-      message: error,
-    });
+    return next(error);
   }
 };

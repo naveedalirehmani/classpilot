@@ -139,11 +139,15 @@ export const resetPassword = async (userId: string, newPassword: string) => {
 // Update user details
 
 interface UserDetails {
-  name?: string;
-  // email?: string;
   organization?: string;
   profession?: string;
   howDidYouHearAboutUs?: string;
+  schoolName?: string;
+  yearsOfExperience?: number;
+  subjectsTaught?: string;
+  gradeLevel?: string;
+  educationalQualification?: string;
+  teacherLicenseNumber?: string;
 }
 
 export const updateUserDetails = async (userId: string, userDetails: UserDetails) => {
@@ -152,7 +156,7 @@ export const updateUserDetails = async (userId: string, userDetails: UserDetails
       where: { id: userId },
       data: userDetails,
     });
-
+    
     return updatedUser;
   } catch (error: any) {
     throw new DatabaseError(error.message);
