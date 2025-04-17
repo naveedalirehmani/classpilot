@@ -16,11 +16,3 @@ export const resetPassword = z.object({
     .min(8, "Password must be at least 8 characters long")
     .max(64, "Password must be at most 64 characters long"),
 });
-
-export const updateUserDetailsSchema = z.object({
-  name: z.string().optional(),
-  // email: z.string().email().optional(),
-  organization: z.string().optional(),
-  profession: z.string().optional(),
-  howDidYouHearAboutUs: z.string().optional(),
-});

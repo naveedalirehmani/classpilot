@@ -40,7 +40,11 @@ export const validateRoleHierarchy = async (requesterRole: Roles, targetUserId: 
       return false;
     }
 
-    return roleHierarchy[requesterRole] >= roleHierarchy[targetUser.role];
+    if (!(requesterRole in roleHierarchy) || !(targetUser.role in roleHierarchy)) {
+      return false;
+    }
+
+    return roleHierarchy[requesterRole as keyof typeof roleHierarchy] >= roleHierarchy[targetUser.role as keyof typeof roleHierarchy];
   } catch (error) {
     throw new Error("Error checking user roles");
   }
