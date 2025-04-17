@@ -2,9 +2,8 @@ import React from "react";
 
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
-type Props = {};
 
-function Page({}: Props) {
+function Page() {
   return (
     <div className="min-h-screen w-full flex flex-col">
       <div className="max-w-[1400px] mx-auto mt-6 md:mt-12">
