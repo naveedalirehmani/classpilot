@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ROUTES } from "./lib/routes";
 
-const API_URL = process.env.API_URL || "http://192.168.1.16:4000/v1/user/current-user";
-const SIGN_IN_PATH = "/signin";
+const API_URL = process.env.API_URL || "http://localhost:4000/v1/user/current-user";
 const COOKIE_HEADER = "cookie";
 const ACCESS_TOKEN = "access_token";
 const REFRESH_TOKEN = "refresh_token";
@@ -19,18 +19,21 @@ function parseCookies(cookieHeader: string): Record<string, string> {
 }
 
 export async function middleware(request: NextRequest) {
-  console.log("middleware");
   try {
     const cookieHeader = request.headers.get(COOKIE_HEADER) || "";
     const cookies = parseCookies(cookieHeader);
-    console.log("cookies", cookies);
+
     const accessToken = cookies[ACCESS_TOKEN];
     const refreshToken = cookies[REFRESH_TOKEN];
-    console.log("accessToken", accessToken);
-    console.log("refreshToken", refreshToken);
+    
+    console.log({
+      accessToken,
+      refreshToken
+    });
+
     // If no tokens are found, redirect to sign-in
     if (!accessToken || !refreshToken) {
-      return NextResponse.redirect(new URL(SIGN_IN_PATH, request.url));
+      return NextResponse.redirect(new URL(ROUTES.SIGNIN, request.url));
     }
 
     // Validate tokens by calling the "current user" API
@@ -47,7 +50,11 @@ export async function middleware(request: NextRequest) {
 
     // If API response is not OK, redirect to sign-in
     if (!apiResponse.ok) {
-      return NextResponse.redirect(new URL(SIGN_IN_PATH, request.url));
+      return NextResponse.redirect(new URL(ROUTES.SIGNIN, request.url));
+    }
+
+    if(data.onboardingCompleted && ROUTES.ONBOARDING === request.nextUrl.pathname && request.headers.get('referer')?.includes(ROUTES.ONBOARDING) !== true){
+      return NextResponse.redirect(new URL(ROUTES.DASHBOARD, request.url));
     }
 
     // Proceed if validation passes
@@ -58,7 +65,7 @@ export async function middleware(request: NextRequest) {
     } else {
       console.error("Middleware error:", error);
     }
-    return NextResponse.redirect(new URL(SIGN_IN_PATH, request.url));
+    return NextResponse.redirect(new URL(ROUTES.SIGNIN, request.url));
   }
 }
 
@@ -66,9 +73,12 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Protect user-related routes
+    "/onboarding",
+
     "/user/:path*", // e.g., /user/profile, /user/settings
 
     // Protect dashboard-related routes
+    "/dashboard",
     "/dashboard/:path*", // e.g., /dashboard/overview, /dashboard/stats
 
     // Protect settings-related routes

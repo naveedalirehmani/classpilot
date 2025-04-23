@@ -9,4 +9,10 @@ export enum QueryKeys {
   COMMENTS = "comments",
   USER = "user",
   UPDATE_USER = "update-user",
+  LESSON_PLAN = "lesson-plan",
+  CREATE_LESSON_PLAN = "create-lesson-plan",
+  FAVORITES = "favorites",
+  ADD_FAVORITE = "add-favorite",
+  UPDATE_LESSON_PLAN = "update-lesson-plan",
+  REMOVE_FAVORITE = "remove-favorite",
 }
