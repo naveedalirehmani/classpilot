@@ -39,4 +39,3 @@ export const mockUser = {
   email: "admin@example.com",
   role: "SUPER_ADMIN",
 };
-
