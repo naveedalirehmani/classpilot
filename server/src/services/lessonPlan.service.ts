@@ -15,8 +15,8 @@ class LessonPlanService {
   ) {
     try {
       const lessonPlan = await generateObject({
-        // model: openai(defaultModel),
-        model: openai(Models.GPT_41),
+        model: openai(defaultModel),
+        // model: openai(Models.GPT_41),
         schema: generateLessonPlanSchema,
         prompt: `Generate a lesson plan for the topic: ${topic} with the following additional instructions: ${additionalInstructions} and standards: ${standards} and output language: ${outputLanguage} and user id: ${userId} Instructor Name is ${instructorName}`,
       });
