@@ -5,13 +5,17 @@ import { SignUpRequest } from "../../types/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { AxiosError } from "axios";
+import {useRouter} from 'next/navigation';
+import { ROUTES } from "src/lib/routes";
 
 export const useSignUp = () => {
+  const router = useRouter();
   return useMutation({
     mutationKey: [QueryKeys.AUTH, QueryKeys.SIGN_UP],
     mutationFn: (data: SignUpRequest) => authService.signUp(data),
     onSuccess: () => {
       toast.success("Account created successfully!");
+      router.push(ROUTES.ONBOARDING);
     },
     onError: (error: unknown) => {
       if (error instanceof AxiosError) {
@@ -24,11 +28,13 @@ export const useSignUp = () => {
 };
 
 export const useSignIn = () => {
+  const router = useRouter();
   return useMutation({
     mutationKey: [QueryKeys.AUTH, QueryKeys.SIGN_IN],
     mutationFn: (data: SignInRequest) => authService.signIn(data),
     onSuccess: () => {
       toast.success("Signed in successfully!");
+      router.push(ROUTES.DASHBOARD);
     },
     onError: (error: unknown) => {
       if (error instanceof AxiosError) {
@@ -48,11 +54,13 @@ export const useCurrentUser = () => {
 };
 
 export const useSignOut = () => {
+  const router = useRouter();
   return useMutation({
     mutationKey: [QueryKeys.AUTH, QueryKeys.SIGN_OUT],
     mutationFn: () => authService.signOut(),
     onSuccess: () => {
       toast.success("Signed out successfully!");
+      router.push(ROUTES.SIGNIN);
     },
     onError: (error: unknown) => {
       if (error instanceof AxiosError) {

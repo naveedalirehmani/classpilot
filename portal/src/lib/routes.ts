@@ -1,7 +1,18 @@
-export enum Routes {
+export enum ROUTES {
     HOME = "/",
     SIGNIN = "/signin",
     SIGNIN_GOOGLE = "/signingoogle",
     SIGNUP = "/signup",
+    ONBOARDING = "/onboarding",
+    DASHBOARD = "/dashboard",
+    DASHBOARD_CREATE = "/dashboard/create",
+    LESSON_PLAN = "/lesson-plan",
+    RESOURCES = "/dashboard/lesson-plan/resources",
+    FAVORITES = "/dashboard/lesson-plan/favorites",
+    ALL = "/dashboard/lesson-plan/all",
+    SETTINGS = "/dashboard/settings",
+    PROFILE = "/dashboard/profile",
+    UPGRADE = "/dashboard/upgrade",
+    FAQ = "/dashboard/faq",
+    KANBAN = "/dashboard/kanban",
   }
-  

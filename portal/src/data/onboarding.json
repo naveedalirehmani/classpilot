@@ -1,0 +1,76 @@
+{
+  "professions": [
+    { "value": "teacher", "label": "Teacher" },
+    { "value": "principal", "label": "Principal" },
+    { "value": "administrator", "label": "Administrator" },
+    { "value": "counselor", "label": "School Counselor" },
+    { "value": "specialist", "label": "Education Specialist" },
+    { "value": "coordinator", "label": "Department Coordinator" },
+    { "value": "other", "label": "Other Education Professional" }
+  ],
+  "referralSources": [
+    { "value": "colleague", "label": "Colleague Recommendation" },
+    { "value": "conference", "label": "Educational Conference" },
+    { "value": "social", "label": "Social Media" },
+    { "value": "search", "label": "Search Engine" },
+    { "value": "school", "label": "School Administration" },
+    { "value": "professional", "label": "Professional Development Event" },
+    { "value": "other", "label": "Other" }
+  ],
+  "yearsOfExperience": [
+    { "value": "0-2", "label": "0-2 years" },
+    { "value": "3-5", "label": "3-5 years" },
+    { "value": "6-10", "label": "6-10 years" },
+    { "value": "11-15", "label": "11-15 years" },
+    { "value": "16-20", "label": "16-20 years" },
+    { "value": "20+", "label": "20+ years" }
+  ],
+  "subjects": [
+    { "value": "mathematics", "label": "Mathematics" },
+    { "value": "algebra", "label": "Algebra" },
+    { "value": "geometry", "label": "Geometry" },
+    { "value": "calculus", "label": "Calculus" },
+    { "value": "physics", "label": "Physics" },
+    { "value": "chemistry", "label": "Chemistry" },
+    { "value": "biology", "label": "Biology" },
+    { "value": "earth_science", "label": "Earth Science" },
+    { "value": "english_language", "label": "English Language" },
+    { "value": "english_literature", "label": "English Literature" },
+    { "value": "world_literature", "label": "World Literature" },
+    { "value": "us_history", "label": "US History" },
+    { "value": "world_history", "label": "World History" },
+    { "value": "geography", "label": "Geography" },
+    { "value": "civics", "label": "Civics" },
+    { "value": "economics", "label": "Economics" },
+    { "value": "computer_science", "label": "Computer Science" },
+    { "value": "foreign_language", "label": "Foreign Language" },
+    { "value": "art", "label": "Art" },
+    { "value": "music", "label": "Music" },
+    { "value": "physical_education", "label": "Physical Education" },
+    { "value": "special_education", "label": "Special Education" },
+    { "value": "other", "label": "Other" }
+  ],
+  "gradeLevels": [
+    { "value": "early_childhood", "label": "Early Childhood (Pre-K)" },
+    { "value": "kindergarten", "label": "Kindergarten" },
+    { "value": "elementary_lower", "label": "Lower Elementary (Grades 1-3)" },
+    { "value": "elementary_upper", "label": "Upper Elementary (Grades 4-5)" },
+    { "value": "middle_school", "label": "Middle School (Grades 6-8)" },
+    { "value": "high_school_lower", "label": "Lower High School (Grades 9-10)" },
+    { "value": "high_school_upper", "label": "Upper High School (Grades 11-12)" },
+    { "value": "college", "label": "College/University" },
+    { "value": "adult_education", "label": "Adult Education" },
+    { "value": "special_education", "label": "Special Education" }
+  ],
+  "educationalQualifications": [
+    { "value": "bachelors_education", "label": "Bachelor's in Education" },
+    { "value": "bachelors_other", "label": "Bachelor's in Other Field" },
+    { "value": "masters_education", "label": "Master's in Education" },
+    { "value": "masters_teaching", "label": "Master's in Teaching" },
+    { "value": "masters_other", "label": "Master's in Other Field" },
+    { "value": "doctorate_education", "label": "Doctorate in Education" },
+    { "value": "doctorate_other", "label": "Doctorate in Other Field" },
+    { "value": "teaching_certificate", "label": "Teaching Certificate" },
+    { "value": "other", "label": "Other Qualification" }
+  ]
+} 
