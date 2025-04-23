@@ -74,7 +74,7 @@ export const signupHandler = async (
       message: ResponseMessages.Success,
     });
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -147,7 +147,7 @@ export const signinHandler = async (
     });
   } catch (error: any) {
     console.error(error);
-    return next(error);
+    next(error);
   }
 };
 
@@ -203,7 +203,7 @@ export async function logoutHandler(
       .status(ResponseStatus.OK)
       .json({ message: ResponseMessages.Success });
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 }
 
@@ -243,7 +243,7 @@ export const refreshAccessToken = async (
       accessToken: newAccessToken,
     });
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -279,7 +279,7 @@ export const resetPasswordHandler = async (
       .status(ResponseStatus.OK)
       .json({ message: ResponseMessages.Success });
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
 
@@ -330,6 +330,6 @@ export const deleteMyAccount = async (
       .status(ResponseStatus.OK)
       .json({ message: ResponseMessages.Success, data: deleteUser });
   } catch (error: any) {
-    return next(error);
+    next(error);
   }
 };
