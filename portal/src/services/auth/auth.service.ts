@@ -25,7 +25,7 @@ class AuthService {
 
   static async signOut(): Promise<void> {
     try {
-      await instance.post(API_ROUTES.AUTH.SIGN_OUT);
+      await instance.get(API_ROUTES.AUTH.SIGN_OUT);
     } catch (error) {
       console.error("Error during sign out:", error);
       throw error;
