@@ -5,7 +5,6 @@ import { NotFoundError, ValidationError } from "../../utils/errors";
 import OtpService from "../../services/email.service";
 import * as forgetPasswordSchema from "../../schema/v1/user.valdiation";
 import { updateUserDetailsSchema } from "../../schema/v1/auth.validation";
-import { updateUserDetails } from "../../model/v1/user.model";
 
 export const getCurrentUserDetails = async (
   request: Request,
@@ -27,7 +26,7 @@ export const getCurrentUserDetails = async (
 
     response
       .status(ResponseStatus.OK)
-      .json({ message: ResponseMessages.Success, user: currentUser });
+      .json({ ...currentUser });
   } catch (error: any) {
     return next(error);
   }
@@ -195,8 +194,8 @@ export const updateUserDetailsHandler = async (
     });
 
     return response.status(ResponseStatus.OK).json({
-      message: ResponseMessages.Success,
-      data: updatedUser,
+      // message: ResponseMessages.Success,
+      ...updatedUser,
     });
   } catch (error: any) {
     return response.status(ResponseStatus.InternalServerError).json({

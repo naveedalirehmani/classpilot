@@ -9,6 +9,7 @@ interface JWTPayload {
   email: string;
   userId: string;
   role: Roles;
+  name: string;
   isTemporaryPasswordReset?: boolean;
   oAuthAccessToken: string;
 }

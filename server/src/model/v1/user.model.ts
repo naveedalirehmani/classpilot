@@ -96,7 +96,17 @@ export const getCurrentUserDetails = async (userId: string) => {
         isTemporaryPasswordReset: true,
         isDeleted: true,
         restrictions:true,
-        created_at: true
+        created_at: true,
+        onboardingCompleted: true,
+        organization: true,
+        profession: true,
+        howDidYouHearAboutUs: true,
+        schoolName: true,
+        yearsOfExperience: true,
+        subjectsTaught: true,
+        gradeLevel: true,
+        educationalQualification: true,
+        teacherLicenseNumber: true,
       },
     });
 
@@ -154,7 +164,10 @@ export const updateUserDetails = async (userId: string, userDetails: UserDetails
   try {
     const updatedUser = await prisma.users.update({
       where: { id: userId },
-      data: userDetails,
+      data: {
+        ...userDetails,
+        onboardingCompleted: true
+      },
     });
     
     return updatedUser;
