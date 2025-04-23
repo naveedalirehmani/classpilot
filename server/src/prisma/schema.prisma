@@ -19,11 +19,11 @@ model Users {
   howDidYouHearAboutUs     String?
   // Teacher specific fields
   schoolName               String?
-  yearsOfExperience       Int?
-  subjectsTaught          String?            // Comma separated subjects
-  gradeLevel              String?
+  yearsOfExperience        Int?
+  subjectsTaught           String?            // Comma separated subjects
+  gradeLevel               String?
   educationalQualification String?
-  teacherLicenseNumber    String?            @unique
+  teacherLicenseNumber     String?            @unique
   otps                     Otp[]
   created_at               DateTime           @default(now())
   updated_at               DateTime           @updatedAt
@@ -38,11 +38,12 @@ model Users {
   reportsMade              UserReports[]      @relation("Reporter")
   provider                 OAuthProvider      @default(EMAIL_PASSWORD)
   // Subscription and lesson plan relations
-  subscription            Subscription?
-  lessonPlans            LessonPlan[]
-  favoriteLessonPlans    FavoriteLessonPlan[]
-  dailyGenerationCount   Int                 @default(0)
-  lastGenerationDate     DateTime?
+  subscription             Subscription?
+  lessonPlans              LessonPlan[]
+  favoriteLessonPlans      FavoriteLessonPlan[]
+  dailyGenerationCount     Int                 @default(0)
+  lastGenerationDate       DateTime?
+  onboardingCompleted      Boolean             @default(false)
 
   @@map("users")
 }
@@ -157,15 +158,6 @@ model LessonPlan {
   userId          String    
   user            Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
   title           String
-  subject         String
-  gradeLevel      String
-  duration        String    // e.g. "45 minutes"
-  objectives      String    @db.Text
-  materials       String    @db.Text
-  procedures      String    @db.Text
-  assessment      String    @db.Text
-  homework        String?   @db.Text
-  notes           String?   @db.Text
   aiPrompt        String    @db.Text  // Store the prompt used to generate
   aiResponse      String    @db.Text  // Store the AI's response
   isDeleted       Boolean   @default(false)

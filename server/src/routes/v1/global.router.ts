@@ -5,6 +5,8 @@ import roleRouter from "./role.router";
 import restrictionsRouter from "./restrictions.router";
 import userRouter from "./user.router";
 import healthRouter from "./health.router";
+import lessonPlanRouter from "./lessonPlan.router";
+import subscriptionRouter from "./subscription.router";
 
 const Api2 = Router();
 // authentication. 
@@ -26,5 +28,10 @@ Api2.use("/user", userRouter);
 // health route for server status
 //TODO : unit test.
 Api2.use("/health", healthRouter);
+
+Api2.use("/lesson-plan", lessonPlanRouter);
+
+// subscription routes
+Api2.use("/subscription", subscriptionRouter);
 
 export default Api2;
