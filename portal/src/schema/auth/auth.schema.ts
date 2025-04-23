@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const formSchema = z
+export const signUpFormSchema = z
   .object({
     name: z.string().min(1, "Name is required"),
     email: z
@@ -15,4 +15,11 @@ export const formSchema = z
     path: ["confirmPassword"],
   });
 
-export type SignUpFormValues = z.infer<typeof formSchema>;
+export type SignUpFormValues = z.infer<typeof signUpFormSchema>;
+
+export const signInFormSchema = z.object({
+  email: z.string({ required_error: "Email is required" }).email("Invalid email address"),
+  password: z.string({ required_error: "Password is required" }).min(8, "Password must be at least 8 characters"),
+});
+
+export type SignInFormValues = z.infer<typeof signInFormSchema>;
