@@ -1,3 +1,5 @@
+"use client";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OnboardingStep } from "../../../types/onboarding";
@@ -13,6 +15,8 @@ import {
   onboardingSchema,
 } from "src/schema/onboarding/onboarding.schema";
 import { useUpdateUser } from "src/hooks/user/user.hooks";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "src/lib/routes";
 
 type StepComponents = {
   [key in OnboardingStep]: React.ComponentType;
@@ -25,7 +29,7 @@ export default function OnboardingPage() {
       organization: "",
       profession: "",
       howDidYouHearAboutUs: "",
-      yearsOfExperience: "",
+      yearsOfExperience: 0,
       subjectsTaught: [],
       gradeLevel: "",
       schoolName: "",
@@ -36,16 +40,21 @@ export default function OnboardingPage() {
 
   const { currentStep } = useOnboardingNavigation();
   const { mutateAsync: updateUser } = useUpdateUser();
+  const router = useRouter()
 
   const onSubmit = async (data: OnboardingSchema) => {
     try {
-      await updateUser({
+      const result = await updateUser({
         ...data,
         yearsOfExperience: Number(data.yearsOfExperience),
         subjectsTaught: data.subjectsTaught.join(","),
       });
-      console.log("Submitting data:", data);
-      toast.success("Onboarding completed successfully!");
+      console.log(result)
+      if(result){
+        router.replace(ROUTES.DASHBOARD)
+        console.log("Submitting data:", data);
+        toast.success("Onboarding completed successfully!");
+      }
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error

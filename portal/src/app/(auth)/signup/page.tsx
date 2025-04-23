@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { formSchema } from "../../../schema/auth/auth.schema";
+import { signUpFormSchema } from "../../../schema/auth/auth.schema";
 import { useSignUp } from "../../../hooks/auth/auth.hooks";
 import { SignUpFormValues } from "../../../schema/auth/auth.schema";
 import {
@@ -17,7 +17,7 @@ import {
 } from "../../../components/ui/form";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
-import { Routes } from "../../../lib/routes";
+import { ROUTES } from "../../../lib/routes";
 import {
   Card,
   CardContent,
@@ -30,7 +30,7 @@ const SignupForm = () => {
   const { mutateAsync: signUp, isPending } = useSignUp();
 
   const form = useForm<SignUpFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(signUpFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -125,7 +125,7 @@ const SignupForm = () => {
 
             <Button
               type="submit"
-              className="w-full bg-blue hover:bg-blue-600 mt-4"
+              className="w-full bg-primary mt-4"
               disabled={isPending}
             >
               {isPending ? "Signing up..." : "Sign up with email"}
@@ -146,7 +146,7 @@ const SignupForm = () => {
               type="button"
               variant="outline"
               className="w-full"
-              onClick={() => router.push(Routes.SIGNIN_GOOGLE)}
+              onClick={() => router.push(ROUTES.SIGNIN_GOOGLE)}
             >
               <span className="mr-2">○</span> Sign In with Google
             </Button>
@@ -155,8 +155,8 @@ const SignupForm = () => {
               Already have an account?{" "}
               <button
                 type="button"
-                className="ml-2 text-blue font-medium cursor-pointer"
-                onClick={() => router.push(Routes.SIGNIN)}
+                className="ml-2 text-primary font-medium cursor-pointer"
+                onClick={() => router.push(ROUTES.SIGNIN)}
               >
                 Sign In
               </button>
