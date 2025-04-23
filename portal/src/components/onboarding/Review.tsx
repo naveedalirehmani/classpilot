@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 import { useOnboardingNavigation } from "../../hooks/onboarding/useOnboardingNavigation";
 import { OnboardingSchema } from "src/schema/onboarding/onboarding.schema";
 
@@ -36,29 +37,31 @@ export const Review = () => {
   ];
 
   return (
-    <div className="space-y-8">
-      {sections.map((section, index) => (
-        <div key={index} className="space-y-4">
-          <h3 className="text-lg font-semibold">{section.title}</h3>
-          <div className="grid gap-4">
-            {section.fields.map((field, fieldIndex) => (
-              <div key={fieldIndex} className="grid grid-cols-2 gap-4">
-                <span className="text-muted-foreground">{field.label}:</span>
-                <span>{field.value || "Not provided"}</span>
-              </div>
-            ))}
+    <Card className="p-6">
+      <div className="space-y-8">
+        {sections.map((section, index) => (
+          <div key={index} className="space-y-4">
+            <h3 className="text-lg font-semibold">{section.title}</h3>
+            <div className="grid gap-4">
+              {section.fields.map((field, fieldIndex) => (
+                <div key={fieldIndex} className="grid grid-cols-2 gap-4">
+                  <span className="text-muted-foreground">{field.label}:</span>
+                  <span>{field.value || "Not provided"}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
-      <div className="flex justify-between pt-4">
-        <Button type="button" variant="outline" onClick={goToPreviousStep}>
-          Previous
-        </Button>
-        <Button type="submit">
-          Complete
-        </Button>
+        <div className="flex justify-between pt-4">
+          <Button type="button" variant="outline" onClick={goToPreviousStep}>
+            Previous
+          </Button>
+          <Button type="submit">
+            Complete
+          </Button>
+        </div>
       </div>
-    </div>
+    </Card>
   );
 }; 

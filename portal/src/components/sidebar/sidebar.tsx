@@ -1,106 +1,241 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { ReactNode, useState } from "react";
+import type React from "react";
 
-enum Routes {
-  HOME = "/",
-  RECENT = "/recent",
-  RESOURCES = "/resources",
-  DOCUMENTS = "/resources/documents",
-  VIDEOS = "/resources/videos",
-}
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { Home, MoreHorizontal, Star, ChevronRight, File, CircleHelp, CircuitBoard } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { cn } from "src/lib/utils";
+import { Button } from "../ui/button";
+import { ROUTES } from "@/lib/routes";
+import { useModalStore } from "@/store/modal.store";
+import { ModalType } from "@/types/modal";
 
 interface SidebarLink {
-  href: Routes;
+  href: ROUTES;
   label: string;
-  icon: string;
+  icon: React.ReactNode;
   children?: SidebarLink[];
 }
 
 const sidebarLinks: SidebarLink[] = [
-  { href: Routes.HOME, label: "Home", icon: "/icons/home.svg" },
-  { href: Routes.RECENT, label: "Recent", icon: "/icons/clock.svg" },
   {
-    href: Routes.RESOURCES,
-    label: "My Resources",
-    icon: "/icons/file.svg",
+    href: ROUTES.DASHBOARD,
+    label: "Home",
+    icon: <Home className="h-4 w-4" />,
+  },
+  {
+    href: ROUTES.ALL,
+    label: "All Lesson Plans",
+    icon: <File className="h-4 w-4" />,
+  },
+  {
+    href: ROUTES.KANBAN,
+    label: "Track Board",
+    icon: <CircuitBoard className="h-4 w-4" />,
+  },
+  {
+    href: ROUTES.FAVORITES,
+    label: "Favorites",
+    icon: <Star className="h-4 w-4" />,
+  },
+  {
+    href: ROUTES.RESOURCES,
+    label: "More",
+    icon: <MoreHorizontal className="h-4 w-4" />,
     children: [
-      { href: Routes.DOCUMENTS, label: "Documents", icon: "/icons/doc.svg" },
-      { href: Routes.VIDEOS, label: "Videos", icon: "/icons/video.svg" },
+      {
+        href: ROUTES.FAQ,
+        label: "FAQ'S",
+        icon: <CircleHelp className="h-4 w-4" />,
+      },
+      // {
+      //   href: Routes.VIDEOS,
+      //   label: "Videos",
+      //   icon: <Video className="h-4 w-4" />,
+      // },
     ],
   },
 ];
 
 interface SidebarItemProps {
-  href?: Routes;
-  icon: string;
-  children: ReactNode;
+  href?: ROUTES;
+  icon: React.ReactNode;
+  children: React.ReactNode;
   hasChildren?: boolean;
   isOpen?: boolean;
   onToggle?: () => void;
+  isActive?: boolean;
+  isChildActive?: boolean;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ href, icon, children, hasChildren, isOpen, onToggle }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({
+  href,
+  icon,
+  children,
+  hasChildren,
+  isOpen,
+  onToggle,
+  isActive,
+  isChildActive,
+}) => {
   return (
     <div>
       {hasChildren ? (
-        <button
+        <Button
           onClick={onToggle}
-          className="flex w-full items-center gap-4 px-3 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none"
+          variant="ghost"
+          className={cn(
+            "w-full justify-start gap-2 px-3 py-2 text-sm font-medium transition-colors",
+            isActive || isChildActive
+              ? "text-emerald-700 bg-emerald-50"
+              : "text-slate-700 hover:text-emerald-600 hover:bg-slate-50"
+          )}
         >
-          <Image src={icon} alt={children?.toString() || "icon"} width={18} height={18} />
-          <span className="flex-1">{children}</span>
-          <span className={`transition-transform ${isOpen ? "rotate-90" : ""}`}>▼</span>
-        </button>
+          <span
+            className={cn(
+              "text-slate-500 transition-colors",
+              (isActive || isChildActive) && "text-emerald-500"
+            )}
+          >
+            {icon}
+          </span>
+          <span className="flex-1 text-left">{children}</span>
+          <ChevronRight
+            className={cn(
+              "h-4 w-4 text-slate-400 transition-transform",
+              isOpen && "rotate-90",
+              (isActive || isChildActive) && "text-emerald-400"
+            )}
+          />
+        </Button>
       ) : (
-        <Link
-          href={href as Routes}
-          className="flex items-center gap-4 px-3 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100"
+        <Button
+          asChild
+          variant="ghost"
+          className={cn(
+            "w-full justify-start gap-2 px-3 py-2 text-sm font-medium transition-colors",
+            isActive
+              ? "text-emerald-700 bg-emerald-50"
+              : "text-slate-700 hover:text-emerald-600 hover:bg-slate-50"
+          )}
         >
-          <Image src={icon} alt={children?.toString() || "icon"} width={18} height={18} />
-          {children}
-        </Link>
+          <Link href={href as string}>
+            <span
+              className={cn(
+                "text-slate-500 transition-colors",
+                isActive && "text-emerald-500"
+              )}
+            >
+              {icon}
+            </span>
+            <span className="ml-2">{children}</span>
+            {isActive && (
+              <span className="absolute left-0 top-1/2 h-6 w-0.5 -translate-y-1/2 rounded-r-full bg-emerald-500" />
+            )}
+          </Link>
+        </Button>
       )}
     </div>
   );
 };
 
 const Sidebar: React.FC = () => {
-  //@ts-expect-error - don't
-  const [openMenus, setOpenMenus] = useState<Record<Routes, boolean>>({});
+  const pathname = usePathname();
+  const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
+  const { openModal } = useModalStore();
+  // Auto-expand parent menu when child is active
+  useEffect(() => {
+    sidebarLinks.forEach((link) => {
+      if (link.children?.some((child) => child.href === pathname)) {
+        setOpenMenus((prev) => ({ ...prev, [link.href]: true }));
+      }
+    });
+  }, [pathname]);
 
-  const toggleMenu = (route: Routes) => {
+  const toggleMenu = (route: ROUTES) => {
     setOpenMenus((prev) => ({ ...prev, [route]: !prev[route] }));
   };
 
+  const isActive = (href: string) => pathname === href;
+  const hasActiveChild = (link: SidebarLink) =>
+    link.children?.some((child) => isActive(child.href));
+
   return (
-    <aside className="w-80 bg-gray-100 p-4 border-r shadow-md">
-      <nav className="space-y-2 flex-1">
-        {sidebarLinks.map(({ href, label, icon, children }) => (
-          <div key={href}>
-            <SidebarItem
-              href={!children ? href : undefined} // Make it undefined if it has children
-              icon={icon}
-              hasChildren={!!children}
-              isOpen={!!openMenus[href]}
-              onToggle={() => children && toggleMenu(href)}
-            >
-              {label}
-            </SidebarItem>
-            {children && openMenus[href] && (
-              <div className="ml-6 mt-1 space-y-1">
-                {children.map(({ href, label, icon }) => (
-                  <SidebarItem key={href} href={href} icon={icon}>
-                    {label}
-                  </SidebarItem>
-                ))}
-              </div>
-            )}
+    <aside className="hidden md:block w-64 border-r bg-white overflow-y-auto">
+      <div className="py-6 flex flex-col justify-between h-full">
+        <div>
+          <div className="px-6 mb-6">
+            <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              Navigation
+            </h2>
           </div>
-        ))}
-      </nav>
+          <nav className="space-y-1 px-3">
+            {sidebarLinks.map(({ href, label, icon, children }) => (
+              <div key={href} className="py-0.5">
+                <SidebarItem
+                  href={!children ? href : undefined}
+                  icon={icon}
+                  hasChildren={!!children}
+                  isOpen={!!openMenus[href]}
+                  onToggle={() => children && toggleMenu(href)}
+                  isActive={isActive(href)}
+                  isChildActive={hasActiveChild({
+                    href,
+                    label,
+                    icon,
+                    children,
+                  })}
+                >
+                  {label}
+                </SidebarItem>
+
+                {children && openMenus[href] && (
+                  <div className="ml-5 mt-1 space-y-1 border-l border-slate-100 pl-2">
+                    {children.map(
+                      ({
+                        href: childHref,
+                        label: childLabel,
+                        icon: childIcon,
+                      }) => (
+                        <SidebarItem
+                          key={childHref}
+                          href={childHref}
+                          icon={childIcon}
+                          isActive={isActive(childHref)}
+                        >
+                          {childLabel}
+                        </SidebarItem>
+                      )
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
+
+        {/* Pro Upgrade Banner */}
+        <div className="px-4 mt-8">
+          <div className="rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 p-4 border border-emerald-100">
+            <h3 className="font-medium text-emerald-800 text-sm">
+              Upgrade to Pro
+            </h3>
+            <p className="text-xs text-emerald-700 mt-1 mb-3">
+              Get access to premium templates and resources.
+            </p>
+            <Button
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs h-8"
+              onClick={() => {
+                openModal(ModalType.UPGRADE);
+              }}
+            >
+              Upgrade Now
+            </Button>
+          </div>
+        </div>
+      </div>
     </aside>
   );
 };

@@ -7,9 +7,17 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 import { useOnboardingNavigation } from "../../hooks/onboarding/useOnboardingNavigation";
-import { OnboardingSchema } from "src/schema/onboarding/onboarding.schema";
+import { OnboardingSchema, onboardingOptions } from "src/schema/onboarding/onboarding.schema";
 import { useUpdateUser } from "src/hooks/user/user.hooks";
 
 export const EducationalInfo = () => {
@@ -36,60 +44,70 @@ export const EducationalInfo = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <FormField
-        control={control}
-        name="schoolName"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>School Name</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter your school name" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+    <Card className="p-6">
+      <div className="space-y-6">
+        <FormField
+          control={control}
+          name="schoolName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Current School/Institution</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your current school or institution" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <FormField
-        control={control}
-        name="educationalQualification"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Educational Qualification</FormLabel>
-            <FormControl>
-              <Input
-                placeholder="Enter your highest qualification"
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+        <FormField
+          control={control}
+          name="educationalQualification"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Educational Qualification</FormLabel>
+              <FormControl>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your highest qualification" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {onboardingOptions.educationalQualifications.map((qualification) => (
+                      <SelectItem key={qualification.value} value={qualification.value}>
+                        {qualification.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <FormField
-        control={control}
-        name="teacherLicenseNumber"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Teacher License Number</FormLabel>
-            <FormControl>
-              <Input placeholder="Enter your license number" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+        <FormField
+          control={control}
+          name="teacherLicenseNumber"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Teacher License/Certification Number</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your teaching license or certification number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <div className="flex justify-between pt-4">
-        <Button type="button" variant="outline" onClick={goToPreviousStep}>
-          Previous
-        </Button>
-        <Button type="button" onClick={handleContinue}>
-          Next
-        </Button>
+        <div className="flex justify-between pt-4">
+          <Button type="button" variant="outline" onClick={goToPreviousStep}>
+            Previous
+          </Button>
+          <Button type="button" onClick={handleContinue}>
+            Next
+          </Button>
+        </div>
       </div>
-    </div>
+    </Card>
   );
 };
