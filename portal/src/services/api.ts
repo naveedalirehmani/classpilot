@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 const URL = process.env.SERVER
 
 const instance = axios.create({
-  baseURL: URL,
+  baseURL: 'https://classplanner-api.kohminds.com/v1',
   withCredentials: true,
 });
 
