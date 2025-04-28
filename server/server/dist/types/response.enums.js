@@ -1,0 +1,36 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResponseMessages = exports.ResponseStatus = void 0;
+var ResponseStatus;
+(function (ResponseStatus) {
+    ResponseStatus[ResponseStatus["OK"] = 200] = "OK";
+    ResponseStatus[ResponseStatus["Created"] = 201] = "Created";
+    ResponseStatus[ResponseStatus["BadRequest"] = 400] = "BadRequest";
+    ResponseStatus[ResponseStatus["NotFound"] = 404] = "NotFound";
+    ResponseStatus[ResponseStatus["InternalServerError"] = 500] = "InternalServerError";
+    ResponseStatus[ResponseStatus["Forbidden"] = 403] = "Forbidden";
+    ResponseStatus[ResponseStatus["Unauthorized"] = 401] = "Unauthorized";
+    ResponseStatus[ResponseStatus["BadGateway"] = 502] = "BadGateway";
+    ResponseStatus[ResponseStatus["Redirect"] = 301] = "Redirect";
+    ResponseStatus[ResponseStatus["NotAcceptable"] = 406] = "NotAcceptable";
+    ResponseStatus[ResponseStatus["NoContent"] = 204] = "NoContent";
+    ResponseStatus[ResponseStatus["Conflict"] = 409] = "Conflict";
+})(ResponseStatus || (exports.ResponseStatus = ResponseStatus = {}));
+var ResponseMessages;
+(function (ResponseMessages) {
+    ResponseMessages["Success"] = "Success";
+    ResponseMessages["InvalidEmailOrPassword"] = "Invalid email or password";
+    ResponseMessages["UserAlreadyExists"] = "User already exists";
+    ResponseMessages["InternalServerError"] = "Internal server error";
+    ResponseMessages["InvalidRefreshToken"] = "Invalid refresh token";
+    ResponseMessages["RefreshTokenNotProvided"] = "Refresh token not provided";
+    ResponseMessages["LogoutSuccessful"] = "Logout successful";
+    ResponseMessages["UserNotFound"] = "User not found";
+    ResponseMessages["NotFound"] = "Data not found";
+    ResponseMessages["Unauthorized"] = "Unauthorized";
+    ResponseMessages["InvalidCredentials"] = "Invalid credentials";
+    ResponseMessages["BadRequest"] = "The request could not be understood by the server due to malformed syntax.";
+    ResponseMessages["Forbidden"] = "Insufficient permissions";
+    ResponseMessages["Redirect"] = "user redirect";
+    ResponseMessages["NoContent"] = "No content available";
+})(ResponseMessages || (exports.ResponseMessages = ResponseMessages = {}));
