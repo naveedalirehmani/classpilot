@@ -1,10 +1,13 @@
-FROM node:20-slim
+FROM node:20-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
 
 RUN npm ci
+
+# Install OpenSSL 1.1 compatibility package
+RUN apk add --no-cache openssl1.1-compat
 
 COPY . .
 
