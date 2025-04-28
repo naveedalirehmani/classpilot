@@ -1,7 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
+const URL = process.env.SERVER
+
 const instance = axios.create({
-  baseURL: "http://localhost:4000/v1",
+  baseURL: URL,
   withCredentials: true,
 });
 
