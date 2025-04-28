@@ -18,7 +18,7 @@ export default function Error({
       <div className="flex flex-col items-center gap-4 text-center">
         <AlertCircle className="h-10 w-10 text-destructive" />
         <div className="space-y-2">
-          <h2 className="text-2xl font-semibold">Something went wrong!</h2>
+          <h2 className="text-2xl font-semibold">Something went wrong!!</h2>
           {/* <p className="text-muted-foreground">
             {error.message || "An unexpected error occurred"}
           </p> */}
