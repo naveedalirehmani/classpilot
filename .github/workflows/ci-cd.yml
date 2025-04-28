@@ -3,6 +3,8 @@ name: ClassPlanner Server CI/CD
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'server/**'
 
 jobs:
   build:
