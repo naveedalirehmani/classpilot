@@ -1,0 +1,53 @@
+name: ClassPlanner Server CD
+
+on:
+  workflow_run:
+    workflows: ["ClassPlanner Server CI"]
+    branches: [main]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH to EC2 and deploy
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.EC2_HOST_IP }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script: |
+            # Login to Docker Hub
+            echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+            
+            # Pull latest image
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest
+            
+            # Stop and remove existing container
+            docker stop classplanner-server || true
+            docker rm classplanner-server || true
+            
+            # Clean up unused images
+            docker image prune -f
+            
+            # Run new container with environment variables
+            docker run -d \
+              -p 4000:4000 \
+              --name classplanner-server \
+              --restart unless-stopped \
+              -e NODE_ENV=production \
+              -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+              -e PORT=4000 \
+              -e AWS_REGION=us-east-1 \
+              -e ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }} \
+              -e REFRESH_TOKEN_SECRET=${{ secrets.REFRESH_TOKEN_SECRET }} \
+              -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+              -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+              -e CLIENT_SERVER=https://classplanner-api.kohminds.com \
+              -e COOKIE_CLIENT=.kohminds.com \
+              -e SALT=${{ secrets.SALT }} \
+              -e AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }} \
+              ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest

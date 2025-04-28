@@ -9,7 +9,6 @@ import {
   signUpSchema,
   updateUserDetailsSchema,
 } from "../../schema/v1/auth.validation";
-import { z } from "zod";
 import { setUserCookies } from "../../utils/auth.utils";
 import { signJWT, verifyJWT } from "../../utils/jwt.utils";
 // import * as userModel from "../../model/v1/user.model";
