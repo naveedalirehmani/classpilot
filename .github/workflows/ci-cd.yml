@@ -17,11 +17,11 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: server/server/package-lock.json
+          cache-dependency-path: server/package-lock.json
 
       - name: Install dependencies
         run: |
-          cd server/server
+          cd server
           npm ci
 
       - name: Run database migrations
@@ -29,7 +29,7 @@ jobs:
           NODE_ENV: production
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          cd server/server/src
+          cd server/src
           npx prisma migrate deploy
 
       - name: Set up Docker Buildx
@@ -43,7 +43,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build ./server/server -f ./server/server/Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest
+          docker build ./server -f ./server/Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest
 
       - name: Push Docker image
         run: |
