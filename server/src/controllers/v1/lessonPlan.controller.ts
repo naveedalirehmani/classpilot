@@ -11,7 +11,6 @@ export const createLessonPlan = async (
 ) => {
   const { userId, name: instructorName } = request.user;
   try {
-    console.log("process.env.OPENAI_API_KEY", process.env.OPENAI_API_KEY);
     const { topic, additionalInstructions, standards, outputLanguage } =
       LessonPlanSchema.LessonPlanSchema.parse(request.body);
     const lessonPlan = await LessonPlanService.createLessonPlan(
