@@ -45,7 +45,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build ./server -f ./server/Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest
+          docker build ./server -f ./server/Dockerfile \
+            --build-arg OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest
 
       - name: Push Docker image
         run: |
