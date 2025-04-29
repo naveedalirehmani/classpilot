@@ -1,6 +1,7 @@
 import Link from "next/link"
-import { Sparkles } from "lucide-react"
+
 import { Separator } from "@/components/ui/separator"
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -9,8 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <Sparkles className="h-6 w-6 text-primary" />
-              <span className="font-bold text-xl">ClassPlanner</span>
+               <Image src="/logo.svg" alt="logo" width={160} height={150}></Image>
             </div>
             <p className="text-muted-foreground">AI-powered lesson planning for modern educators.</p>
           </div>

@@ -7,14 +7,14 @@ import { Separator } from "@/components/ui/separator"
 
 export default function HeroSection() {
   return (
-    <section className="container mx-auto px-4 py-20 text-center">
+    <section className="container mx-auto px-4 mt-40 text-center">
       <div className="max-w-3xl mx-auto mb-16">
         <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">Plan perfect lessons, together.</h1>
         <p className="text-xl text-gray-600 mb-8">
           Capture your teaching ideas, generate AI-powered lesson plans, and organize your curriculum with the ultimate
           classroom planning tool.
         </p>
-        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col sm:flex-row justify-center space-y-8 sm:space-y-0 sm:space-x-4">
           <Button asChild size="lg" className="text-lg">
             <Link href="/signup">
               Get started for free
@@ -30,7 +30,7 @@ export default function HeroSection() {
       </div>
 
       {/* Feature Icons Grid - Similar to Notion */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-24 max-w-5xl mx-auto my-20">
         <div className="flex flex-col items-center">
           <div className="rounded-full border border-gray-200 p-4 mb-4">
             <FileText className="h-8 w-8 text-indigo-600" />
@@ -57,11 +57,11 @@ export default function HeroSection() {
       </div>
 
       {/* Screenshot Display - Similar to Notion */}
-      <div className="bg-amber-100 rounded-xl p-6 relative">
+      <div className="bg-amber-100 rounded-xl p-8  py-4 relative">
         <Badge variant="outline" className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2">
           See ClassPlanner in action
         </Badge>
-        <div className="flex justify-center">
+        <div className="flex justify-center"> 
           <div className="relative flex -ml-10">
             {/* First Card */}
             <Card className="p-4 w-64 z-10 -mr-6 transform -rotate-3">

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ROUTES } from "@/lib/routes";
+import Image from "next/image";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -34,12 +35,7 @@ const Navbar = () => {
       <div className="container mx-auto h-full px-4 flex items-center justify-between">
         <div className="flex items-center space-x-8">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-              <span className="font-bold text-white">T</span>
-            </div>
-            <span className="font-bold text-xl hidden sm:inline-block">
-              Class Planner
-            </span>
+            <Image src="/logo.svg" alt="logo" width={160} height={150}></Image>
           </Link>
 
           {isHomePage && (

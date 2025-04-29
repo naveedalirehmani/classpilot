@@ -12,10 +12,10 @@ interface FeatureItemProps {
 
 export default function FeatureItem({ title, description, features, imageSrc, imageAlt }: FeatureItemProps) {
   return (
-    <div className="flex flex-col mb-20 max-w-6xl mx-auto">
+    <div className="flex flex-col mb-28 max-w-6xl mx-auto">
       <div className="flex flex-col md:flex-row gap-8 mb-10">
         <div className="md:w-1/2">
-          <h3 className="text-2xl font-bold mb-4">{title}</h3>
+          <h3 className="text-3xl font-bold mb-4">{title}</h3>
           <p className="text-gray-600">{description}</p>
         </div>
         <div className="md:w-1/2">
