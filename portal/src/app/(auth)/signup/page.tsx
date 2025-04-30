@@ -1,25 +1,23 @@
 import Link from "next/link";
 import Signup from "../components/signup-form";
+import Image from "next/image";
 
 function signupForm() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2 w-full">
       <div className="relative hidden bg-muted lg:block">
-        <img
-          src="/placeholder.png"
+        <Image
+          src="/readBook.jpg"
           alt="Image"
-          className="absolute inset-0 w-2/3 m-auto bg-muted"
+          width={1000}
+          height={1000}
+          className="absolute h-full object-cover bg-muted"
         />
       </div>
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-              <span className="font-bold text-white">T</span>
-            </div>
-            <span className="font-bold text-xl hidden sm:inline-block ">
-              Class Planner
-            </span>
+            <Image src="/mainLogo.png" alt="Logo" width={40} height={40} />
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">

@@ -19,7 +19,6 @@ import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import { ROUTES } from "../../../lib/routes";
 import {
-  Card,
   CardContent,
   CardHeader,
   CardFooter,
@@ -49,8 +48,8 @@ const Signup = () => {
 
   return (
     <div className="w-[400px] max-w-md mx-auto">
-      <CardHeader className="text-center">
-        <h2 className="text-xl font-semibold mb-4">Sign Up</h2>
+      <CardHeader className="">
+        <h2 className="text-xl font-semibold mb-4 border-b-2 w-18 pb-1">Sign Up</h2>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -136,7 +135,7 @@ const Signup = () => {
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
+                <span className="bg-muted px-2 text-muted-foreground">
                   OR
                 </span>
               </div>
