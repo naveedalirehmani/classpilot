@@ -3,11 +3,36 @@ import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image";
 
+
+
+
+const links = [
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Cookie Policy", href: "/cookies" },
+];
+
+
+const menuLinks = [
+  { label: "Features", href: "/features" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Testimonials", href: "/testimonials" },
+  { label: "FAQ", href: "/faq" },
+];
+
+const aboutLinks = [
+  { label: "About Us", href: "/features-section" },
+  { label: "Blog", href: "/blog" },
+  { label: "Careers", href: "/careers" },
+  { label: "Contact", href: "/contact" },
+];
+
+
 export default function Footer() {
   return (
     <footer className="border-t py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 ">
           <div>
             <div className="flex items-center space-x-2 mb-6">
                <Image src="/logo.svg" alt="logo" width={160} height={150}></Image>
@@ -18,37 +43,37 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Product</h3>
             <ul className="space-y-2">
-              {["Features", "Pricing", "Testimonials", "FAQ"].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground transition">
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+  {menuLinks.map((item) => (
+    <li key={item.label}>
+     <a href={item.href} className="text-muted-foreground hover:text-foreground transition">
+        {item.label}
+      </a>
+    </li>
+  ))}
+</ul>
           </div>
 
           <div>
             <h3 className="font-bold text-lg mb-4">Company</h3>
             <ul className="space-y-2">
-              {["About Us", "Blog", "Careers", "Contact"].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground transition">
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+  {aboutLinks.map((item) => (
+    <li key={item.label}>
+      <a href={item.href} className="text-muted-foreground hover:text-foreground transition">
+        {item.label}
+      </a>
+    </li>
+  ))}
+</ul>
           </div>
 
           <div>
             <h3 className="font-bold text-lg mb-4">Legal</h3>
             <ul className="space-y-2">
-              {["Terms of Service", "Privacy Policy", "Cookie Policy"].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-muted-foreground hover:text-foreground transition">
-                    {item}
-                  </Link>
+              {links.map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} className="text-muted-foreground hover:text-foreground transition">
+        {item.label}
+      </a>
                 </li>
               ))}
             </ul>

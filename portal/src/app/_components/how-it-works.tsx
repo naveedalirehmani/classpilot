@@ -20,13 +20,13 @@ export default function HowItWorks() {
     ]
   
     return (
-      <section id="how-it-works" className="bg-gray-50 py-20">
+      <section id="how-it-works" className=" py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16">How ClassPlanner Works</h2>
   
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
             {steps.map((item) => (
-              <Card key={item.step} className="bg-gradient-to-r from-violet-200 to-pink-200">
+              <Card key={item.step} >
                 <CardHeader>
                   <div className="text-indigo-600 font-bold text-xl mb-2 ">{item.step}</div>
                   <CardTitle>{item.title}</CardTitle>

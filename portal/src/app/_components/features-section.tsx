@@ -54,7 +54,7 @@ export default function FeaturesSection() {
       <Separator className="my-8" />
 
       {features.map((feature, index) => (
-        <div key={index}>
+        <div className="font-montserrat" key={index}>
           <FeatureItem
             title={feature.title}
             description={feature.description}
