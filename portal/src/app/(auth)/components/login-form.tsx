@@ -34,7 +34,10 @@ function LoginForm() {
   return (
     <div className="w-[400px] max-w-md mx-auto">
       <CardHeader className="">
-        <h2 className="text-xl font-semibold mb-4 border-b-2 w-16 pb-1">Sign In</h2>
+        <h2 className="text-xl font-semibold">Sign In</h2>
+        <p className="text-sm text-muted-foreground mb-4">
+          Please sign in to continue.
+        </p>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -80,9 +83,7 @@ function LoginForm() {
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-muted px-2 text-muted-foreground">
-                  OR
-                </span>
+                <span className="bg-muted px-2 text-muted-foreground">OR</span>
               </div>
             </div>
 
@@ -100,7 +101,7 @@ function LoginForm() {
               <button
                 type="button"
                 className="ml-2 text-primary font-medium cursor-pointer"
-                onClick={() => router.push(ROUTES.SIGNUP)}
+                onClick={() => router.replace(ROUTES.SIGNUP)}
               >
                 Sign Up
               </button>
