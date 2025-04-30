@@ -49,7 +49,10 @@ const Signup = () => {
   return (
     <div className="w-[400px] max-w-md mx-auto">
       <CardHeader className="">
-        <h2 className="text-xl font-semibold mb-4 border-b-2 w-18 pb-1">Sign Up</h2>
+        <h2 className="text-xl font-semibold">Sign Up</h2>
+        <p className="text-sm text-muted-foreground mb-4">
+          Create an account to get started.
+        </p>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -135,9 +138,7 @@ const Signup = () => {
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-muted px-2 text-muted-foreground">
-                  OR
-                </span>
+                <span className="bg-muted px-2 text-muted-foreground">OR</span>
               </div>
             </div>
 
@@ -155,7 +156,7 @@ const Signup = () => {
               <button
                 type="button"
                 className="ml-2 text-primary font-medium cursor-pointer"
-                onClick={() => router.push(ROUTES.SIGNIN)}
+                onClick={() => router.replace(ROUTES.SIGNIN)}
               >
                 Sign In
               </button>
