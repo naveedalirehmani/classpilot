@@ -1,29 +1,47 @@
-import Image from "next/image"
-import { CheckCircle } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
 
-interface FeatureItemProps {
-  title: string
-  description: string
-  features: string[]
-  imageSrc: string
-  imageAlt: string
+interface Feature {
+  image: string;
+  title: string;
+  description: string;
 }
 
-export default function FeatureItem({ title, description, features, imageSrc, imageAlt }: FeatureItemProps) {
+interface FeatureItemProps {
+  title: string;
+  description: string;
+  features: Feature[];
+  imageSrc: string;
+  imageAlt: string;
+}
+
+export default function FeatureItem({
+  title,
+  description,
+  features,
+  imageSrc,
+  imageAlt,
+}: FeatureItemProps) {
   return (
-    <div className="flex flex-col mb-28 max-w-6xl mx-auto">
+    <div className="flex flex-col mb-28  mx-auto  font-nunito">
       <div className="flex flex-col md:flex-row gap-8 mb-10">
         <div className="md:w-1/2">
-          <h3 className="text-3xl font-bold mb-4">{title}</h3>
-          <p className="text-gray-600">{description}</p>
+          <h3 className="text-5xl font-bold mb-4 w-[500px] ">{title}</h3>
+          <p className="text-gray-600  py-4">{description}</p>
         </div>
-        <div className="md:w-1/2">
-          <ul className="space-y-4">
-            {features.map((item) => (
-              <li key={item} className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                <span>{item}</span>
+        <div className="md:w-1/2 ">
+          <ul className="space-y-6  space-x-20 flex ">
+            {features.map((item, index) => (
+              <li key={index} className=" gap-4 ">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-20 h-20 flex-shrink-0 rounded-md object-cover my-4  "
+                />
+                <div>
+                  <p className="font-semibold font-inter  ">{item.title}</p>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -37,11 +55,11 @@ export default function FeatureItem({ title, description, features, imageSrc, im
               alt={imageAlt}
               width={2000}
               height={1000}
-              className="w-full"
+              className="w-full h-auto object-cover"
             />
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

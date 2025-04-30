@@ -7,7 +7,28 @@ export default function FeaturesSection() {
       title: "AI-Generated Lesson Plans",
       description:
         "Simply input your topic and grade level, and ClassPlanner's AI will generate comprehensive lesson plans with objectives, activities, assessments, and resources.",
-      features: ["Aligned with curriculum standards", "Customizable templates", "Save hours of planning time"],
+      features: [{ image: "image.png",
+        title: "Building blocks",
+        description: "100+ content types to communicate any idea."}
+        ,{
+          image: "at.png",
+          title: "Collaborative tools",
+          description: "Built for teams to share, suggest, and comment.",
+        },
+      { image: "monk.png",
+        title: "AI-assisted",
+        description: "Edit, draft, translate. Ask and AI will help.",}],
+
+
+
+
+
+
+
+
+
+
+
       imageSrc: "/create.png",
       imageAlt: "AI Lesson Plan Generator",
     },
@@ -27,7 +48,17 @@ export default function FeaturesSection() {
       title: "Comprehensive Unit Planning",
       description:
         "Plan entire units with connected lesson plans, resources, and assessments. Ensure curriculum coherence and track progress throughout the unit.",
-      features: ["Scope and sequence planning", "Integrated assessment tools", "Resource management"],
+        features: [{ image: "book.png",
+          title: "Teamspaces",
+          description: "Dedicated spaces for every team & project"}
+          ,{
+            image: "flok.png",
+            title: "Integrations",
+            description: "Connected to all your other tools..",
+          },
+        { image: "monk.png",
+          title: "Just ask AI",
+          description: "Trusted answers across your apps.",}],
       imageSrc: "/view.png",
       imageAlt: "Unit Planning Tool",
     },
@@ -35,26 +66,32 @@ export default function FeaturesSection() {
       title: "Kanban Planning Board",
       description:
         "Visualize your teaching workflow with our intuitive Kanban board. Track lessons from planning to completion and manage assignments all in one place.",
-      features: ["Visual workflow management", "Track lesson status", "Organize by class, subject, or date"],
+        features: [{ image: "tdodcheck.png",
+          title: "Tasks and to-dos",
+          description: "Tackle any project, big or small."}
+          ,{
+            image: "clander.png",
+            title: "Custom views",
+            description: "View work as calendars, boards, and more.",
+          },
+        { image: "monk.png",
+          title: "Automations",
+          description: "Put tedious tasks on autopilot.",}],
       imageSrc: "/kanban.png",
       imageAlt: "Kanban Planning Board",
     },
-  ]
+
+    
+  ] 
 
   return (
     <section id="features" className="container mx-auto px-4 py-20">
-      <div className="max-w-3xl mx-auto mb-16">
-        <h2 className="text-4xl font-bold mb-6">Build your classroom curriculum with AI</h2>
-        <p className="text-xl text-gray-600">
-          ClassPlanner combines AI-powered content generation with intuitive organization tools to transform how you
-          plan and teach.
-        </p>
-      </div>
-
-      <Separator className="my-8" />
+      
+{/* 
+      <Separator className="my-8" /> */}
 
       {features.map((feature, index) => (
-        <div className="font-montserrat" key={index}>
+        <div  key={index}>
           <FeatureItem
             title={feature.title}
             description={feature.description}
