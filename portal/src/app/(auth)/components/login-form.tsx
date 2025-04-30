@@ -7,12 +7,7 @@ import { FormItem } from "src/components/ui/form";
 import { FormField } from "src/components/ui/form";
 import { Form } from "src/components/ui/form";
 import { ROUTES } from "src/lib/routes";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "src/components/ui/card";
+import { CardContent, CardFooter, CardHeader } from "src/components/ui/card";
 import { useSignIn } from "src/hooks/auth/auth.hooks";
 import { Button } from "src/components/ui/button";
 import { Input } from "src/components/ui/input";
@@ -38,8 +33,8 @@ function LoginForm() {
 
   return (
     <div className="w-[400px] max-w-md mx-auto">
-      <CardHeader className="text-center">
-        <h2 className="text-xl font-semibold mb-4">Sign Up</h2>
+      <CardHeader className="">
+        <h2 className="text-xl font-semibold mb-4 border-b-2 w-16 pb-1">Sign In</h2>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -76,11 +71,7 @@ function LoginForm() {
               )}
             />
 
-            <Button
-              type="submit"
-              className="w-full mt-4"
-              disabled={isPending}
-            >
+            <Button type="submit" className="w-full mt-4" disabled={isPending}>
               {isPending ? "Signing In..." : "Sign In with email"}
             </Button>
 
@@ -89,7 +80,7 @@ function LoginForm() {
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
+                <span className="bg-muted px-2 text-muted-foreground">
                   OR
                 </span>
               </div>
