@@ -1,5 +1,7 @@
 "use client";
 
+// import Navbar from "@/components/Navbar";
+
 export default function AuthLayout({
   children,
 }: {
@@ -7,8 +9,8 @@ export default function AuthLayout({
 }) {
   return (
     <main className="bg-gray-50 min-h-screen">
-      
-      <div className="flex justify-center items-center h-[calc(100vh-64px)]">
+      {/* <Navbar /> */}
+      <div className="flex justify-center items-center h-screen">
         {children}
       </div>
     </main>
