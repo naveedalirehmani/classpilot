@@ -3,18 +3,18 @@ import { ArrowRight, FileText, LayoutGrid, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
+
 
 export default function HeroSection() {
   return (
-    <section className="container mx-auto px-4 mt-40 text-center">
+    <section className="container mx-auto px-4 mt-40 text-center font-lato">
       <div className="max-w-3xl mx-auto mb-16">
-        <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">Plan perfect lessons, together.</h1>
-        <p className="text-xl text-gray-600 mb-8">
+        <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6  ">Plan perfect lessons, together.</h1>
+        <p className="text-xl text-gray-600 mb-8 ">
           Capture your teaching ideas, generate AI-powered lesson plans, and organize your curriculum with the ultimate
           classroom planning tool.
         </p>
-        <div className="flex flex-col sm:flex-row justify-center space-y-8 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col sm:flex-row justify-center  mt-12 sm:space-y-0 sm:space-x-6">
           <Button asChild size="lg" className="text-lg">
             <Link href="/signup">
               Get started for free
