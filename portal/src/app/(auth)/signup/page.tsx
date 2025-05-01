@@ -1,184 +1,32 @@
-"use client";
+import Link from "next/link";
+import Signup from "../components/signup-form";
+import Image from "next/image";
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { signUpFormSchema } from "../../../schema/auth/auth.schema";
-import { useSignUp } from "../../../hooks/auth/auth.hooks";
-import { SignUpFormValues } from "../../../schema/auth/auth.schema";
-import {
-  Form,
-  FormLabel,
-  FormField,
-  FormItem,
-  FormControl,
-  FormMessage,
-} from "../../../components/ui/form";
-import { Input } from "../../../components/ui/input";
-import { Button } from "../../../components/ui/button";
-import { ROUTES } from "../../../lib/routes";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardFooter,
-} from "../../../components/ui/card";
-
-const SignupForm = () => {
-  const router = useRouter();
-  const { mutateAsync: signUp, isPending } = useSignUp();
-
-  const form = useForm<SignUpFormValues>({
-    resolver: zodResolver(signUpFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-  });
-
-  const onSubmit = async (values: SignUpFormValues) => {
-    signUp({
-      name: values.name,
-      email: values.email,
-      password: values.password,
-    });
-  };
-
+function signupForm() {
   return (
-    <Card className="w-[400px] max-w-md mx-auto">
-      <CardHeader className="text-center">
-        <h2 className="text-xl font-semibold mb-4">Sign Up</h2>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your name"
-                      type="text"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter email" type="email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter password"
-                      type="password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Confirm your password"
-                      type="password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button
-              type="submit"
-              className="w-full bg-primary mt-4"
-              disabled={isPending}
-            >
-              {isPending ? "Signing up..." : "Sign up with email"}
-            </Button>
-
-            <div className="relative my-4">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  OR
-                </span>
-              </div>
-            </div>
-
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              onClick={() => router.push(ROUTES.SIGNIN_GOOGLE)}
-            >
-              <span className="mr-2">○</span> Sign In with Google
-            </Button>
-
-            <p className="text-center text-sm">
-              Already have an account?{" "}
-              <button
-                type="button"
-                className="ml-2 text-primary font-medium cursor-pointer"
-                onClick={() => router.push(ROUTES.SIGNIN)}
-              >
-                Sign In
-              </button>
-            </p>
-          </form>
-        </Form>
-      </CardContent>
-      <CardFooter />
-    </Card>
+    <div className="grid min-h-svh lg:grid-cols-2 w-full">
+      <div className="relative hidden bg-muted lg:block">
+        <Image
+          src="/readBook.jpg"
+          alt="Image"
+          width={1000}
+          height={1000}
+          className="absolute h-full object-cover bg-muted"
+        />
+      </div>
+      <div className="flex flex-col gap-4 p-6 md:p-10">
+        <div className="flex justify-center gap-2 md:justify-start">
+          <Link href="/" className="flex items-center space-x-2">
+            <Image src="/mainLogo.png" alt="Logo" width={40} height={40} />
+          </Link>
+        </div>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-xs">
+            <Signup />
+          </div>
+        </div>
+      </div>
+    </div>
   );
-};
-
-export default SignupForm;
-
-// "use client"
-
-// import {SignUpForm}  from "../../../components/auth/signupForm";
-
-// export default function SignInPage() {
-//   return (
-//     <div className="flex justify-center items-center h-screen">
-//       <SignUpForm />
-//     </div>
-//   );
-// }
+}
+export default signupForm;
