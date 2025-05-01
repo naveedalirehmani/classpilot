@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Image from "next/image"
 
 export default function HowItWorks() {
   const features = [
@@ -42,7 +43,7 @@ export default function HowItWorks() {
       {/* Kanban Planning Board Section */}
       <section id="kanban-board " className="py-10  mx-auto max-w-6xl">
         <div className="container px-4">
-          <div className="flex gap-12">
+          <div className=" md:flex  block gap-12">
             {/* Left side - Heading and description */}
             <div className="lg:col-span-1">
               <h2 className="text-5xl font-bold mb-4 md:w-[500px]">How ClassPlanner Works</h2>
@@ -56,9 +57,9 @@ export default function HowItWorks() {
             <div className="lg:col-span-3 ">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
                 {features.map((feature, index) => (
-                  <div key={index} className="flex flex-col items-center">
+                  <div key={index} className="flex  flex-col items-center">
                     <div className="mb-2 flex justify-center mb-2">
-                      <img src={`/${feature.image}`} alt={feature.title} className="h-20 w-20" />
+                      <Image src={`/${feature.image}`} alt={feature.title}  width={100} height={100} className="" />
                     </div>
                     <h3 className="text-lg font-semibold text-center ">{feature.title}</h3>
                     <p className="text-gray-600 text-center">{feature.description}</p>
@@ -77,7 +78,7 @@ export default function HowItWorks() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((item) => (
-              <Card key={item.step}>
+              <Card  key={item.step}>
                 <CardHeader>
                   <div className="text-indigo-600 font-bold text-xl mb-2">{item.step}</div>
                   <CardTitle>{item.title}</CardTitle>

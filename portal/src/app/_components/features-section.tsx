@@ -1,5 +1,5 @@
 import FeatureItem from "./feature-item"
-import { Separator } from "@/components/ui/separator"
+
 
 export default function FeaturesSection() {
   const features = [

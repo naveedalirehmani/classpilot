@@ -33,10 +33,12 @@ export default function FeatureItem({
           <ul className="space-y-6  space-x-20 flex ">
             {features.map((item, index) => (
               <li key={index} className=" gap-4 ">
-                <img
-                  src={item.image}
+                <Image
+                  src={`/${item.image}`}
                   alt={item.title}
-                  className="w-20 h-20 flex-shrink-0 rounded-md object-cover my-4  "
+                  width={100}
+                  height={100}
+                  className=" flex-shrink-0 rounded-md object-cover my-4  "
                 />
                 <div>
                   <p className="font-semibold font-inter">{item.title}</p>
