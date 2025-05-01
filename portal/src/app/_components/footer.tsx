@@ -35,7 +35,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 ">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-               <Image src="/mainLogo.png" alt="banner" width={50} height={50}></Image>
+               <Image src="/mainLogo.png" alt="banner" width={120} height={120}></Image>
             </div>
             <p className="text-muted-foreground">AI-powered lesson planning for modern educators.</p>
           </div>

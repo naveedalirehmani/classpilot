@@ -49,8 +49,8 @@ const Signup = () => {
   return (
     <div className="w-[400px] max-w-md mx-auto">
       <CardHeader className="">
-        <h2 className="text-xl font-semibold font-roboto">Sign Up</h2>
-        <p className="text-sm font-roboto font-mdeium text-muted-foreground mb-4">
+        <h2 className="text-xl font-semibold">Sign Up</h2>
+        <p className="text-sm  font-mdeium text-muted-foreground mb-4">
           Create an account to get started.
         </p>
       </CardHeader>

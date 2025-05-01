@@ -26,7 +26,9 @@ export default function FeatureItem({
     <div className="flex flex-col mb-28  mx-auto max-w-6xl  font-nunito">
       <div className="flex flex-col md:flex-row gap-8 mb-10">
         <div className="md:w-1/2">
-          <h3 className="text-5xl font-bold mb-4 w-[450px] ">{title}</h3>
+          <h3 className="text-5xl font-bold mb-4 w-[450px] leading-tight">
+            {title}
+          </h3>
           <p className="text-gray-600  py-4 w-[500px]">{description}</p>
         </div>
         <div className="md:w-1/2 ">
@@ -36,13 +38,15 @@ export default function FeatureItem({
                 <Image
                   src={`/${item.image}`}
                   alt={item.title}
-                  width={100}
-                  height={100}
+                  width={80}
+                  height={80}
                   className=" flex-shrink-0 rounded-md object-cover my-4  "
                 />
                 <div>
-                  <p className="font-semibold font-inter">{item.title}</p>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                  <p className="font-semibold font-inter pt-2">{item.title}</p>
+                  <p className="text-sm text-muted-foreground pt-4 ">
+                    {item.description}
+                  </p>
                 </div>
               </li>
             ))}

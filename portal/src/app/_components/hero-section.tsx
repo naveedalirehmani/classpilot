@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="container mx-auto max-w-6xl  px-4 text-center font-lato">
-      <div className="container mx-auto px-4 py-16 ">
+      <div className="container mx-auto px-4 pt-24 ">
       <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
         {/* Image on the left */}
         <div className="w-full md:w-1/2 py-16 flex justify-center md:justify-start">
@@ -49,7 +49,7 @@ export default function HeroSection() {
       </div>
     </div>
       {/* Feature Icons Grid - Similar to Notion */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-24 max-w-5xl mx-auto my-20">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-24 max-w-5xl mx-auto my-">
         <div className="flex flex-col items-center">
           <div className="rounded-full border border-gray-200 p-4 mb-4">
             <FileText className="h-8 w-8 text-indigo-600" />
@@ -82,7 +82,7 @@ export default function HeroSection() {
       </div>
 
       {/* Screenshot Display - Similar to Notion */}
-      <div className="bg-amber-100 rounded-xl p-8  py-4 relative">
+      <div className="bg-amber-100 rounded-xl p-8 py-6 mt-40  mb-12 relative">
         <Badge
           variant="outline"
           className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2"

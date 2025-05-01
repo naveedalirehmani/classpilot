@@ -17,7 +17,7 @@ function signupForm() {
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/mainLogo.png" alt="Logo" width={40} height={40} />
+            <Image src="/mainLogo.png" alt="Logo" width={100} height={100} />
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
