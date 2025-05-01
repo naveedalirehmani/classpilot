@@ -35,7 +35,7 @@ function LoginForm() {
     <div className="w-[400px] max-w-md mx-auto">
       <CardHeader className="">
         <h2 className="text-xl font-semibold">Sign In</h2>
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-sm text-muted-foreground mb-4 font-roboto font-normal">
           Please sign in to continue.
         </p>
       </CardHeader>
@@ -96,11 +96,11 @@ function LoginForm() {
               <span className="mr-2">○</span> Sign In with Google
             </Button>
 
-            <p className="text-center text-sm">
+            <p className="text-center text-sm font-roboto font-normal">
               Already have an account?{" "}
               <button
                 type="button"
-                className="ml-2 text-primary font-medium cursor-pointer"
+                className="ml-2 text-primary font-medium cursor-pointer font-roboto"
                 onClick={() => router.replace(ROUTES.SIGNUP)}
               >
                 Sign Up

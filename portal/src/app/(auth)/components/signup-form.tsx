@@ -49,8 +49,8 @@ const Signup = () => {
   return (
     <div className="w-[400px] max-w-md mx-auto">
       <CardHeader className="">
-        <h2 className="text-xl font-semibold">Sign Up</h2>
-        <p className="text-sm text-muted-foreground mb-4">
+        <h2 className="text-xl font-semibold font-roboto">Sign Up</h2>
+        <p className="text-sm font-roboto font-mdeium text-muted-foreground mb-4">
           Create an account to get started.
         </p>
       </CardHeader>
@@ -151,11 +151,11 @@ const Signup = () => {
               <span className="mr-2">○</span> Sign In with Google
             </Button>
 
-            <p className="text-center text-sm">
+            <p className="text-center text-sm font-roboto font-normal">
               Already have an account?{" "}
               <button
                 type="button"
-                className="ml-2 text-primary font-medium cursor-pointer"
+                className="ml-2 text-primary font-medium cursor-pointer font-roboto"
                 onClick={() => router.replace(ROUTES.SIGNIN)}
               >
                 Sign In
