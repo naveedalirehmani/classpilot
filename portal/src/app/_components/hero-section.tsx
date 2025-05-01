@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="container mx-auto max-w-6xl  px-4 text-center font-lato">
-      <div className="container mx-auto px-4 pt-24 ">
+      <div className="container mx-auto px-4 py-16 ">
       <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
         {/* Image on the left */}
         <div className="w-full md:w-1/2 py-16 flex justify-center md:justify-start">
@@ -26,8 +26,8 @@ export default function HeroSection() {
         </div>
 
         {/* Text content on the right */}
-        <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+        <div className=" mt-20 md:mt-0  w-full md:w-1/2 space-y-6  text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl  font-bold leading-tight tracking-tight">
             Plan perfect lessons, together.
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-xl">
@@ -49,7 +49,7 @@ export default function HeroSection() {
       </div>
     </div>
       {/* Feature Icons Grid - Similar to Notion */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-24 max-w-5xl mx-auto my-">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-24 max-w-5xl mx-auto mb-32">
         <div className="flex flex-col items-center">
           <div className="rounded-full border border-gray-200 p-4 mb-4">
             <FileText className="h-8 w-8 text-indigo-600" />
@@ -82,101 +82,101 @@ export default function HeroSection() {
       </div>
 
       {/* Screenshot Display - Similar to Notion */}
-      <div className="bg-amber-100 rounded-xl p-8 py-6 mt-40  mb-12 relative">
-        <Badge
-          variant="outline"
-          className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2"
-        >
-          See ClassPlanner in action
-        </Badge>
-        <div className="flex justify-center">
-          <div className="relative flex -ml-10">
-            {/* First Card */}
-            <Card className="p-4 w-64 z-10 -mr-6 transform -rotate-3">
-              <div className="flex items-center mb-3">
-                <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <div className="flex justify-center mb-2">
-                <FileText className="h-10 w-10 text-red-500" />
-              </div>
-              <CardHeader className="p-0">
-                <h4 className="text-xl font-bold text-center mb-2">
-                  Lesson Plan
-                </h4>
-              </CardHeader>
-              <CardContent className="p-0">
-                <p className="text-sm text-gray-600">
-                  In today&apos;s math lesson, students will learn about
-                  fractions through interactive activities and visual aids...
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Second Card */}
-            <Card className="p-4 w-72 z-20">
-              <div className="flex items-center mb-3">
-                <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <div className="flex justify-center mb-2">
-                <LayoutGrid className="h-10 w-10 text-indigo-500" />
-              </div>
-              <CardHeader className="p-0">
-                <h4 className="text-xl font-bold text-center mb-2">
-                  Kanban Board
-                </h4>
-              </CardHeader>
-              <CardContent className="p-0 space-y-2">
-                <div className="bg-gray-100 p-2 rounded text-sm">
-                  <div className="font-medium">To Plan</div>
-                  <div className="text-xs text-gray-500">3 lessons</div>
-                </div>
-                <div className="bg-gray-100 p-2 rounded text-sm">
-                  <div className="font-medium">In Progress</div>
-                  <div className="text-xs text-gray-500">2 lessons</div>
-                </div>
-                <div className="bg-gray-100 p-2 rounded text-sm">
-                  <div className="font-medium">Completed</div>
-                  <div className="text-xs text-gray-500">8 lessons</div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Third Card */}
-            <Card className="p-4 w-64 z-10 -ml-6 transform rotate-3">
-              <div className="flex items-center mb-3">
-                <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <div className="flex justify-center mb-2">
-                <BookOpen className="h-10 w-10 text-blue-500" />
-              </div>
-              <CardHeader className="p-0">
-                <h4 className="text-xl font-bold text-center mb-2">
-                  Unit Plan
-                </h4>
-              </CardHeader>
-              <CardContent className="p-0 space-y-2 text-sm">
-                <div className="font-medium">Objective</div>
-                <p className="text-xs text-gray-600">
-                  Students will understand the concept of fractions and their
-                  applications.
-                </p>
-                <div className="font-medium mt-2">Key lessons</div>
-                <ul className="text-xs text-gray-600 list-disc pl-4">
-                  <li>Introduction to fractions</li>
-                  <li>Comparing fractions</li>
-                  <li>Adding fractions</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
+      <div className="bg-amber-100 rounded-xl p-4 md:p-8 py-4 relative">
+  <Badge
+    variant="outline"
+    className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 whitespace-nowrap"
+  >
+    See ClassPlanner in action
+  </Badge>
+  <div className="flex justify-center">
+    <div className="relative flex flex-col md:flex-row items-center md:-ml-10 gap-4 md:gap-0">
+      {/* First Card */}
+      <Card className="p-4 w-full md:w-64 z-10 md:-mr-6 md:transform md:-rotate-3">
+        <div className="flex items-center mb-3">
+          <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
+          <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
+          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
         </div>
-      </div>
+        <div className="flex justify-center mb-2">
+          <FileText className="h-10 w-10 text-red-500" />
+        </div>
+        <CardHeader className="p-0">
+          <h4 className="text-xl font-bold text-center mb-2">
+            Lesson Plan
+          </h4>
+        </CardHeader>
+        <CardContent className="p-0">
+          <p className="text-sm text-gray-600">
+            In today&apos;s math lesson, students will learn about
+            fractions through interactive activities and visual aids...
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Second Card - Center card on mobile */}
+      <Card className="p-4 w-full md:w-72 z-20 order-first md:order-none">
+        <div className="flex items-center mb-3">
+          <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
+          <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
+          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+        <div className="flex justify-center mb-2">
+          <LayoutGrid className="h-10 w-10 text-indigo-500" />
+        </div>
+        <CardHeader className="p-0">
+          <h4 className="text-xl font-bold text-center mb-2">
+            Kanban Board
+          </h4>
+        </CardHeader>
+        <CardContent className="p-0 space-y-2">
+          <div className="bg-gray-100 p-2 rounded text-sm">
+            <div className="font-medium">To Plan</div>
+            <div className="text-xs text-gray-500">3 lessons</div>
+          </div>
+          <div className="bg-gray-100 p-2 rounded text-sm">
+            <div className="font-medium">In Progress</div>
+            <div className="text-xs text-gray-500">2 lessons</div>
+          </div>
+          <div className="bg-gray-100 p-2 rounded text-sm">
+            <div className="font-medium">Completed</div>
+            <div className="text-xs text-gray-500">8 lessons</div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Third Card */}
+      <Card className="p-4 w-full md:w-64 z-10 md:-ml-6 md:transform md:rotate-3">
+        <div className="flex items-center mb-3">
+          <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
+          <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
+          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+        <div className="flex justify-center mb-2">
+          <BookOpen className="h-10 w-10 text-blue-500" />
+        </div>
+        <CardHeader className="p-0">
+          <h4 className="text-xl font-bold text-center mb-2">
+            Unit Plan
+          </h4>
+        </CardHeader>
+        <CardContent className="p-0 space-y-2 text-sm">
+          <div className="font-medium">Objective</div>
+          <p className="text-xs text-gray-600">
+            Students will understand the concept of fractions and their
+            applications.
+          </p>
+          <div className="font-medium mt-2">Key lessons</div>
+          <ul className="text-xs text-gray-600 list-disc pl-4">
+            <li>Introduction to fractions</li>
+            <li>Comparing fractions</li>
+            <li>Adding fractions</li>
+          </ul>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</div> 
     </section>
   );
 }
