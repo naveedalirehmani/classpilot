@@ -12,7 +12,7 @@ export default function FeaturesSection() {
         description: "100+ content types to communicate any idea."}
         ,{
           image: "at.png",
-          title: "Collaborative tools",
+          title: "Collaborative",
           description: "Built for teams to share, suggest, and comment.",
         },
       { image: "monk.png",
@@ -47,7 +47,7 @@ export default function FeaturesSection() {
     {
       title: "Comprehensive Unit Planning",
       description:
-        "Plan entire units with connected lesson plans, resources, and assessments. Ensure curriculum coherence and track progress throughout the unit.",
+        "Plan entire units with connected lesson plans, resources, and assessments. Ensure curriculum coherence and track progress.",
         features: [{ image: "book.png",
           title: "Teamspaces",
           description: "Dedicated spaces for every team & project"}
@@ -65,9 +65,9 @@ export default function FeaturesSection() {
     {
       title: "Kanban Planning Board",
       description:
-        "Visualize your teaching workflow with our intuitive Kanban board. Track lessons from planning to completion and manage assignments all in one place.",
+        "Visualize your teaching workflow with our intuitive Kanban board. Track lessons from planning to completion and manage assignments ",
         features: [{ image: "tdodcheck.png",
-          title: "Tasks and to-dos",
+          title: "Tasks & to-dos",
           description: "Tackle any project, big or small."}
           ,{
             image: "clander.png",
@@ -85,7 +85,7 @@ export default function FeaturesSection() {
   ] 
 
   return (
-    <section id="features" className="container mx-auto px-4 py-20">
+    <section id="features" className="container mx-auto  py-20">
       
 {/* 
       <Separator className="my-8" /> */}

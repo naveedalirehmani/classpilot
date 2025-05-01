@@ -35,7 +35,7 @@ const Navbar = () => {
       <div className="container mx-auto h-full px-4 flex items-center justify-between">
         <div className="flex items-center space-x-8">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/logo.svg" alt="logo" width={160} height={150}></Image>
+            <Image src="/banner.png" alt="logo" width={50} height={150}></Image>
           </Link>
 
           {isHomePage && (

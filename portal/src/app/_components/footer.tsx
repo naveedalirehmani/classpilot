@@ -31,11 +31,11 @@ const aboutLinks = [
 export default function Footer() {
   return (
     <footer className="border-t py-12">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto   max-w-6xl px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 ">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-               <Image src="/logo.svg" alt="logo" width={160} height={150}></Image>
+               <Image src="/banner.png" alt="banner" width={50} height={150}></Image>
             </div>
             <p className="text-muted-foreground">AI-powered lesson planning for modern educators.</p>
           </div>

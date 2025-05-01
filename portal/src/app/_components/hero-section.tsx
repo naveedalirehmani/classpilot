@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="container mx-auto px-4 text-center font-lato">
+    <section className="container mx-auto max-w-6xl  px-4 text-center font-lato">
       <div className="container mx-auto px-4 py-16 ">
       <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
         {/* Image on the left */}
@@ -18,7 +18,7 @@ export default function HeroSection() {
               alt="Classroom planning tool interface"
               width={300}
               height={100}
-              className="md:w-[500px] object-cover"
+              className="md:w-[400px] object-cover"
               priority
             />
             <div className="absolute inset-0 pointer-events-none"></div>
@@ -27,7 +27,7 @@ export default function HeroSection() {
 
         {/* Text content on the right */}
         <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
             Plan perfect lessons, together.
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-xl">

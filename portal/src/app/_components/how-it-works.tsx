@@ -40,8 +40,8 @@ export default function HowItWorks() {
   return (
     <>
       {/* Kanban Planning Board Section */}
-      <section id="kanban-board" className="py-10">
-        <div className="container mx-auto px-4">
+      <section id="kanban-board " className="py-10  mx-auto max-w-6xl">
+        <div className="container px-4">
           <div className="flex gap-12">
             {/* Left side - Heading and description */}
             <div className="lg:col-span-1">
@@ -72,7 +72,7 @@ export default function HowItWorks() {
 
       {/* How ClassPlanner Works Section */}
       <section id="how-it-works" className="py-20 ">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto   max-w-6xl px-4">
           <h2 className="text-4xl font-bold text-center mb-16">How ClassPlanner Works</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
