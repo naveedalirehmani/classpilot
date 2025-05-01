@@ -35,7 +35,7 @@ function LoginForm() {
     <div className="w-[400px] max-w-md mx-auto">
       <CardHeader className="">
         <h2 className="text-xl font-semibold">Sign In</h2>
-        <p className="text-sm text-muted-foreground mb-4 font-roboto font-normal">
+        <p className="text-sm text-muted-foreground mb-4">
           Please sign in to continue.
         </p>
       </CardHeader>

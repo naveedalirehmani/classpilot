@@ -85,7 +85,7 @@ export default function FeaturesSection() {
   ] 
 
   return (
-    <section id="features" className="container mx-auto  py-20">
+    <section id="features" className="container mx-auto  py-10">
       
 {/* 
       <Separator className="my-8" /> */}
