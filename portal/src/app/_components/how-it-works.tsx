@@ -2,23 +2,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Image from "next/image"
 
 export default function HowItWorks() {
-  const features = [
-    {
-      image: "pen.png",
-      title: "Personalized editor",
-      description: "Generate content that’s always relevant.",
-    },
-    {
-      image: "notification.png",
-      title: "Instant answers",
-      description: "Ask any question about a team’s docs and projects.",
-    },
-    {
-      image: "monk.png",
-      title: "AI connectors beta",
-      description: "Access info from Slack, Google Drive and more, right inside Notion.",
-    },
-  ]
 
   const steps = [
     {
@@ -45,9 +28,9 @@ export default function HowItWorks() {
     
 
       {/* How ClassPlanner Works Section */}
-      <section id="how-it-works" className="pb-10 ">
-        <div className="container mx-auto   max-w-6xl px-4">
-          <h2 className="text-5xl font-bold text-center mb-16">How ClassPlanner Works</h2>
+      <section id="how-it-works" className="pb-10 font-nunito">
+        <div className="container mx-auto  max-w-6xl px-4">
+          <h2 className="text-3xl sm:text-5xl font-bold  pb-12 sm:mb-4 w-full sm:w-[450px] leading-tight">How ClassPlanner Works</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((item) => (

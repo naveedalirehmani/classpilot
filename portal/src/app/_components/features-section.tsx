@@ -56,7 +56,7 @@ export default function FeaturesSection() {
             title: "Integrations",
             description: "Connected to all your other tools..",
           },
-        { image: "monk.png",
+        { image: "notification.png",
           title: "Just ask AI",
           description: "Trusted answers across your apps.",}],
       imageSrc: "/view.png",
@@ -67,14 +67,14 @@ export default function FeaturesSection() {
       description:
         "Visualize your teaching workflow with our intuitive Kanban board. Track lessons from planning to completion and manage assignments ",
         features: [{ image: "tdodcheck.png",
-          title: "Tasks & to-dos",
-          description: "Tackle any project, big or small."}
+          title: "Tasks",
+          description: "Tackle any project."}
           ,{
             image: "clander.png",
             title: "Custom views",
             description: "View work as calendars, boards, and more.",
           },
-        { image: "monk.png",
+        { image: "pen.png",
           title: "Automations",
           description: "Put tedious tasks on autopilot.",}],
       imageSrc: "/kanban.png",
