@@ -18,6 +18,7 @@ import {
   SignInFormValues,
 } from "../../../schema/auth/auth.schema";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function LoginForm() {
   const form = useForm<SignInFormValues>({
@@ -32,7 +33,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-[400px] max-w-md mx-auto">
+    <div className=" md:w-[400px] max-w-md mx-auto">
       <CardHeader className="">
         <h2 className="text-xl font-semibold">Sign In</h2>
         <p className="text-sm text-muted-foreground mb-4">
@@ -93,14 +94,20 @@ function LoginForm() {
               className="w-full"
               onClick={() => router.push(ROUTES.SIGNIN_GOOGLE)}
             >
-              <span className="mr-2">○</span> Sign In with Google
+              <Image
+                src="/icons/google.svg"
+                alt="google"
+                width={17}
+                height={17}
+              />
+              Sign In with Google
             </Button>
 
-            <p className="text-center text-sm font-roboto font-normal">
+            <p className="text-center text-sm">
               Already have an account?{" "}
               <button
                 type="button"
-                className="ml-2 text-primary font-medium cursor-pointer font-roboto"
+                className="ml-2 text-primary font-medium cursor-pointer "
                 onClick={() => router.replace(ROUTES.SIGNUP)}
               >
                 Sign Up

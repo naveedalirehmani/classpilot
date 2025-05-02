@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function LoginPage() {
   return (
-    <div className="grid h-screen lg:grid-cols-2 w-full">
+    <div className="grid min-h-svh lg:grid-cols-2 w-full">
       <div className="relative hidden bg-muted lg:block">
         <Image
           src="/readBook.jpg"
