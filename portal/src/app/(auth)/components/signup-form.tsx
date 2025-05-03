@@ -23,6 +23,7 @@ import {
   CardHeader,
   CardFooter,
 } from "../../../components/ui/card";
+import Image from "next/image";
 
 const Signup = () => {
   const router = useRouter();
@@ -47,10 +48,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-[400px] max-w-md mx-auto">
+    <div className="md:w-[400px] max-w-md mx-auto">
       <CardHeader className="">
-        <h2 className="text-xl font-semibold font-roboto">Sign Up</h2>
-        <p className="text-sm font-roboto font-mdeium text-muted-foreground mb-4">
+        <h2 className="text-xl font-semibold">Sign Up</h2>
+        <p className="text-sm  font-mdeium text-muted-foreground mb-4">
           Create an account to get started.
         </p>
       </CardHeader>
@@ -148,14 +149,20 @@ const Signup = () => {
               className="w-full"
               onClick={() => router.push(ROUTES.SIGNIN_GOOGLE)}
             >
-              <span className="mr-2">○</span> Sign In with Google
+              <Image
+                src="/icons/google.svg"
+                alt="google"
+                width={17}
+                height={17}
+              />
+              Sign In with Google
             </Button>
 
-            <p className="text-center text-sm font-roboto font-normal">
+            <p className="text-center text-sm">
               Already have an account?{" "}
               <button
                 type="button"
-                className="ml-2 text-primary font-medium cursor-pointer font-roboto"
+                className="ml-2 text-primary font-medium cursor-pointer"
                 onClick={() => router.replace(ROUTES.SIGNIN)}
               >
                 Sign In
