@@ -1,0 +1,27 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main document background -->
+  <rect x="15" y="10" width="70" height="80" rx="4" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  
+  <!-- Document header -->
+  <rect x="25" y="20" width="50" height="8" rx="2" fill="#10b981" opacity="0.7"/>
+  
+  <!-- Document content lines -->
+  <rect x="25" y="35" width="50" height="4" rx="1" fill="#10b981" opacity="0.5"/>
+  <rect x="25" y="45" width="40" height="4" rx="1" fill="#10b981" opacity="0.5"/>
+  
+  <!-- Checkmark section -->
+  <circle cx="30" cy="60" r="5" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+  <path d="M27.5 60L29.5 62L33 58.5" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="40" y="58" width="35" height="4" rx="1" fill="#10b981" opacity="0.5"/>
+  
+  <!-- Second checkmark section -->
+  <circle cx="30" cy="70" r="5" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+  <path d="M27.5 70L29.5 72L33 68.5" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="40" y="68" width="35" height="4" rx="1" fill="#10b981" opacity="0.5"/>
+  
+  <!-- Bottom decoration -->
+  <rect x="25" y="80" width="20" height="4" rx="1" fill="#10b981" opacity="0.7"/>
+  
+  <!-- Corner fold -->
+  <path d="M70 10L85 25L70 25L70 10Z" fill="#ecfdf5" stroke="#10b981" stroke-width="2" stroke-linejoin="round"/>
+</svg>

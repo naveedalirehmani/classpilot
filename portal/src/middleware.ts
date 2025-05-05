@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ROUTES } from "./lib/routes";
 
-const API_URL = process.env.API_URL || "https://classplanner-api.kohminds.com/v1/user/current-user";
+// const API_URL = process.env.API_URL || "https://classplanner-api.kohminds.com/v1/user/current-user";
+const API_URL = process.env.API_URL || "http://localhost:4000/v1/user/current-user";
 const COOKIE_HEADER = "cookie";
 const ACCESS_TOKEN = "access_token";
 const REFRESH_TOKEN = "refresh_token";

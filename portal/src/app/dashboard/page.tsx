@@ -68,7 +68,7 @@ export default function DashboardPage() {
                 <CardDescription>Create detailed lesson plans with objectives and activities</CardDescription>
               </CardHeader>
               <CardContent className="flex justify-center py-4">
-                <Image src="/icons/man.svg" alt="Lesson Plan" width={100} height={100} className="opacity-90" />
+                <Image src="/icons/lessonplan.svg" alt="Lesson Plan" width={100} height={100} className="opacity-90" />
               </CardContent>
               <CardFooter>
                 <Link href={ROUTES.DASHBOARD_CREATE} className="w-full">

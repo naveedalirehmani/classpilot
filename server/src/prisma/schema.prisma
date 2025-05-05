@@ -163,9 +163,17 @@ model LessonPlan {
   isDeleted       Boolean   @default(false)
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
+  position        LessonPlanStatus       @default(GENERATED)
   favorites       FavoriteLessonPlan[]
 
   @@map("lesson_plans")
+}
+
+enum LessonPlanStatus {
+  GENERATED
+  TAUGHT
+  AWAITING_ASSESSMENT
+  COMPLETED
 }
 
 model FavoriteLessonPlan {
