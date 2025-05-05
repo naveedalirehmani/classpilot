@@ -17,6 +17,7 @@ export default function Home() {
       <HowItWorks />
       {/* <Testimonials /> */}
       <CTASection />
+      
       <Footer />
     </div>
   )
