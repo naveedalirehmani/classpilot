@@ -11,7 +11,7 @@ export default function CTACard() {
       <Card className="max-w-3xl mx-auto">
         <CardContent className="pt-6">
           <p className="text-lg text-muted-foreground text-center mb-6">
-            Join thousands of teachers who are saving time and creating better learning experiences with ClassPlanner.
+            Join thousands of teachers who are saving time and creating better learning experiences with Class Pilot.
           </p>
           <div className="flex justify-center">
             <Button asChild size="lg">

@@ -1,5 +1,5 @@
 {
-  "name": "classplannerfile",
+  "name": "classpilotfile",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -32,7 +32,7 @@
     "ai": "^4.3.9",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
-    "classplannerfile": "file:",
+    "classpilotfile": "file:",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",

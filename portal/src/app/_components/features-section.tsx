@@ -6,7 +6,7 @@ export default function FeaturesSection() {
     {
       title: "AI-Generated Lesson Plans",
       description:
-        "Simply input your topic and grade level, and ClassPlanner's AI will generate comprehensive lesson plans with objectives, activities, assessments, and resources.",
+        "Simply input your topic and grade level, and Class Pilot's AI will generate comprehensive lesson plans with objectives, activities, assessments, and resources.",
       features: [{ image: "image.png",
         title: "Building blocks",
         description: "100+ content types to communicate any idea."}

@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 export default function Testimonials() {
     const testimonials = [
       {
-        quote: "ClassPlanner has revolutionized how I prepare for my classes. What used to take hours now takes minutes.",
+        quote: "Class Pilot has revolutionized how I prepare for my classes. What used to take hours now takes minutes.",
         author: "Sarah Johnson",
         role: "5th Grade Teacher",
       },

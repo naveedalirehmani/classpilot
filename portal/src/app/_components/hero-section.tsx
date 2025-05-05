@@ -87,7 +87,7 @@ export default function HeroSection() {
     variant="outline"
     className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 whitespace-nowrap"
   >
-    See ClassPlanner in action
+    See Class Pilot in action
   </Badge>
   <div className="flex justify-center">
     <div className="relative flex flex-col md:flex-row items-center md:-ml-10 gap-4 md:gap-0">

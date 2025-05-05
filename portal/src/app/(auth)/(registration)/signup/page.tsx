@@ -20,7 +20,7 @@ function signupForm() {
         <div className="flex justify-center gap-2 md:justify-start">
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/mainLogo.png"
+              src="/classpilot.png"
               alt="Logo"
               width={100}
               height={100}

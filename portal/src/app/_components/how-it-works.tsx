@@ -27,10 +27,10 @@ export default function HowItWorks() {
       
     
 
-      {/* How ClassPlanner Works Section */}
+      {/* How Class Pilot Works Section */}
       <section id="how-it-works" className="pb-10 font-nunito">
         <div className="container mx-auto  max-w-6xl px-4">
-          <h2 className="text-3xl sm:text-5xl font-bold  pb-12 sm:mb-4 w-full sm:w-[450px] leading-tight">How ClassPlanner Works</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold  pb-12 sm:mb-4 w-full sm:w-[450px] leading-tight">How Class Pilot Works</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((item) => (

@@ -28,12 +28,13 @@ import { ROUTES } from "src/lib/routes";
 import { useSignOut } from "src/hooks/auth/auth.hooks";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useUserStore } from "@/store/user.store";
+import Image from "next/image";
 
 export function Navbar() {
   const [isScrolled] = useState(false);
   const { mutate: signOutMutation } = useSignOut();
 
-  const { user } = useUserStore()
+  const { user } = useUserStore();
 
   // Add scroll event listener when component mounts (in a real implementation)
   // useEffect(() => {
@@ -55,12 +56,16 @@ export function Navbar() {
           {/* Left: Logo & Brand */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-                <span className="font-bold text-white">T</span>
+              <div className="flex items-center justify-center">
+                <Link href="/" className="flex items-center space-x-2">
+                  <Image
+                    src="/classpilot.png"
+                    alt="logo"
+                    width={100}
+                    height={100}
+                  ></Image>
+                </Link>
               </div>
-              <span className="font-bold text-xl hidden sm:inline-block ">
-              Class Planner
-              </span>
             </Link>
           </div>
 
@@ -127,14 +132,14 @@ export function Navbar() {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <Link href={ROUTES.PROFILE}>
-                <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
                 </Link>
                 <Link href={ROUTES.SETTINGS}>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
                 </Link>
                 <DropdownMenuItem>My Resources</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={()=>signOutMutation()} >
+                <DropdownMenuItem onClick={() => signOutMutation()}>
                   Log out
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -159,7 +164,7 @@ export function Navbar() {
                     Access quick navigation and actions
                   </SheetDescription>
                 </SheetHeader>
-                
+
                 <div className="grid gap-4 py-4">
                   <nav className="flex flex-col space-y-4">
                     <MobileNavLink href="/" active>

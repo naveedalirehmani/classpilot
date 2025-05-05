@@ -31,8 +31,8 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-1">
             <div className="flex items-center space-x-2  sm:mb-6">
               <Image 
-                src="/mainLogo.png" 
-                alt="ClassPlanner Logo" 
+                src="/classpilot.png" 
+                alt="Class Pilot Logo" 
                 width={120} 
                 height={120}
                 className="w-20 h-auto sm:w-24"
@@ -90,7 +90,7 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <p className="text-muted-foreground text-xs sm:text-sm text-center sm:text-left order-2 sm:order-1 mt-4 sm:mt-0">
-            © 2025 ClassPlanner. All rights reserved.
+            © 2025 Class Pilot. All rights reserved.
           </p>
           
           {/* Legal links for mobile */}

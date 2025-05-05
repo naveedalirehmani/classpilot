@@ -1,4 +1,4 @@
-name: ClassPlanner Server CI/CD
+name: classpilot Server CI/CD
 
 on:
   push:
@@ -46,11 +46,11 @@ jobs:
       - name: Build Docker image
         run: |
           docker build ./server -f ./server/Dockerfile \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/classpilot-server:latest
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/classpilot-server:latest
 
   deploy:
     needs: build
@@ -68,11 +68,11 @@ jobs:
             echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             
             # Pull latest image
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/classpilot-server:latest
             
             # Stop and remove existing container
-            docker stop classplanner-server || true
-            docker rm classplanner-server || true
+            docker stop classpilot-server || true
+            docker rm classpilot-server || true
             
             # Clean up unused images
             docker image prune -f
@@ -80,7 +80,7 @@ jobs:
             # Run new container with environment variables
             docker run -d \
               -p 4000:4000 \
-              --name classplanner-server \
+              --name classpilot-server \
               --restart unless-stopped \
               -e NODE_ENV=production \
               -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
@@ -94,7 +94,7 @@ jobs:
               -e STRIPE_PUBLISHABLE_KEY=${{secrets.STRIPE_PUBLISHABLE_KEY}} \
               -e OPENAI_API_KEY=${{secrets.OPENAI_API_KEY}} \
               -e AWS_REGION=us-east-1 \
-              -e CLIENT_SERVER=https://classplanner.kohminds.com \
+              -e CLIENT_SERVER=https://classpilot.kohminds.com \
               -e COOKIE_CLIENT=.kohminds.com \
               -e SALT=${{ secrets.SALT }} \
-              ${{ secrets.DOCKERHUB_USERNAME }}/classplanner-server:latest 
+              ${{ secrets.DOCKERHUB_USERNAME }}/classpilot-server:latest 

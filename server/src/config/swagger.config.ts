@@ -5,11 +5,11 @@ export const swaggerOptions: Options = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "classPlanner",
+      title: "Class Pilot",
       version: "1.0.0",
-      description: "classPlanner API Documentation",
+      description: "Class Pilot API Documentation",
       contact: {
-        name: "classPlanner",
+        name: "Class Pilot",
         email: "your-email@example.com",
       },
     },
