@@ -9,7 +9,7 @@ const httpServer: http.Server = http.createServer(app);
 
 async function startServer(): Promise<void> {
   httpServer.listen(PORT, () => {
-    console.log("listening to server on", PORT);
+    console.log("listening to server on ", PORT);
   });
 }
 
