@@ -26,18 +26,6 @@ export default function FeaturesSection() {
       imageSrc: "/3.png",
       imageAlt: "AI Lesson Plan Generator",
     },
-    // {
-    //   title: "Worksheet Generator",
-    //   description:
-    //     "Create engaging, curriculum-aligned worksheets in seconds. Choose from various question types, difficulty levels, and formats to meet your students' needs.",
-    //   features: [
-    //     "Multiple formats (PDF, Word, Google Docs)",
-    //     "Differentiated learning options",
-    //     "Answer keys included",
-    //   ],
-    //   imageSrc: "/placeholder.svg?height=500&width=700",
-    //   imageAlt: "Worksheet Generator",
-    // },
     {
       title: "Comprehensive Unit Planning",
       description:
@@ -65,7 +53,7 @@ export default function FeaturesSection() {
     {
       title: "Kanban Planning Board",
       description:
-        "Visualize your teaching workflow with our intuitive Kanban board. Track lessons from planning to completion and manage assignments ",
+        "Visualize your teaching workflow with our intuitive Kanban board. Track lessons from planning to completion and manage assignments.",
       features: [
         {
           image: "tdodcheck.png",
@@ -81,16 +69,15 @@ export default function FeaturesSection() {
           image: "pen.png",
           title: "Automations",
           description: "Put tedious tasks on autopilot.",
+        },
+      ],
       imageSrc: "/2.png",
       imageAlt: "Kanban Planning Board",
     },
   ];
 
   return (
-    <section id="features" className="container mx-auto  py-10">
-      {/* 
-      <Separator className="my-8" /> */}
-
+    <section id="features" className="container mx-auto py-10">
       {features.map((feature, index) => (
         <div key={index}>
           <FeatureItem

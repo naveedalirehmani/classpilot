@@ -25,7 +25,7 @@ export default function CTACard() {
             </Button>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-center pt-8">
+        <CardFooter className="flex justify-center pt-6">
           <p className="text-sm text-muted-foreground">
             No credit card required. Free 14-day trial.
           </p>
