@@ -5,17 +5,26 @@ import { useGetAllUserLessonPlans, useAddFavorite, useRemoveFavorite } from "src
 import { useRouter } from "next/navigation"
 import { ROUTES } from "src/lib/routes"
 import type { LessonPlanResponse } from "src/types/lessonPlan/lessonPlan"
-import { LessonPlanCard } from "./components/card"
+import { LessonPlanCard, LessonPlanCardSkeleton, EmptyLessonPlans } from "./components/card"
 import { LayoutGrid, List } from 'lucide-react'
 import { useState } from "react"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { LessonPlanPagination } from "./components/pagination"
 
 function AllPlan() {
   const router = useRouter()
-  const { data: allPlans } = useGetAllUserLessonPlans()
+  const [page, setPage] = useState<number>(1)
+  const [limit] = useState<number>(9)
+  const { data: paginatedPlans, isLoading } = useGetAllUserLessonPlans(page, limit)
   const addFavorite = useAddFavorite()
   const removeFavorite = useRemoveFavorite()
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage)
+    // Scroll to top when page changes
+    window.scrollTo(0, 0)
+  }
 
   const handleCardClick = (id: string) => {
     router.push(`${ROUTES.DASHBOARD}/${ROUTES.LESSON_PLAN}/${id}`)
@@ -34,6 +43,13 @@ function AllPlan() {
     }
   }
 
+  // Render loading skeletons
+  const renderSkeletons = () => {
+    return Array(limit).fill(0).map((_, index) => (
+      <LessonPlanCardSkeleton key={`skeleton-${index}`} viewMode={viewMode} />
+    ))
+  }
+
   return (
     <div className="bg-slate-50 min-h-screen pb-12">
       <div className="bg-white border-b sticky top-0 z-10">
@@ -50,25 +66,46 @@ function AllPlan() {
         </div>
       </div>
       <div className="container mx-auto py-8 px-4">
-        <div 
-          className={
-            viewMode === "grid" 
-              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
-              : "flex flex-col gap-4"
-          }
-        >
-          {allPlans?.map((plan) => (
-            <LessonPlanCard 
-              key={plan.id} 
-              plan={plan} 
-              viewMode={viewMode}
-              onCardClick={handleCardClick} 
-              onToggleFavorite={toggleFavorite} 
+        {isLoading ? (
+          <div 
+            className={
+              viewMode === "grid" 
+                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
+                : "flex flex-col gap-4"
+            }
+          >
+            {renderSkeletons()}
+          </div>
+        ) : paginatedPlans && paginatedPlans.data && paginatedPlans.data.length > 0 ? (
+          <>
+            <div 
+              className={
+                viewMode === "grid" 
+                  ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
+                  : "flex flex-col gap-4"
+              }
+            >
+              {paginatedPlans.data.map((plan) => (
+                <LessonPlanCard 
+                  key={plan.id} 
+                  plan={plan} 
+                  viewMode={viewMode}
+                  onCardClick={handleCardClick} 
+                  onToggleFavorite={toggleFavorite} 
+                />
+              ))}
+            </div>
+            
+            {/* Pagination - always show regardless of page count */}
+            <LessonPlanPagination
+              currentPage={paginatedPlans.currentPage}
+              totalPages={paginatedPlans.totalPages || 1}
+              onPageChange={handlePageChange}
             />
-          ))}
-        </div>
-
-        {!allPlans?.length && <div className="text-center text-gray-500 mt-8">No lesson plans found</div>}
+          </>
+        ) : (
+          <EmptyLessonPlans />
+        )}
       </div>
     </div>
   )

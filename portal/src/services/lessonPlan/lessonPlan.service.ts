@@ -1,4 +1,4 @@
-import { CreateLessonPlanData, LessonPlanResponse } from "src/types/lessonPlan/lessonPlan";
+import { CreateLessonPlanData, LessonPlanResponse, PaginatedResponse } from "src/types/lessonPlan/lessonPlan";
 import instance from "../api";
 import { API_ROUTES } from "src/constants/api";
 
@@ -23,9 +23,11 @@ class LessonPlanService {
     }
   }
 
-  static async getAllUserLessonPlans(): Promise<LessonPlanResponse[]> {
+  static async getAllUserLessonPlans(page: number = 1, limit: number = 10): Promise<PaginatedResponse<LessonPlanResponse>> {
     try {
-      const response = await instance.get(API_ROUTES.LESSON_PLAN.GET_ALL_USER_LESSON_PLANS);
+      const response = await instance.get(API_ROUTES.LESSON_PLAN.GET_ALL_USER_LESSON_PLANS, {
+        params: { page, limit }
+      });
       return response.data;
     } catch (error) {
       console.error("Error during getting all user lesson plans:", error);
@@ -33,9 +35,11 @@ class LessonPlanService {
     }
   }
 
-  static async getAllFavorites() {
+  static async getAllFavorites(page: number = 1, limit: number = 10): Promise<PaginatedResponse<LessonPlanResponse>> {
     try {
-      const response = await instance.get(API_ROUTES.LESSON_PLAN.GET_ALL_FAVORITES);
+      const response = await instance.get(API_ROUTES.LESSON_PLAN.GET_ALL_FAVORITES, {
+        params: { page, limit }
+      });
       return response.data;
     } catch (error) {
       console.error("Error during getting all favorites:", error);

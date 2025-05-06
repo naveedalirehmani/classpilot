@@ -249,6 +249,14 @@ interface HomeworkResource {
   access?: string;
 }
 
+export interface PaginatedResponse<T> {
+  data: T[];
+  totalCount: number;
+  totalPages: number;
+  currentPage: number;
+  hasMore: boolean;
+}
+
 export interface CreateLessonPlanData {
   topic: string;
   additionalInstructions: string;
@@ -266,4 +274,5 @@ export interface LessonPlanResponse {
   isFavorite: boolean;
   createdAt: string;
   updatedAt: string;
+  favorites?: any[];
 }

@@ -62,7 +62,11 @@ export const updateLessonPlan = async (
   }
 };
 
-export const getLessonPlan = async (request: Request, response: Response) => {
+export const getLessonPlan = async (
+  request: Request, 
+  response: Response,
+  next: NextFunction
+) => {
   const { id } = request.params;
   const { userId } = request.user;
   try {
@@ -77,37 +81,63 @@ export const getLessonPlan = async (request: Request, response: Response) => {
 
     response.status(ResponseStatus.OK).json(lessonPlan);
   } catch (error) {
-    response
-      .status(ResponseStatus.InternalServerError)
-      .json({ error: "Failed to get lesson plan" });
+    next(error);
   }
 };
 
 export const getAllUserLessonPlans = async (
   request: Request,
-  response: Response
+  response: Response,
+  next: NextFunction
 ) => {
   const { userId } = request.user;
-  console.log("userId", userId);
   try {
-    const lessonPlans = await LessonPlanModel.getAllUserLessonPlans(userId);
-    response.status(ResponseStatus.OK).json(lessonPlans);
+    const page = parseInt(request.query.page as string, 10) || 1;
+    const limit = parseInt(request.query.limit as string, 10) || 10;
+    const skip = (page - 1) * limit;
+
+    const { lessonPlans, totalCount } = await LessonPlanModel.getAllUserLessonPlans(userId, skip, limit);
+
+    const totalPages = Math.ceil(totalCount / limit);
+    const hasMore = page < totalPages;
+
+    response.status(ResponseStatus.OK).json({
+      data: lessonPlans,
+      totalCount,
+      totalPages,
+      currentPage: page,
+      hasMore,
+    });
   } catch (error) {
-    response
-      .status(ResponseStatus.InternalServerError)
-      .json({ error: "Failed to get all user lesson plans" });
+    next(error);
   }
 };
 
-export const getAllFavorites = async (request: Request, response: Response) => {
+export const getAllFavorites = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
   const { userId } = request.user;
   try {
-    const favorites = await LessonPlanModel.getAllFavorites(userId);
-    response.status(ResponseStatus.OK).json(favorites);
+    const page = parseInt(request.query.page as string, 10) || 1;
+    const limit = parseInt(request.query.limit as string, 10) || 10;
+    const skip = (page - 1) * limit;
+
+    const { favorites, totalCount } = await LessonPlanModel.getAllFavorites(userId, skip, limit);
+
+    const totalPages = Math.ceil(totalCount / limit);
+    const hasMore = page < totalPages;
+
+    response.status(ResponseStatus.OK).json({
+      data: favorites,
+      totalCount,
+      totalPages,
+      currentPage: page,
+      hasMore,
+    });
   } catch (error) {
-    response
-      .status(ResponseStatus.InternalServerError)
-      .json({ error: "Failed to get all favorites" });
+    next(error);
   }
 };
 

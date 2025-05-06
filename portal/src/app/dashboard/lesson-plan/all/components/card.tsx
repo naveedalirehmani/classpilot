@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { formatDistanceToNow } from "date-fns";
-import { Heart, BookOpen, Clock } from "lucide-react";
+import { Heart, BookOpen, Clock, SearchX } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -11,6 +11,7 @@ import {
   CardFooter,
 } from "src/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "src/components/ui/skeleton";
 import type { LessonPlanResponse } from "src/types/lessonPlan/lessonPlan";
 
 interface LessonPlanCardProps {
@@ -21,6 +22,70 @@ interface LessonPlanCardProps {
     e: React.MouseEvent,
     plan: LessonPlanResponse
   ) => Promise<void>;
+  isLoading?: boolean;
+}
+
+export function LessonPlanCardSkeleton({ viewMode }: { viewMode: "grid" | "list" }) {
+  if (viewMode === "list") {
+    return (
+      <Card className="rounded-sm w-full flex flex-row overflow-hidden py-0">
+        <div className="flex-grow flex flex-col p-4">
+          <div className="flex justify-between items-start mb-2">
+            <Skeleton className="h-6 w-3/4" />
+            <Skeleton className="h-8 w-8 rounded-full" />
+          </div>
+          <Skeleton className="h-4 w-full mb-1" />
+          <Skeleton className="h-4 w-4/5 mb-2" />
+          <div className="flex flex-wrap gap-1.5 mt-auto">
+            <Skeleton className="h-5 w-16" />
+            <Skeleton className="h-5 w-16" />
+            <Skeleton className="h-5 w-16" />
+          </div>
+        </div>
+        <div className="border-l flex flex-col justify-between p-4 bg-gray-50 dark:bg-gray-800 min-w-48">
+          <Skeleton className="h-4 w-28 mb-auto" />
+          <Skeleton className="h-4 w-28 mt-auto" />
+        </div>
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="h-full flex flex-col overflow-hidden">
+      <CardHeader className="pb-2 flex flex-row items-start justify-between space-y-0">
+        <div className="space-y-1.5 w-full">
+          <Skeleton className="h-6 w-4/5" />
+        </div>
+        <Skeleton className="h-8 w-8 rounded-full" />
+      </CardHeader>
+      <CardContent className="flex-grow pb-2">
+        <Skeleton className="h-4 w-full mb-1" />
+        <Skeleton className="h-4 w-full mb-1" />
+        <Skeleton className="h-4 w-4/5 mb-3" />
+        <div className="flex flex-wrap gap-1.5 mt-2">
+          <Skeleton className="h-5 w-16" />
+          <Skeleton className="h-5 w-16" />
+          <Skeleton className="h-5 w-16" />
+        </div>
+      </CardContent>
+      <CardFooter className="pt-2 border-t text-xs flex items-center justify-between">
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-4 w-24" />
+      </CardFooter>
+    </Card>
+  );
+}
+
+export function EmptyLessonPlans() {
+  return (
+    <div className="w-full flex flex-col items-center justify-center py-12 text-center">
+      <SearchX className="h-16 w-16 text-gray-300 mb-4" />
+      <h3 className="text-xl font-medium text-gray-900 mb-1">No lesson plans found</h3>
+      <p className="text-gray-500 max-w-md">
+        You haven&apos;t created any lesson plans yet. Start creating your first lesson plan to see it here.
+      </p>
+    </div>
+  );
 }
 
 export function LessonPlanCard({
@@ -28,7 +93,12 @@ export function LessonPlanCard({
   viewMode,
   onCardClick,
   onToggleFavorite,
+  isLoading = false,
 }: LessonPlanCardProps) {
+  if (isLoading) {
+    return <LessonPlanCardSkeleton viewMode={viewMode} />;
+  }
+
   const aiResponse = JSON.parse(plan.aiPrompt);
 
   if (viewMode === "list") {

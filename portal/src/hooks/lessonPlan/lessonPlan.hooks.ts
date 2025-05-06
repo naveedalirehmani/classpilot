@@ -8,6 +8,7 @@ import LessonPlanService from "src/services/lessonPlan/lessonPlan.service";
 import {
   CreateLessonPlanData,
   LessonPlanResponse,
+  PaginatedResponse,
 } from "src/types/lessonPlan/lessonPlan";
 
 export const useCreateLessonPlan = () => {
@@ -40,17 +41,17 @@ export const useGetLessonPlan = (id: string) => {
   });
 };
 
-export const useGetAllUserLessonPlans = () => {
-  return useQuery<LessonPlanResponse[], Error>({
-    queryKey: [QueryKeys.LESSON_PLAN],
-    queryFn: () => LessonPlanService.getAllUserLessonPlans(),
+export const useGetAllUserLessonPlans = (page: number = 1, limit: number = 10) => {
+  return useQuery<PaginatedResponse<LessonPlanResponse>, Error>({
+    queryKey: [QueryKeys.LESSON_PLAN, page, limit],
+    queryFn: () => LessonPlanService.getAllUserLessonPlans(page, limit),
   });
 };
 
-export const useGetAllFavorites = () => {
-  return useQuery<LessonPlanResponse[], Error>({
-    queryKey: [QueryKeys.FAVORITES],
-    queryFn: () => LessonPlanService.getAllFavorites(),
+export const useGetAllFavorites = (page: number = 1, limit: number = 10) => {
+  return useQuery<PaginatedResponse<LessonPlanResponse>, Error>({
+    queryKey: [QueryKeys.FAVORITES, page, limit],
+    queryFn: () => LessonPlanService.getAllFavorites(page, limit),
   });
 };
 

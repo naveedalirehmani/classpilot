@@ -80,11 +80,12 @@ export default function DashboardPage() {
               </CardFooter>
             </Card>
 
-            <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-100 hover:shadow-md transition-shadow">
+            <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-100 hover:shadow-md transition-shadow opacity-50">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <FileText className="h-5 w-5 text-blue-600" />
                   Worksheet
+                  <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full ml-2">Coming Soon</span>
                 </CardTitle>
                 <CardDescription>Generate custom worksheets and assessments</CardDescription>
               </CardHeader>
@@ -92,18 +93,19 @@ export default function DashboardPage() {
                 <Image src="/icons/worksheet.svg" alt="Worksheet" width={100} height={100} className="opacity-90" />
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                <Button className="w-full bg-blue-600 hover:bg-blue-700" disabled>
                   <Plus className="mr-2 h-4 w-4" />
                   Create Worksheet
                 </Button>
               </CardFooter>
             </Card>
 
-            <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-100 hover:shadow-md transition-shadow">
+            <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-100 hover:shadow-md transition-shadow opacity-50">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Grid className="h-5 w-5 text-purple-600" />
                   Unit Plan
+                  <span className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full ml-2">Coming Soon</span>
                 </CardTitle>
                 <CardDescription>Design comprehensive unit plans for your curriculum</CardDescription>
               </CardHeader>
@@ -111,7 +113,7 @@ export default function DashboardPage() {
                 <Image src="/icons/unit-plan.svg" alt="Unit Plan" width={100} height={100} className="opacity-90" />
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                <Button className="w-full bg-purple-600 hover:bg-purple-700" disabled>
                   <Plus className="mr-2 h-4 w-4" />
                   Create Unit Plan
                 </Button>

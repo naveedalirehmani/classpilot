@@ -56,38 +56,64 @@ export const getLessonPlan = async (lessonPlanId: string) => {
   }
 };
 
-export const getAllUserLessonPlans = async (userId: string) => {
+export const getAllUserLessonPlans = async (userId: string, skip: number = 0, limit: number = 10) => {
   try {
-    const lessonPlans = await prisma.lessonPlan.findMany({
-      where: { userId },
-      include: {
-        favorites: {
-          where: { userId },
+    const [lessonPlans, totalCount] = await Promise.all([
+      prisma.lessonPlan.findMany({
+        where: { userId },
+        include: {
+          favorites: {
+            where: { userId },
+          },
         },
-      },
-    });
+        skip,
+        take: limit,
+        orderBy: {
+          createdAt: 'desc',
+        },
+      }),
+      prisma.lessonPlan.count({
+        where: { userId },
+      }),
+    ]);
 
-    return lessonPlans.map(plan => ({
-      ...plan,
-      isFavorite: plan.favorites.length > 0,
-    }));
+    return {
+      lessonPlans: lessonPlans.map(plan => ({
+        ...plan,
+        isFavorite: plan.favorites.length > 0,
+      })),
+      totalCount,
+    };
   } catch (error) {
     throw new DatabaseError("Failed to get all user lesson plans");
   }
 };
 
-export const getAllFavorites = async (userId: string) => {
+export const getAllFavorites = async (userId: string, skip: number = 0, limit: number = 10) => {
   try {
-    // Find all lesson plans that this user has favorited
-    const favorites = await prisma.lessonPlan.findMany({
-      where: {
-        favorites: {
-          some: { userId },
+    const [favorites, totalCount] = await Promise.all([
+      prisma.lessonPlan.findMany({
+        where: {
+          favorites: {
+            some: { userId },
+          },
         },
-      },
-    });
+        skip,
+        take: limit,
+        orderBy: {
+          createdAt: 'desc',
+        },
+      }),
+      prisma.lessonPlan.count({
+        where: {
+          favorites: {
+            some: { userId },
+          },
+        },
+      }),
+    ]);
 
-    return favorites;
+    return { favorites, totalCount };
   } catch (error) {
     throw new DatabaseError("Failed to get all favorites");
   }
