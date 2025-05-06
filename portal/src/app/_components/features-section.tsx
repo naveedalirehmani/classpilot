@@ -81,8 +81,6 @@ export default function FeaturesSection() {
           image: "pen.png",
           title: "Automations",
           description: "Put tedious tasks on autopilot.",
-        },
-      ],
       imageSrc: "/2.png",
       imageAlt: "Kanban Planning Board",
     },
