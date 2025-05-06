@@ -33,12 +33,12 @@ export default function HowItWorks() {
       {/* Kanban Planning Board Section */}
 
       {/* How Class Pilot Works Section */}
-      <section id="how-it-works" className="pb-10">
+      <section id="how-it-works" className="">
         <div className="container mx-auto  max-w-6xl px-4">
-          <h2 className="text-3xl sm:text-5xl font-bold w-full leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-bold w-full leading-tight pb-4">
             How Class Pilot Works
           </h2>
-          <p className="text-muted-foreground py-10">
+          <p className="text-muted-foreground pb-10">
             Start by sharing your teaching goals, then let Class Pilot create
             and customize content to make lesson planning easy
           </p>
