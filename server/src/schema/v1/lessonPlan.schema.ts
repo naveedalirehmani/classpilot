@@ -142,18 +142,18 @@ export const generateLessonPlanSchema = z.object({
     ).optional(),
 
     assessment: z.object({
-      formative: z.array(
-        z.object({
-          method: z.string().describe("Assessment method"),
-          timing: z.string().describe("When to implement").optional(),
-          questions: z.array(z.string()).describe("Specific check questions").optional(),
-        })
-      ).optional(),
       summative: z.array(
         z.object({
           method: z.string().describe("Assessment method"),
           description: z.string().describe("Detailed description").optional(),
           criteria: z.array(z.string()).describe("Success criteria").optional(),
+        })
+      ).optional(),
+      formative: z.array(
+        z.object({
+          method: z.string().describe("Assessment method"),
+          timing: z.string().describe("When to implement").optional(),
+          questions: z.array(z.string()).describe("Specific check questions").optional(),
         })
       ).optional(),
     }).optional(),
