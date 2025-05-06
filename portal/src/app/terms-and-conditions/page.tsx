@@ -57,7 +57,7 @@ export default function TermsAndConditionsPage() {
   }, [activeSection, sections]);
 
   // Scroll to section
-  const scrollToSection = (id) => {
+  const scrollToSection = (id:string) => {
     const element = document.getElementById(id);
     if (element) {
       window.scrollTo({
