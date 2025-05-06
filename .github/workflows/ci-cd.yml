@@ -71,8 +71,8 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/classpilot-server:latest
             
             # Stop and remove existing container
-            # docker stop classpilot-server || true
-            # docker rm classpilot-server || true
+            docker stop classpilot-server || true
+            docker rm classpilot-server || true
             
             # Clean up unused images
             docker image prune -f
