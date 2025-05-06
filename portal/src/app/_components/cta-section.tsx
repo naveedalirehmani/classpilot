@@ -5,13 +5,13 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 export default function CTACard() {
   return (
-    <div className="container mx-auto px-4 py-12  font-nunito ">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+    <div className="container mx-auto px-4 py-10 md:py-20">
+      <h2 className="text-3xl md:text-4xl font-bold text-center">
         Ready to transform your lesson planning?
       </h2>
 
       <div className="max-w-3xl mx-auto">
-        <CardContent className="pt-6">
+        <CardContent className="pt-4">
           <p className="text-lg text-muted-foreground text-center mb-6">
             Join thousands of teachers who are saving time and creating better
             learning experiences with Class Pilot.

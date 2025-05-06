@@ -103,7 +103,7 @@ const Navbar = () => {
 
       {/* Mobile menu overlay */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-white pt-16">
+        <div className="md:hidden fixed inset-0 z-40 bg-white flex items-center justify-center">
           <div className="container mx-auto px-4 pt-6 flex flex-col">
             {isHomePage && (
               <>
