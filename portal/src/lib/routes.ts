@@ -14,5 +14,8 @@ export enum ROUTES {
   PROFILE = "/dashboard/profile",
   UPGRADE = "/dashboard/upgrade",
   FAQ = "/dashboard/faq",
+  PUBLIC_FAQ = "/faq",
+  PRICING = "/pricing",
+  TERMS = "/terms-and-conditions",
   KANBAN = "/dashboard/kanban",
 }

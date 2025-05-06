@@ -1,18 +1,19 @@
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
+import { ROUTES } from "@/lib/routes"
 
 const links = [
-  { label: "Terms of Service", href: "/terms" },
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Cookie Policy", href: "/cookies" },
+  { label: "Terms of Service", href: ROUTES.TERMS },
+  // { label: "Privacy Policy", href: "/privacy" },
+  // { label: "Cookie Policy", href: "/cookies" },
 ];
 
 const menuLinks = [
-  { label: "Features", href: "/features" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Testimonials", href: "/testimonials" },
-  { label: "FAQ", href: "/faq" },
+  // { label: "Features", href: "/features" },
+  { label: "Pricing", href: ROUTES.PRICING },
+  // { label: "Testimonials", href: "/testimonials" },
+  { label: "FAQ", href: ROUTES.PUBLIC_FAQ },
 ];
 
 const aboutLinks = [
@@ -39,7 +40,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-muted-foreground text-sm sm:text-base">
-              AI-powered lesson planning for modern educators.
+              A Product by <Link href="www.kohminds.com" target="_blank">Kohminds Technologies</Link>
             </p>
           </div>
 
@@ -59,7 +60,7 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Company</h3>
+            {/* <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">Company</h3>
             <ul className="space-y-2">
               {aboutLinks.map((item) => (
                 <li key={item.label}>
@@ -68,7 +69,7 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
 
           {/* Legal Links - Shown on medium screens and up */}

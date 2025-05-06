@@ -109,7 +109,7 @@ const Navbar = () => {
               <>
                 <a
                   href="#features"
-                  className="text-gray-600 hover:text-gray-900 text-lg text-center"
+                  className="hover:text-gray-900 text-lg text-center"
                   onClick={(e) => scrollToSection(e, "#features")}
                 >
                   Features

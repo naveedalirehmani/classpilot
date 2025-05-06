@@ -6,7 +6,6 @@ export const Modals = () => {
     <>
       <EditLessonPlanModal />
       <UpgradeSubscriptionModal/>
-      {/* Add more modals here */}
     </>
   )
 } 

@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 export default function CTACard() {
   return (
-    <div className="container mx-auto px-4 py-10 md:py-20">
+    <div className="container mx-auto px-4 py-10 md:py-46">
       <h2 className="text-3xl md:text-4xl font-bold text-center">
         Ready to transform your lesson planning?
       </h2>
