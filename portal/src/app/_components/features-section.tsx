@@ -48,7 +48,7 @@ export default function FeaturesSection() {
         },
       ],
       imageSrc: "/1.png",
-      imageAlt: "Unit Planning Tool",
+      imageAlt: "Unit Planning Tool ",
     },
     {
       title: "Kanban Planning Board",
@@ -89,6 +89,6 @@ export default function FeaturesSection() {
           />
         </div>
       ))}
-    </section>
+    </section> 
   );
 }
