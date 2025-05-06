@@ -23,8 +23,7 @@ export default function FeaturesSection() {
           description: "Edit, draft, translate. Ask and AI will help.",
         },
       ],
-
-      imageSrc: "/create.png",
+      imageSrc: "/3.png",
       imageAlt: "AI Lesson Plan Generator",
     },
     // {
@@ -60,7 +59,7 @@ export default function FeaturesSection() {
           description: "Trusted answers across your apps.",
         },
       ],
-      imageSrc: "/view.png",
+      imageSrc: "/1.png",
       imageAlt: "Unit Planning Tool",
     },
     {
@@ -82,9 +81,7 @@ export default function FeaturesSection() {
           image: "pen.png",
           title: "Automations",
           description: "Put tedious tasks on autopilot.",
-        },
-      ],
-      imageSrc: "/kanban.png",
+      imageSrc: "/2.png",
       imageAlt: "Kanban Planning Board",
     },
   ];
