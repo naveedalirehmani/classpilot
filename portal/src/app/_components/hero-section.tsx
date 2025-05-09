@@ -92,12 +92,15 @@ export default function HeroSection() {
   <div className="flex justify-center">
     <div className="relative flex flex-col md:flex-row items-center md:-ml-10 gap-4 md:gap-0">
       {/* First Card */}
-      <Card className="p-4 w-full md:w-64 z-10 md:-mr-6 md:transform md:-rotate-3">
+      <Card className="p-4 w-full md:w-64 h-90 z-10 md:-mr-6 md:transform md:-rotate-3">
+        
         <div className="flex items-center mb-3">
           <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
           <div className="w-3 h-3 bg-green-500 rounded-full"></div>
         </div>
+
+
         <div className="flex justify-center mb-2">
           <FileText className="h-10 w-10 text-red-500" />
         </div>
@@ -146,7 +149,7 @@ export default function HeroSection() {
       </Card>
 
       {/* Third Card */}
-      <Card className="p-4 w-full md:w-64 z-10 md:-ml-6 md:transform md:rotate-3">
+      <Card className="p-4 w-full md:w-64  z-10 md:-ml-6 md:transform md:rotate-3">
         <div className="flex items-center mb-3">
           <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
@@ -163,7 +166,7 @@ export default function HeroSection() {
         <CardContent className="p-0 space-y-2 text-sm">
           <div className="font-medium">Objective</div>
           <p className="text-xs text-gray-600">
-            Students will understand the concept of fractions and their
+              Students will understand the concept of fractions and their
             applications.
           </p>
           <div className="font-medium mt-2">Key lessons</div>
@@ -174,6 +177,7 @@ export default function HeroSection() {
           </ul>
         </CardContent>
       </Card>
+
     </div>
   </div>
 </div> 
