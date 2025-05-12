@@ -42,7 +42,7 @@ export default function HeroSection() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-lg">
-              <Link href="#demo">See how it works</Link>
+              <Link href="#how-it-works">See how it works</Link>
             </Button>
           </div>
         </div>

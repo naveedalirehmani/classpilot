@@ -35,7 +35,7 @@ const Signup = () => {
       name: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      confirmPassword:"",
     },
   });
 

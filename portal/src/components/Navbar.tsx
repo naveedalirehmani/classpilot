@@ -24,15 +24,25 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    id: string
-  ) => {
-    e.preventDefault();
-    const element = document.querySelector(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-    setMobileMenuOpen(false);
-  };
+ const scrollToSection = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  id: string
+) => {
+  e.preventDefault();
+  const element = document.querySelector(id);
+  if (!element) return;
+
+  const offset = 150; // Adjust this to create space above the section
+  const y = element.getBoundingClientRect().top + window.pageYOffset - offset;
+
+  window.scrollTo({
+    top: y,
+    behavior: "smooth",
+  });
+
+  setMobileMenuOpen(false);
+};
+
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -66,9 +76,9 @@ const Navbar = () => {
                   Features
                 </a>
                 <a
-                  href="#demo"
+                  href="#how-it-works"
                   className="text-gray-600 hover:text-gray-900"
-                  onClick={(e) => scrollToSection(e, "#demo")}
+                  onClick={(e) => scrollToSection(e, "#how-it-works")}
                 >
                   How it works
                 </a>

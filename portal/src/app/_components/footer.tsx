@@ -40,7 +40,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-muted-foreground text-sm sm:text-base">
-              A Product by <Link href="www.kohminds.com" target="_blank">Kohminds Technologies</Link>
+              A Product by <Link href="https://www.kohminds.com/" target="_blank">Kohminds Technologies</Link>
             </p>
           </div>
 
@@ -107,17 +107,25 @@ export default function Footer() {
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6 order-3 w-full sm:w-auto">
-            {["Twitter", "LinkedIn", "Facebook", "Instagram"].map((item) => (
-              <Link 
-                key={item} 
-                href="#" 
-                className="text-muted-foreground hover:text-foreground transition text-sm sm:text-base"
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
+         <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6 order-3 w-full sm:w-auto">
+  {[
+    { name: "Twitter", link: "https://twitter.com/YourProfile" },
+    { name: "LinkedIn", link: "https://www.linkedin.com/company/kohminds/posts/?feedView=all" },
+    { name: "Facebook", link: "https://www.facebook.com/YourPage" },
+    { name: "Instagram", link: "https://www.instagram.com/YourProfile" },
+  ].map((item) => (
+    <Link 
+      key={item.name} 
+      href={item.link} 
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-muted-foreground hover:text-foreground transition text-sm sm:text-base"
+    >
+      {item.name}
+    </Link>
+  ))}
+</div>
+
         </div>
       </div>
     </footer>
