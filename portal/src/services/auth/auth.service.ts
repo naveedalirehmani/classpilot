@@ -7,6 +7,8 @@ class AuthService {
     try {
       const response = await instance.post(API_ROUTES.AUTH.SIGN_UP, data);
       return response.data;
+
+      
     } catch (error) {
       console.error("Error during sign up:", error);
       throw error;
