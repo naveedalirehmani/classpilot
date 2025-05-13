@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 const URL = process.env.SERVER_BASE_URL
 
 const instance = axios.create({
-  baseURL: URL,
+  baseURL: "https://classpilot-api.kohminds.com/v1",
   withCredentials: true,
 });
 
