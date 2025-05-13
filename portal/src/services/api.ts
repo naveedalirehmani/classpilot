@@ -1,10 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-const URL = process.env.SERVER
+const URL = process.env.SERVER_BASE_URL
 
 const instance = axios.create({
-  baseURL: 'https://classpilot-api.kohminds.com/v1',
-  // baseURL: 'http://localhost:4000/v1',
+  baseURL: URL,
   withCredentials: true,
 });
 

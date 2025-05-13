@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ROUTES } from "./lib/routes";
+import { API_ROUTES } from "./constants/api";
 
-const API_URL = process.env.API_URL || "https://classpilot-api.kohminds.com/v1/user/current-user";
-// const API_URL = process.env.API_URL || "http://localhost:4000/v1/user/current-user";
+const API_URL = `${process.env.SERVER_BASE_URL}/${API_ROUTES.USER.GET_CURRENT_USER}`;
+
 const COOKIE_HEADER = "cookie";
 const ACCESS_TOKEN = "access_token";
 const REFRESH_TOKEN = "refresh_token";
