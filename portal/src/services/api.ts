@@ -3,8 +3,8 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 const URL = process.env.SERVER
 
 const instance = axios.create({
-  // baseURL: 'https://classpilot-api.kohminds.com/v1',
-  baseURL: 'http://localhost:4000/v1',
+  baseURL: 'https://classpilot-api.kohminds.com/v1',
+  // baseURL: 'http://localhost:4000/v1',
   withCredentials: true,
 });
 
