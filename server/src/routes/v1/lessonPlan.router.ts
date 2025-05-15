@@ -16,10 +16,22 @@ lessonPlanRouter.put(
   LessonPlanController.updateLessonPlan
 );
 
+lessonPlanRouter.put(
+  "/update-status/:id",
+  isAuthorized([Roles.ADMIN, Roles.USER, Roles.SUPER_ADMIN]),
+  LessonPlanController.updateLessonPlanStatus
+);
+
 lessonPlanRouter.get(
   "/all-user-lesson-plans",
   isAuthorized([Roles.ADMIN, Roles.USER, Roles.SUPER_ADMIN]),
   LessonPlanController.getAllUserLessonPlans
+);
+
+lessonPlanRouter.get(
+  "/all-lesson-plans-no-pagination",
+  isAuthorized([Roles.ADMIN, Roles.USER, Roles.SUPER_ADMIN]),
+  LessonPlanController.getAllLessonPlansNoPagination
 );
 
 lessonPlanRouter.get(

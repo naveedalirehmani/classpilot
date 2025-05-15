@@ -164,8 +164,17 @@ model LessonPlan {
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   favorites       FavoriteLessonPlan[]
+  status          LessonPlanStatus @default(GENERATED)
 
   @@map("lesson_plans")
+}
+
+enum LessonPlanStatus {
+  DRAFT
+  GENERATED
+  TAUGHT
+  AWAITING_ASSIGNMENT
+  COMPLETED
 }
 
 model FavoriteLessonPlan {

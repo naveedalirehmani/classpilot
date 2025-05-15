@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, GraduationCap, BookOpen } from "lucide-react"
+import { LessonPlanStatus } from "@/types/lessonPlan/lessonPlan"
 
 type LessonPlan = {
   id: string
@@ -24,15 +25,15 @@ export function LessonPlanCard({ lessonPlan }: LessonPlanCardProps) {
   // Get the appropriate badge color based on status
   const getBadgeColor = (status: string) => {
     switch (status) {
-      case "need-to-generate":
+      case LessonPlanStatus.DRAFT:
         return "bg-slate-200 hover:bg-slate-300 text-slate-800"
-      case "generated":
+      case LessonPlanStatus.GENERATED:
         return "bg-emerald-100 hover:bg-emerald-200 text-emerald-800"
-      case "taught":
+      case LessonPlanStatus.TAUGHT:
         return "bg-blue-100 hover:bg-blue-200 text-blue-800"
-      case "awaiting-assignments":
+      case LessonPlanStatus.AWAITING_ASSIGNMENT:
         return "bg-amber-100 hover:bg-amber-200 text-amber-800"
-      case "completed":
+      case LessonPlanStatus.COMPLETED:
         return "bg-green-100 hover:bg-green-200 text-green-800"
       default:
         return "bg-gray-100 hover:bg-gray-200 text-gray-800"
@@ -42,19 +43,30 @@ export function LessonPlanCard({ lessonPlan }: LessonPlanCardProps) {
   // Add a function to get border color based on status
   const getBorderColor = (status: string) => {
     switch (status) {
-      case "need-to-generate":
+      case LessonPlanStatus.DRAFT:
         return "#94a3b8" // slate-400
-      case "generated":
+      case LessonPlanStatus.GENERATED:
         return "#10b981" // emerald-500
-      case "taught":
+      case LessonPlanStatus.TAUGHT:
         return "#3b82f6" // blue-500
-      case "awaiting-assignments":
+      case LessonPlanStatus.AWAITING_ASSIGNMENT:
         return "#f59e0b" // amber-500
-      case "completed":
+      case LessonPlanStatus.COMPLETED:
         return "#22c55e" // green-500
       default:
         return "#cbd5e1" // slate-300
     }
+  }
+
+  // Format status for display
+  const formatStatus = (status: string) => {
+    // Replace underscores with spaces and capitalize each word
+    return status
+      .replace(/_/g, ' ')
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   // Add a visual indicator that the card is draggable
@@ -88,10 +100,7 @@ export function LessonPlanCard({ lessonPlan }: LessonPlanCardProps) {
 
           <div className="pt-1">
             <Badge className={getBadgeColor(lessonPlan.status)} variant="secondary">
-              {lessonPlan.status
-                .split("-")
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(" ")}
+              {formatStatus(lessonPlan.status)}
             </Badge>
           </div>
         </div>

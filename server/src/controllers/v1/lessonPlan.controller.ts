@@ -21,6 +21,7 @@ export const createLessonPlan = async (
       instructorName,
       userId
     );
+
     const dataResponse = await LessonPlanModel.createLessonPlan(
       { topic, additionalInstructions, standards, outputLanguage },
       lessonPlan,
@@ -63,7 +64,7 @@ export const updateLessonPlan = async (
 };
 
 export const getLessonPlan = async (
-  request: Request, 
+  request: Request,
   response: Response,
   next: NextFunction
 ) => {
@@ -96,7 +97,8 @@ export const getAllUserLessonPlans = async (
     const limit = parseInt(request.query.limit as string, 10) || 10;
     const skip = (page - 1) * limit;
 
-    const { lessonPlans, totalCount } = await LessonPlanModel.getAllUserLessonPlans(userId, skip, limit);
+    const { lessonPlans, totalCount } =
+      await LessonPlanModel.getAllUserLessonPlans(userId, skip, limit);
 
     const totalPages = Math.ceil(totalCount / limit);
     const hasMore = page < totalPages;
@@ -113,6 +115,20 @@ export const getAllUserLessonPlans = async (
   }
 };
 
+export const getAllLessonPlansNoPagination = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  const { userId } = request.user;
+  try {
+    const lessonPlans = await LessonPlanModel.getAllLessonPlansNoPagination(userId);
+    response.status(ResponseStatus.OK).json(lessonPlans);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getAllFavorites = async (
   request: Request,
   response: Response,
@@ -124,7 +140,11 @@ export const getAllFavorites = async (
     const limit = parseInt(request.query.limit as string, 10) || 10;
     const skip = (page - 1) * limit;
 
-    const { favorites, totalCount } = await LessonPlanModel.getAllFavorites(userId, skip, limit);
+    const { favorites, totalCount } = await LessonPlanModel.getAllFavorites(
+      userId,
+      skip,
+      limit
+    );
 
     const totalPages = Math.ceil(totalCount / limit);
     const hasMore = page < totalPages;
@@ -170,6 +190,37 @@ export const removeFavorite = async (
     response.status(ResponseStatus.OK).json(favorite);
   } catch (error) {
     console.log("here", error);
+    next(error);
+  }
+};
+
+export const updateLessonPlanStatus = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  try {
+    const { userId } = request.user;
+    const { id } = request.params;
+    const { status } = request.body;
+    const lessonPlanId = LessonPlanSchema.addFavoriteSchema.parse(id);
+    
+    // check if the lesson plan is owned by the user
+    const lessonPlan = await LessonPlanModel.getLessonPlan(lessonPlanId);
+ 
+    if (lessonPlan?.userId !== userId) {
+      return response
+        .status(ResponseStatus.Forbidden)
+        .json({ error: "You are not authorized to access this lesson plan" });
+    }
+
+    const updateLessonPlan = await LessonPlanModel.updateLessonPlanStatus(
+      lessonPlanId,
+      status,
+    );
+    
+    response.status(ResponseStatus.OK).json(updateLessonPlan);
+  } catch (error) {
     next(error);
   }
 };

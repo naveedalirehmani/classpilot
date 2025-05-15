@@ -16,6 +16,7 @@ import {
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable"
 import { KanbanColumn } from "./kanban-column"
 import { LessonPlanCard } from "./lesson-plan-card"
+import { LessonPlanStatus } from "@/types/lessonPlan/lessonPlan"
 
 type LessonPlan = {
   id: string
@@ -35,7 +36,7 @@ type Column = {
 interface KanbanBoardProps {
   columns: Column[]
   lessonPlans: LessonPlan[]
-  onStatusChange: (lessonPlanId: string, newStatus: string) => void
+  onStatusChange: (lessonPlanId: string, newStatus: LessonPlanStatus) => void
 }
 
 export function KanbanBoard({ columns, lessonPlans, onStatusChange }: KanbanBoardProps) {
@@ -94,7 +95,7 @@ export function KanbanBoard({ columns, lessonPlans, onStatusChange }: KanbanBoar
       const isColumn = columns.some((column) => column.id === over.id)
       
       if (isColumn) {
-        const newStatus = over.id as string
+        const newStatus = over.id as LessonPlanStatus
         console.log(`Moving lesson plan ${active.id} to ${newStatus}`)
         onStatusChange(active.id as string, newStatus)
       }

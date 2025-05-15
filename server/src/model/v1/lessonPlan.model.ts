@@ -1,3 +1,4 @@
+import { LessonPlanStatus } from "@prisma/client";
 import prisma from "../../config/prisma.config";
 import { DatabaseError } from "../../utils/errors";
 
@@ -20,6 +21,7 @@ export const createLessonPlan = async (
         aiPrompt: JSON.stringify(promptlessonPlan),
         aiResponse: JSON.stringify(lessonPlan),
         userId: userId,
+        status: LessonPlanStatus.GENERATED,
       },
     });
     return lessonPlanResponse;
@@ -56,6 +58,17 @@ export const getLessonPlan = async (lessonPlanId: string) => {
   }
 };
 
+export const getLessonPlanByUserId = async (userId: string) => {
+  try {
+    const lessonPlan = await prisma.lessonPlan.findFirst({
+      where: { userId },
+    });
+    return lessonPlan;
+  } catch (error) {
+    throw new DatabaseError("Failed to get lesson plan by user id");
+  }
+};
+
 export const getAllUserLessonPlans = async (userId: string, skip: number = 0, limit: number = 10) => {
   try {
     const [lessonPlans, totalCount] = await Promise.all([
@@ -86,6 +99,17 @@ export const getAllUserLessonPlans = async (userId: string, skip: number = 0, li
     };
   } catch (error) {
     throw new DatabaseError("Failed to get all user lesson plans");
+  }
+};
+
+export const getAllLessonPlansNoPagination = async (userId: string) => {
+  try {
+    const lessonPlans = await prisma.lessonPlan.findMany({
+      where: { userId },
+    });
+    return lessonPlans;
+  } catch (error) {
+    throw new DatabaseError("Failed to get all lesson plans");
   }
 };
 
@@ -148,3 +172,16 @@ export const removeFavorite = async (lessonPlanId: string, userId: string) => {
     throw new DatabaseError("Failed to remove favorite");
   }
 };
+
+export const updateLessonPlanStatus = async (lessonPlanId: string, status: LessonPlanStatus) => {
+  try {
+    const lessonPlan = await prisma.lessonPlan.update({
+      where: { id: lessonPlanId },
+      data: { status },
+    });
+    return lessonPlan;
+  } catch (error) {
+    throw new DatabaseError("Failed to update lesson plan status");
+  }
+};
+

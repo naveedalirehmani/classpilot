@@ -8,6 +8,7 @@ import LessonPlanService from "src/services/lessonPlan/lessonPlan.service";
 import {
   CreateLessonPlanData,
   LessonPlanResponse,
+  LessonPlanStatus,
   PaginatedResponse,
 } from "src/types/lessonPlan/lessonPlan";
 
@@ -41,7 +42,10 @@ export const useGetLessonPlan = (id: string) => {
   });
 };
 
-export const useGetAllUserLessonPlans = (page: number = 1, limit: number = 10) => {
+export const useGetAllUserLessonPlans = (
+  page: number = 1,
+  limit: number = 10
+) => {
   return useQuery<PaginatedResponse<LessonPlanResponse>, Error>({
     queryKey: [QueryKeys.LESSON_PLAN, page, limit],
     queryFn: () => LessonPlanService.getAllUserLessonPlans(page, limit),
@@ -104,5 +108,28 @@ export const useUpdateLessonPlan = () => {
       console.error("Error during updating lesson plan:", error);
       throw error;
     },
+  });
+};
+
+export const useUpdateLessonPlanStatus = () => {
+  return useMutation({
+    mutationKey: [QueryKeys.UPDATE_LESSON_PLAN_STATUS],
+    mutationFn: (data: { id: string; status: LessonPlanStatus }) =>
+      LessonPlanService.updateLessonPlanStatus(data.id, data.status),
+    onSuccess: () => {
+      toast.success("Lesson plan status updated successfully");
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.LESSON_PLAN] });
+    },
+    onError: (error: unknown) => {
+      console.error("Error during updating lesson plan status:", error);
+      throw error;
+    },
+  });
+};
+
+export const useGetAllLessonPlansNoPagination = () => {
+  return useQuery<LessonPlanResponse[], Error>({
+    queryKey: [QueryKeys.ALL_LESSON_PLANS_NO_PAGINATION],
+    queryFn: () => LessonPlanService.getAllLessonPlansNoPagination(),
   });
 };

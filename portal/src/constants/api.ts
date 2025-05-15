@@ -21,5 +21,7 @@ export const API_ROUTES = {
     ADD_FAVORITE: (id: string) => `/lesson-plan/add-favorite/${id}`,
     REMOVE_FAVORITE: (id: string) => `/lesson-plan/remove-favorite/${id}`,
     UPDATE_LESSON_PLAN: (id: string) => `/lesson-plan/update/${id}`,
+    UPDATE_LESSON_PLAN_STATUS: (id: string) => `/lesson-plan/update-status/${id}`,
+    GET_ALL_LESSON_PLANS_NO_PAGINATION: `/lesson-plan/all-lesson-plans-no-pagination`,
   },
 };

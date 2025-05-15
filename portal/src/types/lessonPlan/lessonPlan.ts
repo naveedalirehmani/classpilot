@@ -10,6 +10,7 @@ export interface LessonPlan {
   assessment?: AssessmentDetails;
   reflection?: Reflection;
   homework?: Homework;
+  status: LessonPlanStatus;
 }
 
 interface LessonOverview {
@@ -275,4 +276,14 @@ export interface LessonPlanResponse {
   createdAt: string;
   updatedAt: string;
   favorites?: any[];
+  status: LessonPlanStatus;
+}
+
+
+export enum LessonPlanStatus {
+  DRAFT = "DRAFT",
+  GENERATED = "GENERATED",
+  TAUGHT = "TAUGHT",
+  AWAITING_ASSIGNMENT = "AWAITING_ASSIGNMENT",
+  COMPLETED = "COMPLETED"
 }

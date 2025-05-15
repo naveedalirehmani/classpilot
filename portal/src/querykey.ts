@@ -15,4 +15,6 @@ export enum QueryKeys {
   ADD_FAVORITE = "add-favorite",
   UPDATE_LESSON_PLAN = "update-lesson-plan",
   REMOVE_FAVORITE = "remove-favorite",
+  UPDATE_LESSON_PLAN_STATUS = "update-lesson-plan-status",
+  ALL_LESSON_PLANS_NO_PAGINATION = "all-lesson-plans-no-pagination",
 }
